@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1355.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuTipoProductoController">
+   <children>
+      <TableView fx:id="tblTipoProducto" layoutX="356.0" layoutY="325.0" onMouseClicked="#seleccionarElemento" prefHeight="333.0" prefWidth="571.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
+         <columns>
+            <TableColumn fx:id="colCodigoTP" minWidth="48.0" prefWidth="214.0" text="Código" />
+            <TableColumn fx:id="colDescripcionTP" minWidth="94.0" prefWidth="353.0" text="Descripción" />
+         </columns>
+      </TableView>
+      <GridPane layoutX="462.0" layoutY="159.0" prefHeight="123.0" prefWidth="407.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="txtDescripcionTP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCodigoTP" GridPane.columnIndex="1" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo">
+               <font>
+                  <Font name="Franklin Gothic Heavy" size="19.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" GridPane.rowIndex="1">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane layoutX="53.0" layoutY="358.0" prefHeight="339.0" prefWidth="178.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="178.66665649414062" minWidth="10.0" prefWidth="178.66665649414062" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnAgregarTP" mnemonicParsing="false" onAction="#agregar" prefHeight="90.0" prefWidth="205.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Agregar" textFill="WHITE">
+               <graphic>
+                  <ImageView fx:id="imgAgregar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/agregar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnEditarTP" mnemonicParsing="false" onAction="#editar" prefHeight="165.0" prefWidth="168.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fx:id="imgEditar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/editar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane layoutX="1087.0" layoutY="358.0" prefHeight="348.0" prefWidth="178.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="178.66665649414062" minWidth="10.0" prefWidth="178.66665649414062" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnEliminarTP" mnemonicParsing="false" onAction="#eliminar" prefHeight="157.0" prefWidth="178.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE">
+               <graphic>
+                  <ImageView fx:id="imgEliminar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/eliminar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnReportesTP" mnemonicParsing="false" prefHeight="121.0" prefWidth="178.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fx:id="imgBuscar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/buscar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+            <MenuButton mnemonicParsing="false" prefHeight="76.0" prefWidth="178.0" stylesheets="@../resourse/SuperKinalCSS.css" text="Regresar" textFill="WHITE" GridPane.rowIndex="3">
+              <items>
+                <MenuItem fx:id="btnProductos" mnemonicParsing="false" onAction="#handleButtonAction" text="Productos" />
+                <MenuItem fx:id="btnRegresar" mnemonicParsing="false" onAction="#handleButtonAction" text="Menu Principal" />
+              </items>
+               <styleClass>
+                  <String fx:value="Button" />
+                  <String fx:value="button" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/atras.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuButton>
+         </children>
+      </GridPane>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1222.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo2.png" />
+         </image>
+         <styleClass>
+            <String fx:value="Button" />
+            <String fx:value="button" />
+         </styleClass>
+      </ImageView>
+      <Text fill="WHITE" layoutX="467.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de Producto" wrappingWidth="431.954833984375">
+         <font>
+            <Font name="Webdings" size="50.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

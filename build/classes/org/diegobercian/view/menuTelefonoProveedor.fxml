@@ -168,7 +168,7 @@
             <Image url="@../images/logo2.png" />
          </image>
       </ImageView>
-      <MenuButton fx:id="btnRegresar" alignment="CENTER" layoutX="1113.0" layoutY="592.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="202.0" stylesheets="@../resourse/SuperKinalCSS.css" text="Regresar" textAlignment="JUSTIFY" textFill="WHITE">
+      <MenuButton fx:id="btnRegresar" alignment="CENTER" layoutX="1113.0" layoutY="592.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="73.0" prefWidth="202.0" stylesheets="@../resourse/SuperKinalCSS.css" text="Regresar" textAlignment="JUSTIFY" textFill="WHITE">
          <items>
             <MenuItem fx:id="btnEmail" mnemonicParsing="false" onAction="#handleButtonAction" text="Email" />
             <MenuItem fx:id="btnProveedor" mnemonicParsing="false" onAction="#handleButtonAction" text="Proveedor" />

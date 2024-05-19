@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1355.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1355.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuEmailProveedorController">
    <children>
       <Text fill="WHITE" layoutX="519.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Proveedor" wrappingWidth="387.2880859375">
          <font>
@@ -136,7 +136,7 @@
             <Image url="@../images/logo2.png" />
          </image>
       </ImageView>
-      <MenuButton fx:id="btnRegresar" alignment="CENTER" layoutX="1078.0" layoutY="577.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="73.0" prefWidth="205.0" stylesheets="@../resourse/SuperKinalCSS.css" text="Regresar" textAlignment="JUSTIFY" textFill="WHITE">
+      <MenuButton alignment="CENTER" layoutX="1078.0" layoutY="577.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="73.0" prefWidth="205.0" stylesheets="@../resourse/SuperKinalCSS.css" text="Regresar" textAlignment="JUSTIFY" textFill="WHITE">
          <items>
             <MenuItem fx:id="btnRegresar" mnemonicParsing="false" onAction="#handleButtonAction" text="Menu Principal" />
             <MenuItem fx:id="btnProveedores" mnemonicParsing="false" onAction="#handleButtonAction" text="Proveedores" />

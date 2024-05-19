@@ -154,8 +154,8 @@ public class Main extends Application {
     
     public void DetalleCompraView(){
         try{
-            MenuDetalleComprasController empleadoView = (MenuDetalleComprasController)cambiarEscena("menuDetalleCompra.fxml", 1355, 720);
-            empleadoView.setEscenarioPrincipal(this);
+            MenuDetalleComprasController detallaeCompraView = (MenuDetalleComprasController)cambiarEscena("menuDetalleCompra.fxml", 1355, 720);
+            detallaeCompraView.setEscenarioPrincipal(this);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -172,8 +172,8 @@ public class Main extends Application {
     
      public void TelefonoProveedorView(){
         try{
-            MenuDetalleComprasController empleadoView = (MenuDetalleComprasController)cambiarEscena("menuTelefonoProveedor.fxml", 1355, 720);
-            empleadoView.setEscenarioPrincipal(this);
+            MenuTelefonoProveedorController telefonoView = (MenuTelefonoProveedorController)cambiarEscena("menuTelefonoProveedor.fxml", 1355, 720);
+            telefonoView.setEscenarioPrincipal(this);
         }catch(Exception e){
             e.printStackTrace();
         }

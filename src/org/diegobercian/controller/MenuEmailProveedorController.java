@@ -160,7 +160,7 @@ public class MenuEmailProveedorController implements Initializable {
                 lista.add(new EmailProveedor(resultado.getInt("codigoEmailProveedor"),
                         resultado.getString("emailProveedor"),
                         resultado.getString("descripcion"),
-                        resultado.getInt("descripcion")
+                        resultado.getInt("codigoProveedor")
                 ));
             }
         } catch (Exception e) {
@@ -278,7 +278,7 @@ public class MenuEmailProveedorController implements Initializable {
     
     public void actualizar(){
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarEmpleados(?,?,?,?,?,?,?);");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarEmailProveedor(?,?,?,?);");
             EmailProveedor registro = (EmailProveedor)tblEmailProveedor.getSelectionModel().getSelectedItem();
             registro.setEmailProveedor(txtEmail.getText());
             registro.setDescripcion(txtDescripcion.getText());
@@ -312,7 +312,7 @@ public class MenuEmailProveedorController implements Initializable {
                     int respuesta = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar el email?", "Eliminar Email", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if(respuesta  == JOptionPane.YES_NO_OPTION){
                         try{
-                            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_eliminarEmpleados(?);");
+                            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_eliminarEmailProveedor(?);");
                             procedimiento.setInt(1, ((EmailProveedor)tblEmailProveedor.getSelectionModel().getSelectedItem()).getCodigoEmailProveedor());
                             procedimiento.execute();
                             listaEmailProveedor.remove(tblEmailProveedor.getSelectionModel().getSelectedItem());

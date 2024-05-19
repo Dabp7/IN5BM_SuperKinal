@@ -76,8 +76,8 @@ public class MenuProveedoresController implements Initializable  {
     private ImageView imgEliminar;
     @FXML
     private MenuItem btnRegresar;
-    private MenuItem btnEmail;
-    private MenuItem btnTelefono;
+    @FXML private MenuItem btnEmail;
+    @FXML private MenuItem btnTelefono;
     
     private ObservableList<Proveedores> listaProveedores;
     private Main escenarioPrincipal;

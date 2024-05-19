@@ -68,7 +68,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="91.0" prefWidth="212.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="3">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="91.0" prefWidth="212.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fx:id="imgEliminar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -117,7 +117,7 @@
             </MenuButton>
          </children>
       </GridPane>
-      <TableView fx:id="tblProductos" layoutX="242.0" layoutY="328.0" prefHeight="356.0" prefWidth="1103.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
+      <TableView fx:id="tblProductos" layoutX="242.0" layoutY="328.0" onMouseClicked="#seleccionarElemento" prefHeight="356.0" prefWidth="1103.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
          <columns>
             <TableColumn fx:id="colCodigoPro" minWidth="48.0" prefWidth="75.0" text="Codigo" />
             <TableColumn fx:id="colDescripcionPro" minWidth="104.0" prefWidth="104.0" text="Descripcion" />

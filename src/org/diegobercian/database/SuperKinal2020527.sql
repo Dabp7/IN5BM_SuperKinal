@@ -84,7 +84,7 @@ create table EmailProveedor(
 	codigoEmailProveedor int not null,
     emailProveedor varchar(50),
     descripcion varchar(100),
-    codigoProveedor int,
+    descripcion int,
     primary key PK_EmailProveedor(codigoEmailProveedor),
     constraint FK_EmailProveedor_Proveedores foreign key EmailProveedor(codigoProveedor) 
 		references Proveedores(codigoProveedor) on delete cascade

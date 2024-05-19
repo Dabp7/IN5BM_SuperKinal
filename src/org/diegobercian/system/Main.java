@@ -163,8 +163,8 @@ public class Main extends Application {
     
     public void EmailProveedorView(){
         try{
-            MenuDetalleComprasController empleadoView = (MenuDetalleComprasController)cambiarEscena("menuEmailProveedor.fxml", 1355, 720);
-            empleadoView.setEscenarioPrincipal(this);
+            MenuEmailProveedorController emailView = (MenuEmailProveedorController)cambiarEscena("menuEmailProveedor.fxml", 1355, 720);
+            emailView.setEscenarioPrincipal(this);
         }catch(Exception e){
             e.printStackTrace();
         }

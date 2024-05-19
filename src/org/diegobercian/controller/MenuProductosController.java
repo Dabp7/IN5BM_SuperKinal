@@ -126,7 +126,7 @@ public class MenuProductosController implements Initializable {
         txtImagenPro.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getImagenProducto());
         txtExistenciaPro.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getExistencia()));
         cmbTipoProducto.getSelectionModel().select(buscarTipoProducto(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getCodigoTipoProducto()));
-        cmbProveedores.getSelectionModel().select(buscarProveedores(((Proveedores)tblProductos.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
+        cmbProveedores.getSelectionModel().select(buscarProveedores(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
     }
     
     public TipoProducto buscarTipoProducto(int codigoTipoProducto){
@@ -356,7 +356,7 @@ public class MenuProductosController implements Initializable {
     
     public void actualizar(){
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarProductos(?,?,?,?,?,?,?,?,?);)");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarProductos(?,?,?,?,?,?,?,?,?);");
             Productos registro = (Productos)tblProductos.getSelectionModel().getSelectedItem();
             
             registro.setDescripcionProducto(txtDescripcionPro.getText());
@@ -379,6 +379,42 @@ public class MenuProductosController implements Initializable {
             procedimiento.execute();
         }catch(Exception e){
             e.printStackTrace();
+        }
+    }
+    
+    public void eliminar() {
+
+        switch(tipoDeOperaciones){
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnAgregar.setText("Agregar");
+                btnEditar.setText("Editar");
+                btnEliminar.setDisable(false);
+                btnReportes.setDisable(false);
+                imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
+                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
+                tipoDeOperaciones = MenuProductosController.operaciones.NINGUNO;
+                break;
+            default: 
+                if(tblProductos.getSelectionModel().getSelectedItem()  != null){
+                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar el producto?", "Eliminar Producto", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if(respuesta  == JOptionPane.YES_NO_OPTION){
+                        try{
+                            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_eliminarProductos(?);");
+                            procedimiento.setString(1, ((Productos)tblProductos.getSelectionModel().getSelectedItem()).getCodigoProducto());
+                            procedimiento.execute();
+                            listaProductos.remove(tblProductos.getSelectionModel().getSelectedItem());
+                            limpiarControles(); 
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        } 
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un producto para eliminar");
+                }
+                break;
+                
         }
     }
     

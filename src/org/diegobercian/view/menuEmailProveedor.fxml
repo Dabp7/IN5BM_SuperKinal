@@ -99,12 +99,12 @@
             </Button>
          </children>
       </GridPane>
-      <TableView fx:id="tblProveedores" layoutX="293.0" layoutY="335.0" onMouseClicked="#seleccionarElemento" prefHeight="356.0" prefWidth="738.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
+      <TableView fx:id="tblEmailProveedor" layoutX="293.0" layoutY="335.0" onMouseClicked="#seleccionarElemento" prefHeight="356.0" prefWidth="738.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
          <columns>
-            <TableColumn minWidth="48.0" prefWidth="101.66668701171875" text="Código" />
-            <TableColumn minWidth="128.0" prefWidth="277.9999694824219" text="Email" />
-            <TableColumn minWidth="127.00003051757812" prefWidth="127.00003051757812" text="Descripción" />
-            <TableColumn minWidth="48.0" prefWidth="210.0" text="Código Proveedor" />
+            <TableColumn fx:id="colCodigo" minWidth="48.0" prefWidth="101.66668701171875" text="Código" />
+            <TableColumn fx:id="colEmail" minWidth="128.0" prefWidth="277.9999694824219" text="Email" />
+            <TableColumn fx:id="colDescripcion" minWidth="127.00003051757812" prefWidth="127.00003051757812" text="Descripción" />
+            <TableColumn fx:id="colProveedor" minWidth="48.0" prefWidth="210.0" text="Código Proveedor" />
          </columns>
       </TableView>
       <GridPane layoutX="297.0" layoutY="171.0" prefHeight="123.0" prefWidth="290.0">
@@ -117,8 +117,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCodigo" GridPane.columnIndex="1" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Código">
                <font>
                   <Font size="19.0" />
@@ -164,7 +164,7 @@
             <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="txtDescripcion" GridPane.columnIndex="1" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción">
                <font>
                   <Font size="19.0" />
@@ -175,7 +175,7 @@
                   <Font size="19.0" />
                </font>
             </Text>
-            <ComboBox prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbProveedor" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

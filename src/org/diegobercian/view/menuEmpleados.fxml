@@ -37,7 +37,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnAgregar" mnemonicParsing="false" prefHeight="111.0" prefWidth="249.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Agregar" textFill="WHITE" GridPane.rowIndex="1">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregar" prefHeight="111.0" prefWidth="249.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Agregar" textFill="WHITE" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fx:id="imgAgregar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -52,7 +52,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" prefHeight="89.0" prefWidth="264.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="89.0" prefWidth="264.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fx:id="imgEditar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -67,7 +67,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="91.0" prefWidth="212.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="3">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="91.0" prefWidth="212.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fx:id="imgEliminar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -99,15 +99,15 @@
             </Button>
          </children>
       </GridPane>
-      <TableView layoutX="242.0" layoutY="328.0" prefHeight="356.0" prefWidth="878.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
+      <TableView fx:id="tblEmpleados" layoutX="242.0" layoutY="328.0" onMouseClicked="#seleccionarElemento" prefHeight="356.0" prefWidth="878.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
          <columns>
-            <TableColumn minWidth="48.0" prefWidth="101.66668701171875" text="Código" />
-            <TableColumn minWidth="128.0" prefWidth="157.33331298828125" text="Nombres" />
-            <TableColumn minWidth="145.0" prefWidth="167.0" text="Apellidos" />
-            <TableColumn minWidth="48.0" prefWidth="99.66668701171875" text="Sueldo" />
-            <TableColumn minWidth="122.33331298828125" prefWidth="122.33331298828125" text="Dirección" />
-            <TableColumn minWidth="64.0" prefWidth="90.66668701171875" text="Turno" />
-            <TableColumn minWidth="120.666748046875" prefWidth="120.666748046875" text="Cargo" />
+            <TableColumn fx:id="colCodigo" minWidth="48.0" prefWidth="101.66668701171875" text="Código" />
+            <TableColumn fx:id="colNombres" minWidth="128.0" prefWidth="157.33331298828125" text="Nombres" />
+            <TableColumn fx:id="colApellidos" minWidth="145.0" prefWidth="167.0" text="Apellidos" />
+            <TableColumn fx:id="colSueldo" minWidth="48.0" prefWidth="99.66668701171875" text="Sueldo" />
+            <TableColumn fx:id="colDireccion" minWidth="122.33331298828125" prefWidth="122.33331298828125" text="Dirección" />
+            <TableColumn fx:id="colTurno" minWidth="64.0" prefWidth="90.66668701171875" text="Turno" />
+            <TableColumn fx:id="colCargo" minWidth="120.666748046875" prefWidth="120.666748046875" text="Cargo" />
          </columns>
       </TableView>
       <GridPane layoutX="287.0" layoutY="161.0" prefHeight="123.0" prefWidth="407.0">
@@ -122,10 +122,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="txtNombres" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtApellidos" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtSueldo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtCodigo" GridPane.columnIndex="1" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Código">
                <font>
                   <Font size="19.0" />
@@ -159,8 +159,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="1" />
-            <TextField prefHeight="25.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtDireccion" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="1" />
+            <TextField fx:id="txtTurno" prefHeight="25.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirección">
                <font>
                   <Font size="19.0" />
@@ -176,7 +176,7 @@
                   <Font size="19.0" />
                </font>
             </Text>
-            <ComboBox prefHeight="29.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cmbCargo" prefHeight="29.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1202.0" pickOnBounds="true" preserveRatio="true">

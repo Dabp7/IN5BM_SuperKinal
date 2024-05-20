@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1355.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuDetalleFacturaController">
+   <children>
+      <TableView layoutX="299.0" layoutY="355.0" prefHeight="333.0" prefWidth="801.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
+         <columns>
+            <TableColumn minWidth="48.0" prefWidth="92.66668701171875" text="Código" />
+            <TableColumn minWidth="97.33331298828125" prefWidth="181.33331298828125" text="Precio Unitario" />
+            <TableColumn minWidth="0.0" prefWidth="195.66668701171875" text="Cantidad" />
+            <TableColumn maxWidth="211.0" minWidth="0.0" prefWidth="149.66668701171875" resizable="false" text="Factura" />
+            <TableColumn minWidth="0.0" prefWidth="173.6666259765625" text="Producto" />
+         </columns>
+      </TableView>
+      <GridPane layoutX="260.0" layoutY="195.0" prefHeight="123.0" prefWidth="407.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="40.333343505859375" minHeight="10.0" prefHeight="36.333343505859375" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField GridPane.columnIndex="1" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Código">
+               <font>
+                  <Font name="Franklin Gothic Heavy" size="19.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio Unitario" GridPane.rowIndex="1">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cantidad" GridPane.rowIndex="2">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="83.0" layoutY="345.0" prefHeight="339.0" prefWidth="178.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="178.66665649414062" minWidth="10.0" prefWidth="178.66665649414062" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="205.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Agregar" textFill="WHITE">
+               <graphic>
+                  <ImageView fx:id="imgAgregar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/agregar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="165.0" prefWidth="168.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fx:id="imgEditar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/editar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="157.0" prefWidth="178.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="2">
+               <graphic>
+                  <ImageView fx:id="imgEliminar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/eliminar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="214.0" prefWidth="303.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
+               <graphic>
+                  <ImageView fx:id="imgBuscar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/buscar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+      <Text fill="WHITE" layoutX="539.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detalle Factura" wrappingWidth="349.28814697265625">
+         <font>
+            <Font name="Webdings" size="50.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1216.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo2.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="721.0" layoutY="189.0" prefHeight="123.0" prefWidth="407.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="28.000015258789062" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="48.33332824707031" minHeight="10.0" prefHeight="42.99998474121094" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Número Factura">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Código Producto" GridPane.rowIndex="1">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <ComboBox prefHeight="25.0" prefWidth="201.0" GridPane.columnIndex="1" />
+            <ComboBox prefHeight="25.0" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <MenuButton layoutX="1138.0" layoutY="603.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="179.0" stylesheets="@../resourse/SuperKinalCSS.css" text="Regresar" textFill="WHITE">
+         <items>
+            <MenuItem fx:id="btnFactura" mnemonicParsing="false" onAction="#handleButtonAction" text="Factura" />
+            <MenuItem fx:id="btnRegresar" mnemonicParsing="false" onAction="#handleButtonAction" text="Menu Principal" />
+         </items>
+         <styleClass>
+            <String fx:value="Button" />
+            <String fx:value="button" />
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/atras.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuButton>
+   </children>
+</AnchorPane>

@@ -518,6 +518,7 @@ end $$
 delimiter ;
 
 call sp_agregarEmpleados(1,'Pedro','Gomez','10.0','10 Calle y 10 Avenida','M',2);
+call sp_agregarEmpleados(2,'Pedro','Gomez','10.0','10 Calle y 10 Avenida','M',2);
 
 
 delimiter $$
@@ -675,3 +676,226 @@ delimiter ;
 call sp_eliminarTelefonoProveedor(1);
 
 -- ------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create procedure sp_agregarFactura(in numeroFactura int,in estado varchar(50), in totalfactura decimal(10,2), in fechaFactura varchar(45), in codigoCliente int, in codigoEmpleado int)
+begin
+	insert into Factura(numeroFactura,estado,totalFactura,fechaFactura,codigoCliente,codigoEmpleado)
+    values (numeroFactura,estado,totalFactura,fechaFactura,codigoCliente,codigoEmpleado);
+end $$
+delimiter ;
+ 
+call sp_agregarFactura(1, 'ss', 10.20,'Hoy' ,1,2);
+call sp_agregarFactura(2, 'ss', 10.20,'Hoy' ,1,2);
+ 
+delimiter $$
+create procedure sp_listarFacturas()
+begin 
+	select * from Factura; 
+end $$
+delimiter ;
+ 
+call sp_listarFacturas();
+ 
+delimiter $$
+create procedure sp_buscarFacturas(in numeroFactura int)
+begin
+	select * from Factura where Factura.numeroFactura = numeroFactura;
+end $$
+delimiter ;
+ 
+call sp_buscarFacturas(1);
+ 
+delimiter $$
+create procedure sp_actualizarFacturas(in numeroFactura int,in estado varchar(50), in totalfactura decimal(10,2), in fechaFactura varchar(45), in codigoCliente int, in codigoEmpleado int)
+begin
+	update Factura
+    set
+		Factura.estado = estado,
+		Factura.totalFactura = totalFactura,
+        Factura.fechaFactura = fechaFactura,
+        Factura.codigoCliente = codigoCliente,
+        Factura.codigoEmpleado = codigoEmpleado
+	where
+		Factura.numeroFactura = numeroFactura;
+end $$
+delimiter ;
+ 
+call sp_actualizarFacturas(1, 'dasd', 5.0,'dasdasf', 1,1);
+
+ 
+delimiter $$
+create procedure sp_eliminarFacturas(in numeroFactura int)
+begin 
+	delete from Factura where Factura.numeroFactura = numeroFactura;
+end $$
+delimiter ;
+ 
+call sp_eliminarFacturas(2);
+
+
+-- ------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create procedure sp_agregarDetalleFactura(in codigoDetalleFactura int, in precioUnitario decimal(10,2),in cantidad int, in numeroFactura int, in codigoProducto varchar(15))
+begin
+	insert into DetalleFactura(codigoDetalleFactura, precioUnitario, cantidad, numeroFactura, codigoProducto)
+    values (codigoDetalleFactura, precioUnitario, cantidad, numeroFactura, codigoProducto);
+end $$
+delimiter ;
+ 
+call sp_agregarDetalleFactura(1, 20.0, 5,1 ,'ds');
+call sp_agregarDetalleFactura(2, 20.0, 5,1 ,'ds');
+
+ 
+delimiter $$
+create procedure sp_listarDetalleFactura()
+begin 
+	select * from DetalleFactura; 
+end $$
+delimiter ;
+ 
+call sp_listarDetalleFactura();
+ 
+delimiter $$
+create procedure sp_buscarDetalleFactura(in codigoDetalleFactura int)
+begin
+	select * from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+ 
+call sp_buscarDetalleFactura(1);
+ 
+delimiter $$
+create procedure sp_ActualizarDetalleFactura(in codigoDetalleFactura int, in precioUnitario decimal(10,2),in cantidad int, in numeroFactura int, in codigoProducto varchar(15))
+begin
+	update DetalleFactura
+    set
+		DetalleFactura.precioUnitario = precioUnitario,
+		DetalleFactura.cantidad = cantidad,
+        DetalleFactura.numeroFactura = numeroFactura,
+        DetalleFactura.codigoProducto = codigoProducto
+	where
+		DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+ 
+call sp_ActualizarDetalleFactura(1, 10.0, 3, 1, 'ds');
+
+ 
+delimiter $$
+create procedure sp_eliminarDetalleFactura(in codigoDetalleFactura int)
+begin 
+	delete from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+ 
+call sp_eliminarDetalleFactura(2);
+
+
+
+-- ------------------------------------------------------------------------------------------------------
+delimiter $$
+create trigger ActualizarTotalFactura after insert on DetalleFactura
+for each row 
+begin
+    update Factura set totalFactura = totalFactura + new.precioUnitario * new.cantidad
+    where numeroFactura = new.numeroFactura;
+end
+$$
+delimiter ;
+
+
+delimiter $$
+create trigger ActualizarTotalFacturaUpdate after update on DetalleFactura
+for each row
+begin
+    update Factura set totalFactura = totalFactura + (new.precioUnitario * new.cantidad) - (OLD.precioUnitario * OLD.cantidad)
+    where numeroFactura = new.numeroFactura;
+end $$
+delimiter ;
+
+
+delimiter $$
+create trigger ActualizarTotalFacturaDelete after delete on DetalleFactura
+for each row
+begin
+    update Factura set totalFactura = totalFactura - OLD.precioUnitario * OLD.cantidad
+    where numeroFactura = OLD.numeroFactura;
+end $$
+delimiter ;
+
+
+
+-- Procedimiento para actualizar el stock de un producto al insertar un DetalleFactura
+delimiter $$
+CREATE PROCEDURE ActualizarStockInsertarDetalle(
+    IN p_codigoProducto varchar(15),
+    IN p_cantidad INT
+)
+BEGIN
+    UPDATE Productos
+    SET existencia = existencia - p_cantidad
+    WHERE codigoProducto = p_codigoProducto;
+END$$
+delimiter ;
+
+-- Procedimiento para actualizar el stock de un producto al eliminar un DetalleFactura
+DELIMITER $$
+CREATE PROCEDURE ActualizarStockEliminarDetalle(
+    IN p_productoID varchar(15),
+    IN p_cantidad INT
+)
+BEGIN
+    UPDATE Productos
+    SET existencia = existencia + p_cantidad
+    WHERE codigoProducto = p_productoID;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER ActualizarStockInsert AFTER INSERT ON DetalleFactura
+FOR EACH ROW
+BEGIN
+    CALL ActualizarStockInsertarDetalle(NEW.codigoProducto, NEW.cantidad);
+END;
+$$
+DELIMITER ;
+
+-- Trigger para actualizar el stock al eliminar un DetalleFactura
+DELIMITER $$
+CREATE TRIGGER ActualizarStockDelete AFTER DELETE ON DetalleFactura
+FOR EACH ROW
+BEGIN
+    CALL ActualizarStockEliminarDetalle(OLD.codigoProducto, OLD.cantidad);
+END;
+$$
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER AfterInsertDetalleCompra
+AFTER INSERT ON DetalleCompra
+FOR EACH ROW
+BEGIN
+    DECLARE precioProveedor DECIMAL(10,2);
+    DECLARE precioDocena DECIMAL(10,2);
+    DECLARE precioMayor DECIMAL(10,2);
+
+    -- Calcular precios
+    SET precioProveedor = NEW.costoUnitario * 1.40;
+    SET precioDocena = precioProveedor * 1.35;
+    SET precioMayor = precioProveedor * 1.25;
+
+    -- Actualizar productos con los precios calculados
+    UPDATE Productos
+    SET precioUnitario = precioProveedor,
+        precioDocena = precioDocena,
+        precioMayor = precioMayor
+    WHERE codigoProducto = NEW.codigoProducto;
+END $$
+
+DELIMITER ;
+
+
+

@@ -518,6 +518,7 @@ end $$
 delimiter ;
 
 call sp_agregarEmpleados(1,'Pedro','Gomez','10.0','10 Calle y 10 Avenida','M',2);
+call sp_agregarEmpleados(2,'Pedro','Gomez','10.0','10 Calle y 10 Avenida','M',2);
 
 
 delimiter $$
@@ -675,3 +676,125 @@ delimiter ;
 call sp_eliminarTelefonoProveedor(1);
 
 -- ------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create procedure sp_agregarFactura(in numeroFactura int,in estado varchar(50), in totalfactura decimal(10,2), in fechaFactura varchar(45), in codigoCliente int, in codigoEmpleado int)
+begin
+	insert into Factura(numeroFactura,estado,totalFactura,fechaFactura,codigoCliente,codigoEmpleado)
+    values (numeroFactura,estado,totalFactura,fechaFactura,codigoCliente,codigoEmpleado);
+end $$
+delimiter ;
+ 
+call sp_agregarFactura(1, 'ss', 10.20,'Hoy' ,1,2);
+call sp_agregarFactura(2, 'ss', 10.20,'Hoy' ,1,2);
+ 
+delimiter $$
+create procedure sp_listarFacturas()
+begin 
+	select * from Factura; 
+end $$
+delimiter ;
+ 
+call sp_listarFacturas();
+ 
+delimiter $$
+create procedure sp_buscarFacturas(in numeroFactura int)
+begin
+	select * from Factura where Factura.numeroFactura = numeroFactura;
+end $$
+delimiter ;
+ 
+call sp_buscarFacturas(1);
+ 
+delimiter $$
+create procedure sp_actualizarFacturas(in numeroFactura int,in estado varchar(50), in totalfactura decimal(10,2), in fechaFactura varchar(45), in codigoCliente int, in codigoEmpleado int)
+begin
+	update Factura
+    set
+		Factura.estado = estado,
+		Factura.totalFactura = totalFactura,
+        Factura.fechaFactura = fechaFactura,
+        Factura.codigoCliente = codigoCliente,
+        Factura.codigoEmpleado = codigoEmpleado
+	where
+		Factura.numeroFactura = numeroFactura;
+end $$
+delimiter ;
+ 
+call sp_actualizarFacturas(1, 'dasd', 5.0,'dasdasf', 1,1);
+
+ 
+delimiter $$
+create procedure sp_eliminarFacturas(in numeroFactura int)
+begin 
+	delete from Factura where Factura.numeroFactura = numeroFactura;
+end $$
+delimiter ;
+ 
+call sp_eliminarFacturas(2);
+
+
+-- ------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create procedure sp_agregarDetalleFactura(in codigoDetalleFactura int, in precioUnitario decimal(10,2),in cantidad int, in numeroFactura int, in codigoProducto varchar(15))
+begin
+	insert into DetalleFactura(codigoDetalleFactura, precioUnitario, cantidad, numeroFactura, codigoProducto)
+    values (codigoDetalleFactura, precioUnitario, cantidad, numeroFactura, codigoProducto);
+end $$
+delimiter ;
+ 
+call sp_agregarDetalleFactura(1, 20.0, 5,1 ,'ds');
+call sp_agregarDetalleFactura(2, 20.0, 5,1 ,'ds');
+
+ 
+delimiter $$
+create procedure sp_listarDetalleFactura()
+begin 
+	select * from DetalleFactura; 
+end $$
+delimiter ;
+ 
+call sp_listarDetalleFactura();
+ 
+delimiter $$
+create procedure sp_buscarDetalleFactura(in codigoDetalleFactura int)
+begin
+	select * from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+ 
+call sp_buscarDetalleFactura(1);
+ 
+delimiter $$
+create procedure sp_ActualizarDetalleFactura(in codigoDetalleFactura int, in precioUnitario decimal(10,2),in cantidad int, in numeroFactura int, in codigoProducto varchar(15))
+begin
+	update DetalleFactura
+    set
+		DetalleFactura.precioUnitario = precioUnitario,
+		DetalleFactura.cantidad = cantidad,
+        DetalleFactura.numeroFactura = numeroFactura,
+        DetalleFactura.codigoProducto = codigoProducto
+	where
+		DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+ 
+call sp_ActualizarDetalleFactura(1, 10.0, 3, 1, 'ds');
+
+ 
+delimiter $$
+create procedure sp_eliminarDetalleFactura(in codigoDetalleFactura int)
+begin 
+	delete from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+ 
+call sp_eliminarDetalleFactura(2);
+
+
+
+-- ------------------------------------------------------------------------------------------------------
+
+
+

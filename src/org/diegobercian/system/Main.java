@@ -178,6 +178,24 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }  
+     
+     public void FacturaView(){
+        try{
+            MenuFacturaController facturaView = (MenuFacturaController)cambiarEscena("menuFacturas.fxml", 1355, 720);
+            facturaView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }  
+     
+     public void DetalleFacturaView(){
+        try{
+            MenuDetalleFacturaController detalleFacturaView = (MenuDetalleFacturaController)cambiarEscena("menuDetalleFactura.fxml", 1355, 720);
+            detalleFacturaView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }  
     
 
     /**

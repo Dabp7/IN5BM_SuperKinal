@@ -153,8 +153,8 @@ delimiter $$
 	end $$
 delimiter ;
 
-call sp_agregarClientes(1,'58bu22u121','Devyn','Tubac','12 Calle y 6 Avenida','3441421','dTubac');
-call sp_agregarClientes(2,'43bu53u121','Samuel','Pérez','12 Calle y 6 Avenida','3441421','sPerez');
+call sp_agregarClientes(1,'502452698','Diego','Bercian','12 Calle y 6 Avenida','3441421','dbercian');
+call sp_agregarClientes(2,'452021456','Samuel','Pérez','13 Calle y 5 Avenida','2595631','sPerez');
 
 
 delimiter $$
@@ -217,7 +217,9 @@ delimiter $$
 	end $$
 delimiter ;
 
-call sp_agregarProveedores(2, 'IN-5285', 'David', 'Salinas', '8 calle 4-56 zona 12', 'Porquesi', 'Mateo', 'paginaweb.com');
+call sp_agregarProveedores(1, '5485', 'David', 'Arevalo', '6 calle 4-76 zona 7', 'Arcos Dorados, C.A.', 'Mateo', 'arcosdorados.com');
+call sp_agregarProveedores(2, '5285', 'Adrián', 'Figueroa', '8 calle 4-43 zona 12', 'Carlos Fernández, E. I. R. L.', 'Luis', 'EIRL.com');
+call sp_agregarProveedores(3, '5280', 'Gustavo', 'Verdezoto', '5 calle 4-56 zona 2	', 'Importaciones PFV.', 'Byron', 'PFV.com');
 
 delimiter $$
 	create procedure sp_listarProveedores()
@@ -258,7 +260,7 @@ end $$
 delimiter ;
 
 
-call sp_actualizarProveedores(1,'5434534','Orlando','Gomez','11 Calle y 10 Avenida','12345678', 'porque no','ogomez');
+call sp_actualizarProveedores(1,'5434534','Orlando','Gomez','11 Calle y 10 Avenida','12345678', 'Importaciones PFV.','ogomez');
     
     
 delimiter $$
@@ -280,9 +282,9 @@ delimiter $$
 	end $$
 delimiter ;
 
-call sp_agregarCargoEmpleado(1, 'Cargo', 'Es un cargo Empleado');
-call sp_agregarCargoEmpleado(2, 'Cargo', 'Es un cargo Empleado');
-call sp_agregarCargoEmpleado(3, 'Cargo', 'Es un cargo Empleado');
+call sp_agregarCargoEmpleado(1, 'Caja', 'Encargado de atender');
+call sp_agregarCargoEmpleado(2, 'Jefe', 'Supervisa el trabajo de los demas');
+call sp_agregarCargoEmpleado(3, 'Limpieza', 'Limpia todo el supermercado');
 
  
 delimiter $$
@@ -319,7 +321,7 @@ end $$
 delimiter ;
 
 
-call sp_actualizarCargoEmpleado(1, 'Das', 'Cargo 2');
+call sp_actualizarCargoEmpleado(1, 'Atención al cliente', 'Encargado de la interacción');
     
     
 delimiter $$
@@ -342,9 +344,9 @@ delimiter $$
 	end $$
 delimiter ;
 
-call sp_agregarTipoProducto(1, 'Una descripcion');
-call sp_agregarTipoProducto(2, 'Una descripcion');
-call sp_agregarTipoProducto(3, 'Una descripcion');
+call sp_agregarTipoProducto(1, 'Carnes');
+call sp_agregarTipoProducto(2, 'Bebidas');
+call sp_agregarTipoProducto(3, 'Comida rápida');
 
  
 delimiter $$
@@ -380,7 +382,7 @@ end $$
 delimiter ;
 
 
-call sp_actualizarTipoProducto(1, 'Das');
+call sp_actualizarTipoProducto(1, 'Jugos');
     
     
 delimiter $$
@@ -401,8 +403,8 @@ begin
 end $$
 delimiter ;
  
-call sp_agregarCompras(1, '2024-03-19', 'dasdasd', 10.20);
-call sp_agregarCompras(2, '2023-11-05', 'dasdasd', 450.50);
+call sp_agregarCompras(1, '2024-03-19', 'Pollo', 10.20);
+call sp_agregarCompras(2, '2023-11-05', 'Fideos', 5.50);
 
  
 delimiter $$
@@ -436,7 +438,7 @@ begin
 end $$
 delimiter ;
  
-call sp_actualizarCompras(1, '2024-04-23', 'sdsad', 5.23);
+call sp_actualizarCompras(1, '2024-04-23', 'Helado', 15.23);
  
 delimiter $$
 create procedure sp_eliminarCompras(in numeroDocumento int)
@@ -457,8 +459,8 @@ begin
 end $$
 delimiter ;
  
-call sp_agregarProductos('ewda','Alta Calidad',12.00,13.00,54.00,'PNG',11,1,2);
-call sp_agregarProductos('ds','Alta Calidad',12.00,13.00,54.00,'PNG',11,1,2);
+call sp_agregarProductos('abc','Alta Calidad',10.00,15.00,60.00,'imagen.PNG',11,1,2);
+call sp_agregarProductos('efg','Alta Calidad',12.00,13.00,54.00,'imagen2.PNG',11,1,2);
  
 delimiter $$
 create procedure sp_listarProductos()
@@ -496,7 +498,7 @@ begin
 end $$
 delimiter ;
  
-call sp_actualizarProductos('jjjj','Alta',14.00,15.00,50.00,'JPG',10,2,2);
+call sp_actualizarProductos('abc','Alta',14.00,15.00,50.00,'JPG',10,2,2);
  
 delimiter $$
 create procedure sp_eliminarProductos(in codigoProducto varchar(45))
@@ -505,7 +507,7 @@ begin
 end $$
 delimiter ;
  
-call sp_eliminarProductos('ewda');
+call sp_eliminarProductos('dfg');
 
 -- -----------------------------------------------------------------------------------
 
@@ -518,7 +520,7 @@ end $$
 delimiter ;
 
 call sp_agregarEmpleados(1,'Pedro','Gomez','10.0','10 Calle y 10 Avenida','M',2);
-call sp_agregarEmpleados(2,'Pedro','Gomez','10.0','10 Calle y 10 Avenida','M',2);
+call sp_agregarEmpleados(2,'Juan','Isaza','10.0','5 Calle y 7 Avenida','V',1);
 
 
 delimiter $$
@@ -554,7 +556,7 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarEmpleados(1,'Hola','Mundo','25.0','11 Calle y 11 Avenida','V',2);
+call sp_actualizarEmpleados(1,'Isaac','Sisa','25.0','2 Calle y 8 Avenida','V',2);
 
 delimiter $$
 create procedure sp_eliminarEmpleados(in codigoEmpleado int)
@@ -576,7 +578,9 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarEmailProveedor(1,'dtubac@kinal','Guatemala',2);
+call sp_agregarEmailProveedor(1,'dbercianc@kinal','Guatemala',3);
+call sp_agregarEmailProveedor(2,'iVerdezoto@kinal','Guatemala',2);
+call sp_agregarEmailProveedor(3,'mCastro@kinal','Guatemala',2);
 
 delimiter $$
 create procedure sp_listarEmailProveedor()
@@ -609,7 +613,7 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarEmailProveedor(1,'@gmail.com','Kinal',2);
+call sp_actualizarEmailProveedor(1,'iSisa@gmail.com','Kinal',2);
 
 delimiter $$
 create procedure sp_eliminarEmailProveedor(in codigoEmailProveedor int)
@@ -630,7 +634,7 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarTelefonoProveedor(1,'12345678','87654321','502',2);
+call sp_agregarTelefonoProveedor(1,'12345678','87654321','Numeros de contacto',2);
 
 delimiter $$
 create procedure sp_listarTelefonoProveedor()
@@ -664,7 +668,7 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarTelefonoProveedor(1,'09876543','12345678','025',2);
+call sp_actualizarTelefonoProveedor(1,'09876543','12345678','Numeros de referencia',2);
 
 delimiter $$
 create procedure sp_eliminarTelefonoProveedor(in codigoTelefonoProveedor int)
@@ -685,8 +689,8 @@ begin
 end $$
 delimiter ;
  
-call sp_agregarFactura(1, 'ss', 10.20,'Hoy' ,1,2);
-call sp_agregarFactura(2, 'ss', 10.20,'Hoy' ,1,2);
+call sp_agregarFactura(1, 'activo', 10.20,'20-05-2024' ,1,2);
+call sp_agregarFactura(2, 'expirado', 20.20,'28-05-2022' ,1,2);
  
 delimiter $$
 create procedure sp_listarFacturas()
@@ -721,7 +725,7 @@ begin
 end $$
 delimiter ;
  
-call sp_actualizarFacturas(1, 'dasd', 5.0,'dasdasf', 1,1);
+call sp_actualizarFacturas(1, 'expirado', 5.0,'04-04-2023', 1,2);
 
  
 delimiter $$
@@ -744,8 +748,8 @@ begin
 end $$
 delimiter ;
  
-call sp_agregarDetalleFactura(1, 20.0, 5,1 ,'ds');
-call sp_agregarDetalleFactura(2, 20.0, 5,1 ,'ds');
+call sp_agregarDetalleFactura(1, 20.0, 5,1 ,'abc');
+call sp_agregarDetalleFactura(2, 20.0, 5,1 ,'abc');
 
  
 delimiter $$
@@ -780,7 +784,7 @@ begin
 end $$
 delimiter ;
  
-call sp_ActualizarDetalleFactura(1, 10.0, 3, 1, 'ds');
+call sp_ActualizarDetalleFactura(1, 10.0, 3, 1, 'abc');
 
  
 delimiter $$

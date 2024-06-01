@@ -152,7 +152,7 @@ public class MenuTelefonoProveedorController implements Initializable {
         tblTelefonoProveedor.setItems(getTelefonoProveedor());
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoTelefonoProveedor"));
         colNumPri.setCellValueFactory(new PropertyValueFactory<>("numeroPrincipal"));
-        colNumSeg.setCellValueFactory(new PropertyValueFactory<>("numeroSecundario"));
+        colNumSeg.setCellValueFactory(new PropertyValueFactory<>("numeroSegundario"));
         colObservaciones.setCellValueFactory(new PropertyValueFactory<>("observaciones"));
         colProveedor.setCellValueFactory(new PropertyValueFactory<>("codigoProveedor"));
     }
@@ -210,12 +210,12 @@ public class MenuTelefonoProveedorController implements Initializable {
             case NINGUNO:
                 activarControles();
                 btnAgregar.setText("Guardar");
-                btnEditar.setText("Cancelar");
-                btnEliminar.setDisable(true);
+                btnEliminar.setText("Cancelar");
+                btnEditar.setDisable(true);
                 btnReportes.setDisable(true);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/guardar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
-                tipoDeOperaciones = MenuTelefonoProveedorController.operaciones.ACTUALIZAR;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
+                tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
                 guardar();
@@ -223,11 +223,14 @@ public class MenuTelefonoProveedorController implements Initializable {
                 desactivarControles();
                 btnAgregar.setText("Agregar");
                 btnEditar.setText("Editar");
+                btnEliminar.setText("Eliminar");
                 btnEliminar.setDisable(false);
                 btnReportes.setDisable(false);
+                btnEditar.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
                 imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
-                tipoDeOperaciones = MenuTelefonoProveedorController.operaciones.NINGUNO;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
         }
@@ -266,7 +269,7 @@ public class MenuTelefonoProveedorController implements Initializable {
                     imgBuscar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
                     activarControles();
                     txtCodigo.setEditable(false);
-                    tipoDeOperaciones = MenuTelefonoProveedorController.operaciones.ACTUALIZAR;
+                    tipoDeOperaciones = operaciones.ACTUALIZAR;
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe de seleccionar un email para editar");
                 }
@@ -281,7 +284,7 @@ public class MenuTelefonoProveedorController implements Initializable {
                 imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
                 desactivarControles();
                 limpiarControles();
-                tipoDeOperaciones = MenuTelefonoProveedorController.operaciones.NINGUNO;
+                tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
         }
@@ -313,12 +316,12 @@ public class MenuTelefonoProveedorController implements Initializable {
                 desactivarControles();
                 limpiarControles();
                 btnAgregar.setText("Agregar");
-                btnEditar.setText("Editar");
-                btnEliminar.setDisable(false);
+                btnEliminar.setText("Eliminar");
+                btnEditar.setDisable(false);
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
-                tipoDeOperaciones = MenuTelefonoProveedorController.operaciones.NINGUNO;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default: 
                 if(tblTelefonoProveedor.getSelectionModel().getSelectedItem()  != null){
@@ -339,6 +342,22 @@ public class MenuTelefonoProveedorController implements Initializable {
                 }
                 break;
                 
+        }
+    }
+    
+    public void reportes() {
+        switch (tipoDeOperaciones) {
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnEditar.setText("Editar");
+                btnReportes.setText("Reporte");
+                btnAgregar.setDisable(false);
+                btnEliminar.setDisable(false);
+                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
+                imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
         }
     }
     

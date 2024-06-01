@@ -156,24 +156,28 @@ public class MenuProveedoresController implements Initializable  {
             case NINGUNO:
                 activarControles();
                 btnAgregarPr.setText("Guardar");
-                btnEditarPr.setText("Cancelar");
-                btnEliminarPr.setDisable(true);
+                btnEliminarPr.setText("Cancelar");
+                btnEditarPr.setDisable(true);
                 btnReportesPr.setDisable(true);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/guardar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
-                tipoDeOperaciones = MenuProveedoresController.operaciones.ACTUALIZAR;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
+                tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
                 guardar();
-                desactivarControles();
                 limpiarControles();
+                desactivarControles();
                 btnAgregarPr.setText("Agregar");
                 btnEditarPr.setText("Editar");
+                btnEliminarPr.setText("Eliminar");
                 btnEliminarPr.setDisable(false);
                 btnReportesPr.setDisable(false);
+                btnEditarPr.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
                 imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
-                tipoDeOperaciones = MenuProveedoresController.operaciones.NINGUNO;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                cargarDatos();
                 break;
         }
     }
@@ -217,7 +221,7 @@ public class MenuProveedoresController implements Initializable  {
                     imgBuscar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
                     activarControles();
                     txtCodigoPr.setEditable(false);
-                    tipoDeOperaciones = MenuProveedoresController.operaciones.ACTUALIZAR;
+                    tipoDeOperaciones = operaciones.ACTUALIZAR;
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe de seleccionar un proveedor para editar");
                 }
@@ -232,7 +236,7 @@ public class MenuProveedoresController implements Initializable  {
                 imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
                 desactivarControles();
                 limpiarControles();
-                tipoDeOperaciones = MenuProveedoresController.operaciones.NINGUNO;
+                tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
         }
@@ -271,11 +275,11 @@ public class MenuProveedoresController implements Initializable  {
                 desactivarControles();
                 limpiarControles();
                 btnAgregarPr.setText("Agregar");
-                btnEditarPr.setText("Editar");
-                btnEliminarPr.setDisable(false);
+                btnEliminarPr.setText("Eliminar");
+                btnEditarPr.setDisable(false);
                 btnReportesPr.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default: 
@@ -297,6 +301,22 @@ public class MenuProveedoresController implements Initializable  {
                 }
                 break;
                 
+        }
+    }
+    
+    public void reportes() {
+        switch (tipoDeOperaciones) {
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnEditarPr.setText("Editar");
+                btnReportesPr.setText("Reporte");
+                btnAgregarPr.setDisable(false);
+                btnEliminarPr.setDisable(false);
+                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
+                imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
         }
     }
     

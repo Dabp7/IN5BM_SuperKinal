@@ -82,6 +82,11 @@ public class Clientes {
         this.correoCliente = correoCliente;
     }
 
+    @Override
+    public String toString() {        
+        return getCodigoCliente() + " ) " + getNombresCliente();
+    }
+
 
     
     

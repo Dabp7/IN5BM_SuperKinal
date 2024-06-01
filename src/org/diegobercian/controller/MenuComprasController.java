@@ -133,25 +133,29 @@ public class MenuComprasController implements Initializable {
             case NINGUNO:
                 activarControles();
                 btnAgregar.setText("Guardar");
-                btnEditar.setText("Cancelar");
-                btnEliminar.setDisable(true);
+                btnEliminar.setText("Cancelar");
+                btnEditar.setDisable(true);
                 btnReportes.setDisable(true);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/guardar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
-                tipoDeOperaciones = MenuComprasController.operaciones.ACTUALIZAR;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
+                tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
 
             case ACTUALIZAR:
                 guardar();
-                desactivarControles();
                 limpiarControles();
+                desactivarControles();
                 btnAgregar.setText("Agregar");
                 btnEditar.setText("Editar");
+                btnEliminar.setText("Eliminar");
                 btnEliminar.setDisable(false);
                 btnReportes.setDisable(false);
+                btnEditar.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
                 imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
-                tipoDeOperaciones = MenuComprasController.operaciones.NINGUNO;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                cargarDatos();
                 break;
         }
     }
@@ -187,7 +191,7 @@ public class MenuComprasController implements Initializable {
                     imgBuscar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
                     activarControles();
                     txtDoc.setEditable(false);
-                    tipoDeOperaciones = MenuComprasController.operaciones.ACTUALIZAR;
+                    tipoDeOperaciones = operaciones.ACTUALIZAR;
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe de seleccionar una compra para editar");
                 }
@@ -202,7 +206,7 @@ public class MenuComprasController implements Initializable {
                 imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
                 desactivarControles();
                 limpiarControles();
-                tipoDeOperaciones = MenuComprasController.operaciones.NINGUNO;
+                tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
         }
@@ -232,12 +236,12 @@ public class MenuComprasController implements Initializable {
                 desactivarControles();
                 limpiarControles();
                 btnAgregar.setText("Agregar");
-                btnEditar.setText("Editar");
-                btnEliminar.setDisable(false);
+                btnEliminar.setText("Eliminar");
+                btnEditar.setDisable(false);
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
-                tipoDeOperaciones = MenuComprasController.operaciones.NINGUNO;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default: 
                 if(tblCompras.getSelectionModel().getSelectedItem()  != null){

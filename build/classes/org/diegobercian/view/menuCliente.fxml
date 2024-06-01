@@ -83,7 +83,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnReportes" mnemonicParsing="false" prefHeight="90.0" prefWidth="205.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
+            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reportes" prefHeight="90.0" prefWidth="205.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fx:id="imgBuscar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -110,7 +110,7 @@
             <Font name="Webdings" size="50.0" />
          </font>
       </Text>
-      <GridPane layoutX="210.0" layoutY="137.0" prefHeight="123.0" prefWidth="407.0">
+      <GridPane layoutX="312.0" layoutY="167.0" prefHeight="123.0" prefWidth="407.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -148,7 +148,7 @@
             </Text>
          </children>
       </GridPane>
-      <GridPane layoutX="678.0" layoutY="142.0" prefHeight="113.0" prefWidth="310.0">
+      <GridPane layoutX="780.0" layoutY="172.0" prefHeight="113.0" prefWidth="310.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="166.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="55.0" />
@@ -159,7 +159,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="txtTelefonoC" prefWidth="126.0" GridPane.columnIndex="1" />
+            <TextField fx:id="txtTelefonoC" prefHeight="25.0" prefWidth="143.0" GridPane.columnIndex="1" />
             <TextField fx:id="txtDireccionC" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtCorreoC" prefWidth="126.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Teléfono">

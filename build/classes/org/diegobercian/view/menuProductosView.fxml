@@ -83,7 +83,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnReportes" mnemonicParsing="false" prefHeight="113.0" prefWidth="277.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="4">
+            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reportes" prefHeight="113.0" prefWidth="277.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fx:id="imgBuscar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -130,10 +130,10 @@
             <TableColumn fx:id="colProveedores" minWidth="125.0" prefWidth="192.0" text="Proveedores" />
          </columns>
       </TableView>
-      <GridPane layoutX="287.0" layoutY="161.0" prefHeight="123.0" prefWidth="407.0">
+      <GridPane layoutX="287.0" layoutY="126.0" prefHeight="158.0" prefWidth="425.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="10.0" prefWidth="190.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="173.0" prefWidth="235.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -142,10 +142,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField fx:id="txtDescripcionPro" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtPrecioUPro" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtPrecioDoPro" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txtCodigoPro" GridPane.columnIndex="1" />
+            <TextField fx:id="txtDescripcionPro" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></TextField>
+            <TextField fx:id="txtPrecioUPro" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></TextField>
+            <TextField fx:id="txtPrecioDoPro" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></TextField>
+            <TextField fx:id="txtCodigoPro" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></TextField>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo">
                <font>
                   <Font size="19.0" />
@@ -168,10 +180,10 @@
             </Text>
          </children>
       </GridPane>
-      <GridPane layoutX="786.0" layoutY="141.0" prefHeight="150.0" prefWidth="367.0">
+      <GridPane layoutX="786.0" layoutY="119.0" prefHeight="172.0" prefWidth="366.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="121.6666259765625" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.66668701171875" minWidth="10.0" prefWidth="173.3333740234375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="121.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="173.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -181,9 +193,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField fx:id="txtExistenciaPro" prefWidth="126.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtPrecioMPro" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="1" />
-            <TextField fx:id="txtImagenPro" prefHeight="25.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtExistenciaPro" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></TextField>
+            <TextField fx:id="txtPrecioMPro" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></TextField>
+            <TextField fx:id="txtImagenPro" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></TextField>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio Mayor">
                <font>
                   <Font size="19.0" />
@@ -209,8 +230,14 @@
                   <Font size="19.0" />
                </font>
             </Text>
-            <ComboBox fx:id="cmbTipoProducto" prefHeight="25.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ComboBox fx:id="cmbProveedores" prefHeight="25.0" prefWidth="227.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="cmbTipoProducto" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></ComboBox>
+            <ComboBox fx:id="cmbProveedores" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></ComboBox>
          </children>
       </GridPane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1231.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">

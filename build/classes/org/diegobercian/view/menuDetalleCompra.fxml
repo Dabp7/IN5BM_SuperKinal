@@ -37,7 +37,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnAgregar" mnemonicParsing="false" prefHeight="111.0" prefWidth="249.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Agregar" textFill="WHITE" GridPane.rowIndex="1">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregar" prefHeight="111.0" prefWidth="249.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Agregar" textFill="WHITE" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fx:id="imgAgregar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -52,7 +52,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" prefHeight="89.0" prefWidth="264.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="89.0" prefWidth="264.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fx:id="imgEditar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -67,7 +67,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="91.0" prefWidth="212.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="3">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="91.0" prefWidth="212.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fx:id="imgEliminar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -82,7 +82,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnReportes" mnemonicParsing="false" prefHeight="113.0" prefWidth="277.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="4">
+            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reportes" prefHeight="113.0" prefWidth="277.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fx:id="imgBuscar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -99,13 +99,13 @@
             </Button>
          </children>
       </GridPane>
-      <TableView fx:id="tblProveedores" layoutX="353.0" layoutY="341.0" prefHeight="356.0" prefWidth="726.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
+      <TableView fx:id="tblDetalleCompra" layoutX="353.0" layoutY="341.0" onMouseClicked="#seleccionarElemento" prefHeight="356.0" prefWidth="726.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
          <columns>
-            <TableColumn minWidth="48.0" prefWidth="101.66668701171875" text="Código" />
-            <TableColumn minWidth="128.0" prefWidth="157.33331298828125" text="Costo Unitario" />
-            <TableColumn minWidth="145.0" prefWidth="167.0" text="Cantidad" />
-            <TableColumn minWidth="48.0" prefWidth="99.66668701171875" text="Código Producto" />
-            <TableColumn minWidth="122.33331298828125" prefWidth="173.66668701171875" text="No. Documento" />
+            <TableColumn fx:id="colCodigo" minWidth="48.0" prefWidth="101.66668701171875" text="Código" />
+            <TableColumn fx:id="colCostoU" minWidth="128.0" prefWidth="157.33331298828125" text="Costo Unitario" />
+            <TableColumn fx:id="colCantidad" minWidth="145.0" prefWidth="167.0" text="Cantidad" />
+            <TableColumn fx:id="colCodigoP" minWidth="48.0" prefWidth="99.66668701171875" text="Código Producto" />
+            <TableColumn fx:id="colNoD" minWidth="122.33331298828125" prefWidth="173.66668701171875" text="No. Documento" />
          </columns>
       </TableView>
       <GridPane layoutX="332.0" layoutY="169.0" prefHeight="123.0" prefWidth="407.0">
@@ -119,9 +119,9 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="txtCostoU" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCantidad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtCodigo" GridPane.columnIndex="1" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Código">
                <font>
                   <Font size="19.0" />
@@ -159,8 +159,8 @@
                   <Font size="19.0" />
                </font>
             </Text>
-            <ComboBox prefHeight="29.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox prefHeight="29.0" prefWidth="195.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbNoD" prefHeight="29.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbCodigoP" prefHeight="29.0" prefWidth="195.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1212.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">

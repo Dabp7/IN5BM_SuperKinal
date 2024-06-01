@@ -148,29 +148,29 @@ public class MenuClientesController implements Initializable {
     }
 
     public void agregar() {
-        switch (tipoDeOperaciones) {
+        switch(tipoDeOperaciones) {
             case NINGUNO:
                 activarControles();
+                btnEliminar.setText("Cancelar");
                 btnAgregar.setText("Guardar");
-                btnEditar.setText("Cancelar");
-                btnEliminar.setDisable(true);
-                btnReportes.setDisable(true);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/guardar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
+                imgEliminar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
+                btnReportes.setDisable(true);
+                btnEditar.setDisable(true);
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
-                //cancelar();
                 break;
-
             case ACTUALIZAR:
                 guardar();
+                cargarDatos();
                 desactivarControles();
                 limpiarControles();
                 btnAgregar.setText("Agregar");
-                btnEditar.setText("Editar");
-                btnEliminar.setDisable(false);
-                btnReportes.setDisable(false);
+                btnEliminar.setText("Eliminar");
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));  
+                btnReportes.setDisable(false);
+                btnEditar.setDisable(false);
+                
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
@@ -239,7 +239,6 @@ public class MenuClientesController implements Initializable {
         try{
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarClientes(?,?,?,?,?,?,?)");
             Clientes registro = (Clientes)tblClientes.getSelectionModel().getSelectedItem();
-            
             registro.setNitClientes(txtNitC.getText());
             registro.setNombresCliente(txtNombreC.getText());
             registro.setApellidosCliente(txtApellidoC.getText());
@@ -266,11 +265,11 @@ public class MenuClientesController implements Initializable {
                 desactivarControles();
                 limpiarControles();
                 btnAgregar.setText("Agregar");
-                btnEditar.setText("Editar");
-                btnEliminar.setDisable(false);
+                btnEliminar.setText("Eliminar");
+                btnEditar.setDisable(false);
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default: 
@@ -296,6 +295,23 @@ public class MenuClientesController implements Initializable {
     }
     
     public void cancelar(){
+    
+    }
+    
+    public void reportes() {
+        switch (tipoDeOperaciones) {
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnEditar.setText("Editar");
+                btnReportes.setText("Reporte");
+                btnAgregar.setDisable(false);
+                btnEliminar.setDisable(false);
+                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
+                imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
+        }
     }
     
     

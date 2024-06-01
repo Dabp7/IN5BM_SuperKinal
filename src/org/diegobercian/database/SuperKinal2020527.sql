@@ -1,4 +1,4 @@
-drop database if exists DBKinalExpress2020527;
+drop database if exists DBKinalExpress2020527; 	
 
 create database DBKinalExpress2020527;
 
@@ -799,6 +799,73 @@ call sp_eliminarDetalleFactura(2);
 
 
 -- ------------------------------------------------------------------------------------------------------
+
+
+
+delimiter $$
+create procedure sp_agregarDetalleCompra(in codigoDc int, in costo decimal(10,2), in cant int, in codProd varchar(15) , in numDoc int)
+begin
+	insert into DetalleCompra (codigoDetalleCompra, costoUnitario, cantidad, codigoProducto, numeroDocumento)
+    values(codigoDc, costo,cant, codProd, numDoc);
+    
+end $$
+delimiter ;
+
+call sp_agregarDetalleCompra(1,1.00, 1, "abc", 2);
+
+-- listar DetalleCompra
+delimiter $$
+create procedure sp_listarDetalleCompra()
+begin
+	select
+	DetalleCompra.codigoDetalleCompra,
+    DetalleCompra.costoUnitario,
+    DetalleCompra.cantidad,
+    DetalleCompra.codigoProducto,
+    DetalleCompra.numeroDocumento
+    from DetalleCompra ;
+end $$
+delimiter ;
+
+
+-- buscar DetalleCompra
+delimiter $$
+create procedure sp_buscarDetalleCompra(in codDetCompra int)
+begin
+	select 
+    DetalleCompra.codigoDetalleCompra,
+    DetalleCompra.costoUnitario,
+    DetalleCompra.cantidad,
+    DetalleCompra.codigoProducto,
+    DetalleCompra.numeroDocumento
+    from DetalleCompra 
+    where DetalleCompra.codigoDetalleCompra=codDetCompra;
+end $$
+delimiter ;
+
+-- eliminar DetalleCompra
+delimiter $$
+create procedure sp_eliminarDetalleCompra(in codProd varchar(15))
+begin
+	delete from DetalleCompra 
+    where DetalleCompra.codigoDetalleCompra=codProd;
+end $$
+delimiter ;
+
+-- actualizar DetalleCompra
+delimiter $$
+create procedure sp_actualizarDetalleCompra(in codDetCompra int, in precUnit decimal(10,2), in cant int, in codProd varchar(15) , in numDoc int )
+begin
+	update DetalleCompra 
+	set 
+		DetalleCompra.costoUnitario=precUnit,
+		DetalleCompra.cantidad=cant,
+		DetalleCompra.codigoProducto=codProd,
+		DetalleCompra.numeroDocumento=numDoc
+    where
+		DetalleCompra.codigoDetalleCompra=codDetCompra;
+end $$
+delimiter ;
 
 
 

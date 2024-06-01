@@ -18,16 +18,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1355.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuDetalleFacturaController">
    <children>
-      <TableView layoutX="299.0" layoutY="355.0" prefHeight="333.0" prefWidth="801.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
+      <TableView fx:id="tblDetalleFactura" layoutX="299.0" layoutY="355.0" onMouseClicked="#seleccionarElemento" prefHeight="333.0" prefWidth="801.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
          <columns>
-            <TableColumn minWidth="48.0" prefWidth="92.66668701171875" text="Código" />
-            <TableColumn minWidth="97.33331298828125" prefWidth="181.33331298828125" text="Precio Unitario" />
-            <TableColumn minWidth="0.0" prefWidth="195.66668701171875" text="Cantidad" />
-            <TableColumn maxWidth="211.0" minWidth="0.0" prefWidth="149.66668701171875" resizable="false" text="Factura" />
-            <TableColumn minWidth="0.0" prefWidth="173.6666259765625" text="Producto" />
+            <TableColumn fx:id="colCodigo" minWidth="48.0" prefWidth="92.66668701171875" text="Código" />
+            <TableColumn fx:id="colPrecioU" minWidth="97.33331298828125" prefWidth="181.33331298828125" text="Precio Unitario" />
+            <TableColumn fx:id="colCantidad" minWidth="0.0" prefWidth="195.66668701171875" text="Cantidad" />
+            <TableColumn fx:id="colFactura" maxWidth="211.0" minWidth="0.0" prefWidth="149.66668701171875" resizable="false" text="Factura" />
+            <TableColumn fx:id="colProducto" minWidth="0.0" prefWidth="173.6666259765625" text="Producto" />
          </columns>
       </TableView>
       <GridPane layoutX="260.0" layoutY="195.0" prefHeight="123.0" prefWidth="407.0">
@@ -41,8 +40,8 @@
             <RowConstraints maxHeight="40.333343505859375" minHeight="10.0" prefHeight="36.333343505859375" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="txtCantidad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtCodigo" GridPane.columnIndex="1" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Código">
                <font>
                   <Font name="Franklin Gothic Heavy" size="19.0" />
@@ -58,7 +57,7 @@
                   <Font size="19.0" />
                </font>
             </Text>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtPrecioU" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <GridPane layoutX="83.0" layoutY="345.0" prefHeight="339.0" prefWidth="178.0">
@@ -72,7 +71,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="205.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Agregar" textFill="WHITE">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregar" prefHeight="90.0" prefWidth="205.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Agregar" textFill="WHITE">
                <graphic>
                   <ImageView fx:id="imgAgregar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +86,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="165.0" prefWidth="168.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="1">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="165.0" prefWidth="168.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Editar" textFill="WHITE" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fx:id="imgEditar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -102,7 +101,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="157.0" prefWidth="178.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="2">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="157.0" prefWidth="178.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Eliminar" textFill="WHITE" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fx:id="imgEliminar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -117,7 +116,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="214.0" prefWidth="303.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
+            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reportes" prefHeight="214.0" prefWidth="303.0" styleClass="Button" stylesheets="@../resourse/SuperKinalCSS.css" text="Reportes" textFill="WHITE" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fx:id="imgBuscar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -164,8 +163,8 @@
                   <Font size="19.0" />
                </font>
             </Text>
-            <ComboBox prefHeight="25.0" prefWidth="201.0" GridPane.columnIndex="1" />
-            <ComboBox prefHeight="25.0" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbNoF" prefHeight="25.0" prefWidth="201.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbCodigoP" prefHeight="25.0" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <MenuButton layoutX="1138.0" layoutY="603.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="179.0" stylesheets="@../resourse/SuperKinalCSS.css" text="Regresar" textFill="WHITE">

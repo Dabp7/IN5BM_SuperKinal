@@ -122,25 +122,29 @@ public class MenuTipoProductoController implements Initializable {
             case NINGUNO:
                 activarControles();
                 btnAgregarTP.setText("Guardar");
-                btnEditarTP.setText("Cancelar");
-                btnEliminarTP.setDisable(true);
+                btnEliminarTP.setText("Cancelar");
+                btnEditarTP.setDisable(true);
                 btnReportesTP.setDisable(true);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/guardar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
-                tipoDeOperaciones = MenuTipoProductoController.operaciones.ACTUALIZAR;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
+                tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
 
             case ACTUALIZAR:
                 guardar();
-                desactivarControles();
                 limpiarControles();
+                desactivarControles();
                 btnAgregarTP.setText("Agregar");
                 btnEditarTP.setText("Editar");
+                btnEliminarTP.setText("Eliminar");
                 btnEliminarTP.setDisable(false);
                 btnReportesTP.setDisable(false);
+                btnEditarTP.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
                 imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
-                tipoDeOperaciones = MenuTipoProductoController.operaciones.NINGUNO;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                cargarDatos();
                 break;
         }
     }
@@ -172,7 +176,7 @@ public class MenuTipoProductoController implements Initializable {
                     imgBuscar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
                     activarControles();
                     txtCodigoTP.setEditable(false);
-                    tipoDeOperaciones = MenuTipoProductoController.operaciones.ACTUALIZAR;
+                    tipoDeOperaciones = operaciones.ACTUALIZAR;
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe de seleccionar un tipo de producto para editar");
                 }
@@ -187,7 +191,7 @@ public class MenuTipoProductoController implements Initializable {
                 imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
                 desactivarControles();
                 limpiarControles();
-                tipoDeOperaciones = MenuTipoProductoController.operaciones.NINGUNO;
+                tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
         }
@@ -213,12 +217,12 @@ public class MenuTipoProductoController implements Initializable {
                 desactivarControles();
                 limpiarControles();
                 btnAgregarTP.setText("Agregar");
-                btnEditarTP.setText("Editar");
-                btnEliminarTP.setDisable(false);
+                btnEliminarTP.setText("Eliminar");
+                btnEditarTP.setDisable(false);
                 btnReportesTP.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
-                tipoDeOperaciones = MenuTipoProductoController.operaciones.NINGUNO;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default: 
                 if(tblTipoProducto.getSelectionModel().getSelectedItem()  != null){
@@ -239,6 +243,22 @@ public class MenuTipoProductoController implements Initializable {
                 }
                 break;
                 
+        }
+    }
+    
+    public void reportes() {
+        switch (tipoDeOperaciones) {
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnEditarTP.setText("Editar");
+                btnReportesTP.setText("Reporte");
+                btnAgregarTP.setDisable(false);
+                btnEliminarTP.setDisable(false);
+                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
+                imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
         }
     }
 

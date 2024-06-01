@@ -249,12 +249,12 @@ public class MenuFacturaController implements Initializable {
             case NINGUNO:
                 activarControles();
                 btnAgregar.setText("Guardar");
-                btnEditar.setText("Cancelar");
-                btnEliminar.setDisable(true);
+                btnEliminar.setText("Cancelar");
+                btnEditar.setDisable(true);
                 btnReportes.setDisable(true);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/guardar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
-                tipoDeOperaciones = MenuFacturaController.operaciones.ACTUALIZAR;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/cancelar.png"));
+                tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
                 guardar();
@@ -262,11 +262,15 @@ public class MenuFacturaController implements Initializable {
                 desactivarControles();
                 btnAgregar.setText("Agregar");
                 btnEditar.setText("Editar");
+                btnEliminar.setText("Eliminar");
                 btnEliminar.setDisable(false);
                 btnReportes.setDisable(false);
+                btnEditar.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
                 imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
-                tipoDeOperaciones = MenuFacturaController.operaciones.NINGUNO;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                cargarDatos();
                 cargarDatos();
                 break;
         }
@@ -322,7 +326,7 @@ public class MenuFacturaController implements Initializable {
                 imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
                 desactivarControles();
                 limpiarControles();
-                tipoDeOperaciones = MenuFacturaController.operaciones.NINGUNO;
+                tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
         }
@@ -356,12 +360,12 @@ public class MenuFacturaController implements Initializable {
                 desactivarControles();
                 limpiarControles();
                 btnAgregar.setText("Agregar");
-                btnEditar.setText("Editar");
-                btnEliminar.setDisable(false);
+                btnEliminar.setText("Eliminar");
+                btnEditar.setDisable(false);
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/diegobercian/images/agregar.png"));
-                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
-                tipoDeOperaciones = MenuFacturaController.operaciones.NINGUNO;
+                imgEliminar.setImage(new Image("/org/diegobercian/images/eliminar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default: 
                 if(tblFacturas.getSelectionModel().getSelectedItem()  != null){
@@ -382,6 +386,22 @@ public class MenuFacturaController implements Initializable {
                 }
                 break;
                 
+        }
+    }
+    
+    public void reportes() {
+        switch (tipoDeOperaciones) {
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnEditar.setText("Editar");
+                btnReportes.setText("Reporte");
+                btnAgregar.setDisable(false);
+                btnEliminar.setDisable(false);
+                imgEditar.setImage(new Image("/org/diegobercian/images/editar.png"));
+                imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
         }
     }
     

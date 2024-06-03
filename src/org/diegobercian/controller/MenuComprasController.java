@@ -1,6 +1,4 @@
-
 package org.diegobercian.controller;
-
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
-import org.diegobercian.bean.CargoEmpleado;
 import org.diegobercian.bean.Compras;
 import org.diegobercian.db.Conexion;
 import org.diegobercian.system.Main;
@@ -48,8 +45,6 @@ public class MenuComprasController implements Initializable {
     private TextField txtFecha;
     @FXML
     private TextField txtDescripcion;
-    @FXML
-    private TextField txtTotal;
     @FXML
     private TableView tblCompras;
     @FXML
@@ -93,17 +88,16 @@ public class MenuComprasController implements Initializable {
     
     public void cargarDatos() {
         tblCompras.setItems(getCompras());
-        colDoc.setCellValueFactory(new PropertyValueFactory<Compras, Integer>("numeroDocumento"));
-        colFecha.setCellValueFactory(new PropertyValueFactory<Compras, String>("fechaDocumento"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<Compras, String>("descripcion"));
-        colTotal.setCellValueFactory(new PropertyValueFactory<Compras, Double>("totalDocumento"));
+        colDoc.setCellValueFactory(new PropertyValueFactory<>("numeroDocumento"));
+        colFecha.setCellValueFactory(new PropertyValueFactory<>("fechaDocumento"));
+        colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("totalDocumento"));
     }
 
     public void seleccionarElemento() {
         txtDoc.setText(String.valueOf(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getNumeroDocumento()));
         txtFecha.setText(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getFechaDocumento());
         txtDescripcion.setText(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getDescripcion());
-        txtTotal.setText(String.valueOf(((Compras)tblCompras.getSelectionModel().getSelectedItem()).getTotalDocumento()));
     }
 
     public ObservableList<Compras> getCompras() {
@@ -165,13 +159,11 @@ public class MenuComprasController implements Initializable {
         registro.setNumeroDocumento(Integer.parseInt(txtDoc.getText()));
         registro.setFechaDocumento(txtFecha.getText());
         registro.setDescripcion(txtDescripcion.getText());
-        registro.setTotalDocumento(Double.parseDouble(txtTotal.getText()));
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarCompras(?,?,?,?);");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarCompras(?,?,?);");
             procedimiento.setInt(1, registro.getNumeroDocumento());
             procedimiento.setString(2, registro.getFechaDocumento());
             procedimiento.setString(3, registro.getDescripcion());
-            procedimiento.setDouble(4, registro.getTotalDocumento());
             procedimiento.execute();
             listaCompra.add(registro);
         } catch (Exception e) {
@@ -214,15 +206,13 @@ public class MenuComprasController implements Initializable {
     
     public void actualizar(){
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarCompras(?,?,?,?);");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarCompras(?,?,?);");
             Compras registro = (Compras)tblCompras.getSelectionModel().getSelectedItem();
             registro.setFechaDocumento(txtFecha.getText());
             registro.setDescripcion(txtDescripcion.getText());
-            registro.setTotalDocumento(Double.parseDouble(txtTotal.getText()));
             procedimiento.setInt(1, registro.getNumeroDocumento());
             procedimiento.setString(2, registro.getFechaDocumento());
             procedimiento.setString(3, registro.getDescripcion());
-            procedimiento.setDouble(4, registro.getTotalDocumento());
             procedimiento.execute();
         }catch(Exception e){
             e.printStackTrace();
@@ -287,26 +277,20 @@ public class MenuComprasController implements Initializable {
         txtDoc.setEditable(false);
         txtFecha.setEditable(false);
         txtDescripcion.setEditable(false);
-        txtTotal.setEditable(false);
     }
 
     public void activarControles() {
         txtDoc.setEditable(true);
         txtFecha.setEditable(true);
         txtDescripcion.setEditable(true);
-        txtTotal.setEditable(true);
     }
 
     public void limpiarControles() {
         txtDoc.clear();
         txtFecha.clear();
         txtDescripcion.clear();
-        txtTotal.clear();
     }
-    
-    
-    
-    
+     
 
     public void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnRegresar) {

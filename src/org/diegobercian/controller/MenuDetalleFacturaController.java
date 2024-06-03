@@ -60,8 +60,6 @@ public class MenuDetalleFacturaController implements Initializable {
     @FXML
     private TextField txtCodigo;
     @FXML
-    private TextField txtPrecioU;
-    @FXML
     private Button btnAgregar;
     @FXML
     private ImageView imgAgregar;
@@ -102,7 +100,6 @@ public class MenuDetalleFacturaController implements Initializable {
     
     public void seleccionarElemento(){
         txtCodigo.setText(String.valueOf(((DetalleFactura)tblDetalleFactura.getSelectionModel().getSelectedItem()).getCodigoDetalleFactura()));
-        txtPrecioU.setText(String.valueOf(((DetalleFactura)tblDetalleFactura.getSelectionModel().getSelectedItem()).getPrecioUnitario()));
         txtCantidad.setText(String.valueOf(((DetalleFactura)tblDetalleFactura.getSelectionModel().getSelectedItem()).getCantidad()));
         cmbNoF.getSelectionModel().select(buscarFactura(((DetalleFactura)tblDetalleFactura.getSelectionModel().getSelectedItem()).getNumeroFactura()));
         cmbCodigoP.getSelectionModel().select(buscarProducto(((DetalleFactura)tblDetalleFactura.getSelectionModel().getSelectedItem()).getCodigoProducto()));
@@ -277,17 +274,15 @@ public class MenuDetalleFacturaController implements Initializable {
     public void guardar() {
         DetalleFactura registro = new DetalleFactura();
         registro.setCodigoDetalleFactura(Integer.parseInt(txtCodigo.getText()));
-        registro.setPrecioUnitario(Double.parseDouble(txtPrecioU.getText()));
         registro.setCantidad(Integer.parseInt(txtCantidad.getText()));
         registro.setNumeroFactura(((Facturas)cmbNoF.getSelectionModel().getSelectedItem()).getNumeroFactura());
         registro.setCodigoProducto(((Productos)cmbCodigoP.getSelectionModel().getSelectedItem()).getCodigoProducto());
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarDetalleFactura(?,?,?,?,?);");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarDetalleFactura(?,?,?,?);");
             procedimiento.setInt(1, registro.getCodigoDetalleFactura());
-            procedimiento.setDouble(2, registro.getPrecioUnitario());
-            procedimiento.setInt(3, registro.getCantidad());
-            procedimiento.setInt(4, registro.getNumeroFactura());
-            procedimiento.setString(5, registro.getCodigoProducto());
+            procedimiento.setInt(2, registro.getCantidad());
+            procedimiento.setInt(3, registro.getNumeroFactura());
+            procedimiento.setString(4, registro.getCodigoProducto());
             procedimiento.execute();
             listaDetalleFactura.add(registro);
         } catch (Exception e) {
@@ -332,7 +327,6 @@ public class MenuDetalleFacturaController implements Initializable {
         try{
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_ActualizarDetalleFactura(?,?,?,?,?);");
             DetalleFactura registro = (DetalleFactura)tblDetalleFactura.getSelectionModel().getSelectedItem();
-            registro.setPrecioUnitario(Double.parseDouble(txtPrecioU.getText()));
             registro.setCantidad(Integer.parseInt(txtCantidad.getText()));
             registro.setNumeroFactura(((Facturas)cmbNoF.getSelectionModel().getSelectedItem()).getNumeroFactura());
             registro.setCodigoProducto(((Productos)cmbCodigoP.getSelectionModel().getSelectedItem()).getCodigoProducto());
@@ -402,7 +396,6 @@ public class MenuDetalleFacturaController implements Initializable {
 
     public void activarControles(){
         txtCodigo.setEditable(true);
-        txtPrecioU.setEditable(true);
         txtCantidad.setEditable(true);
         cmbNoF.setDisable(false);
         cmbCodigoP.setDisable(false);
@@ -410,7 +403,6 @@ public class MenuDetalleFacturaController implements Initializable {
     
     public void desactivarControles(){
         txtCodigo.setEditable(false);
-        txtPrecioU.setEditable(false);
         txtCantidad.setEditable(false);
         cmbNoF.setDisable(true);
         cmbCodigoP.setDisable(true);
@@ -418,7 +410,6 @@ public class MenuDetalleFacturaController implements Initializable {
     
     public void limpiarControles(){
         txtCodigo.clear();
-        txtPrecioU.clear();
         txtCantidad.clear();
         cmbNoF.getSelectionModel().clearSelection();
         cmbCodigoP.getSelectionModel().clearSelection();

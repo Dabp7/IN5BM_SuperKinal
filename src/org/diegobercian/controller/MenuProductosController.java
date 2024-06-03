@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.diegobercian.controller;
-
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -85,16 +79,7 @@ public class MenuProductosController implements Initializable {
     @FXML
     private TextField txtDescripcionPro;
     @FXML
-    private TextField txtPrecioUPro;
-    @FXML
-    private TextField txtPrecioDoPro;
-    @FXML
     private TextField txtCodigoPro;
-    @FXML
-    private TextField txtExistenciaPro;
-    @FXML
-    private TextField txtPrecioMPro;
-
     @FXML
     private TextField txtImagenPro;
     @FXML
@@ -120,11 +105,7 @@ public class MenuProductosController implements Initializable {
     public void seleccionarElemento(){
         txtCodigoPro.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoProducto()));
         txtDescripcionPro.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getDescripcionProducto());
-        txtPrecioUPro.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getPrecioUnitario()));
-        txtPrecioDoPro.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getPrecioDocena()));
-        txtPrecioMPro.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getPrecioMayor()));
         txtImagenPro.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getImagenProducto());
-        txtExistenciaPro.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getExistencia()));
         cmbTipoProducto.getSelectionModel().select(buscarTipoProducto(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getCodigoTipoProducto()));
         cmbProveedores.getSelectionModel().select(buscarProveedores(((Productos)tblProductos.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
     }
@@ -300,24 +281,16 @@ public class MenuProductosController implements Initializable {
         Productos registro = new Productos();
         registro.setCodigoProducto(txtCodigoPro.getText());
         registro.setDescripcionProducto(txtDescripcionPro.getText());
-        registro.setPrecioUnitario(Double.parseDouble(txtPrecioUPro.getText()));
-        registro.setPrecioDocena(Double.parseDouble(txtPrecioDoPro.getText()));
-        registro.setPrecioMayor(Double.parseDouble(txtPrecioMPro.getText()));
         registro.setImagenProducto(txtImagenPro.getText());
-        registro.setExistencia(Integer.parseInt(txtExistenciaPro.getText()));
         registro.setCodigoTipoProducto(((TipoProducto)cmbTipoProducto.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
         registro.setCodigoProveedor(((Proveedores)cmbProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor());
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarProductos(?,?,?,?,?,?,?,?,?);");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarProductos(?,?,?,?,?);");
             procedimiento.setString(1, registro.getCodigoProducto());
             procedimiento.setString(2, registro.getDescripcionProducto());
-            procedimiento.setDouble(3, registro.getPrecioUnitario());
-            procedimiento.setDouble(4, registro.getPrecioDocena());
-            procedimiento.setDouble(5, registro.getPrecioMayor());
-            procedimiento.setString(6, registro.getImagenProducto());
-            procedimiento.setInt(7, registro.getExistencia());
-            procedimiento.setInt(8, registro.getCodigoTipoProducto());
-            procedimiento.setInt(9, registro.getCodigoProveedor());
+            procedimiento.setString(3, registro.getImagenProducto());
+            procedimiento.setInt(4, registro.getCodigoTipoProducto());
+            procedimiento.setInt(5, registro.getCodigoProveedor());
             procedimiento.execute();
             listaProductos.add(registro);
         } catch (Exception e) {
@@ -360,26 +333,17 @@ public class MenuProductosController implements Initializable {
     
     public void actualizar(){
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarProductos(?,?,?,?,?,?,?,?,?);");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarProductos(?,?,?,?,?);");
             Productos registro = (Productos)tblProductos.getSelectionModel().getSelectedItem();
-            
             registro.setDescripcionProducto(txtDescripcionPro.getText());
-            registro.setPrecioUnitario(Double.parseDouble(txtPrecioUPro.getText()) );
-            registro.setPrecioDocena(Double.parseDouble(txtPrecioDoPro.getText()));
-            registro.setPrecioMayor(Double.parseDouble(txtPrecioMPro.getText()));
             registro.setImagenProducto(txtImagenPro.getText());
-            registro.setExistencia(Integer.parseInt(txtExistenciaPro.getText()));
             registro.setCodigoTipoProducto(((TipoProducto)cmbTipoProducto.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
             registro.setCodigoProveedor(((Proveedores)cmbProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor());
             procedimiento.setString(1, registro.getCodigoProducto());
             procedimiento.setString(2, registro.getDescripcionProducto());
-            procedimiento.setDouble(3, registro.getPrecioUnitario());
-            procedimiento.setDouble(4, registro.getPrecioDocena());
-            procedimiento.setDouble(5, registro.getPrecioMayor());
-            procedimiento.setString(6, registro.getImagenProducto());
-            procedimiento.setInt(7, registro.getExistencia());
-            procedimiento.setInt(8, registro.getCodigoTipoProducto());
-            procedimiento.setInt(9, registro.getCodigoProveedor());
+            procedimiento.setString(3, registro.getImagenProducto());
+            procedimiento.setInt(4, registro.getCodigoTipoProducto());
+            procedimiento.setInt(5, registro.getCodigoProveedor());
             procedimiento.execute();
         }catch(Exception e){
             e.printStackTrace();
@@ -443,11 +407,7 @@ public class MenuProductosController implements Initializable {
     public void activarControles(){
         txtCodigoPro.setEditable(true);
         txtDescripcionPro.setEditable(true);
-        txtPrecioUPro.setEditable(true);
-        txtPrecioDoPro.setEditable(true);
-        txtPrecioMPro.setEditable(true);
         txtImagenPro.setEditable(true);
-        txtExistenciaPro.setEditable(true);
         cmbTipoProducto.setDisable(false);
         cmbProveedores.setDisable(false);
     }
@@ -455,11 +415,7 @@ public class MenuProductosController implements Initializable {
     public void desactivarControles(){
         txtCodigoPro.setEditable(false);
         txtDescripcionPro.setEditable(false);
-        txtPrecioUPro.setEditable(false);
-        txtPrecioDoPro.setEditable(false);
-        txtPrecioMPro.setEditable(false);
         txtImagenPro.setEditable(false);
-        txtExistenciaPro.setEditable(false);
         cmbTipoProducto.setDisable(true);
         cmbProveedores.setDisable(true);
     }
@@ -467,11 +423,7 @@ public class MenuProductosController implements Initializable {
     public void limpiarControles(){
         txtCodigoPro.clear();
         txtDescripcionPro.clear();
-        txtPrecioUPro.clear();
-        txtPrecioDoPro.clear();
-        txtPrecioMPro.clear();
         txtImagenPro.clear();
-        txtExistenciaPro.clear();
         tblProductos.getSelectionModel().getSelectedItem();
         cmbTipoProducto.getSelectionModel().getSelectedItem();
         cmbProveedores.getSelectionModel().getSelectedItem();

@@ -33,14 +33,12 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="54.33332824707031" minHeight="10.0" prefHeight="43.66667175292969" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="56.33332824707031" minHeight="10.0" prefHeight="48.33332824707031" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <TextField fx:id="txtDescripcion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtTotal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="txtDoc" GridPane.columnIndex="1" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="No. Documento">
                <font>
@@ -53,11 +51,6 @@
                </font>
             </Text>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Descripción" GridPane.rowIndex="2">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: Franklin Gothic Heavy;" text="Total" GridPane.rowIndex="3">
                <font>
                   <Font size="19.0" />
                </font>

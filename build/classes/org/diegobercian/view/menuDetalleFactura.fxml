@@ -29,35 +29,28 @@
             <TableColumn fx:id="colProducto" minWidth="0.0" prefWidth="173.6666259765625" text="Producto" />
          </columns>
       </TableView>
-      <GridPane layoutX="260.0" layoutY="195.0" prefHeight="123.0" prefWidth="407.0">
+      <GridPane layoutX="305.0" layoutY="189.0" prefHeight="96.0" prefWidth="363.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="40.333343505859375" minHeight="10.0" prefHeight="36.333343505859375" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField fx:id="txtCantidad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtCantidad" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtCodigo" GridPane.columnIndex="1" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Código">
                <font>
                   <Font name="Franklin Gothic Heavy" size="19.0" />
                </font>
             </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio Unitario" GridPane.rowIndex="1">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cantidad" GridPane.rowIndex="1">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cantidad" GridPane.rowIndex="2">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Text>
-            <TextField fx:id="txtPrecioU" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <GridPane layoutX="83.0" layoutY="345.0" prefHeight="339.0" prefWidth="178.0">
@@ -143,7 +136,7 @@
             <Image url="@../images/logo2.png" />
          </image>
       </ImageView>
-      <GridPane layoutX="721.0" layoutY="189.0" prefHeight="123.0" prefWidth="407.0">
+      <GridPane layoutX="702.0" layoutY="195.0" prefHeight="90.0" prefWidth="373.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

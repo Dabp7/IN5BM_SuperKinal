@@ -10,7 +10,7 @@ package org.diegobercian.bean;
  * @author gaber
  */
 public class CargoEmpleado {
-    private int codigoCargoEmpleado;
+    private int codigoCargoEmpleado; 
     private String nombreCargo;
     private String descripcionCargo; 
 

@@ -20,7 +20,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1355.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuFacturaController">
    <children>
-      <TableView fx:id="tblFacturas" layoutX="238.0" layoutY="357.0" prefHeight="333.0" prefWidth="914.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
+      <TableView fx:id="tblFacturas" layoutX="238.0" layoutY="357.0" onMouseClicked="#seleccionarElemento" prefHeight="333.0" prefWidth="914.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
          <columns>
             <TableColumn fx:id="colNumero" minWidth="48.0" prefWidth="92.66668701171875" text="Número" />
             <TableColumn fx:id="colEstado" minWidth="97.33331298828125" prefWidth="143.33331298828125" text="Estado" />
@@ -41,7 +41,6 @@
             <RowConstraints maxHeight="40.333343505859375" minHeight="10.0" prefHeight="36.333343505859375" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField fx:id="txtTotal" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtNumero" GridPane.columnIndex="1" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Número">
                <font>
@@ -53,12 +52,13 @@
                   <Font size="19.0" />
                </font>
             </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Total" GridPane.rowIndex="2">
+            <TextField fx:id="txtEstado" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha " GridPane.rowIndex="2">
                <font>
-                  <Font size="19.0" />
+                  <Font name="Franklin Gothic Heavy" size="19.0" />
                </font>
             </Text>
-            <TextField fx:id="txtEstado" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtFecha" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane layoutX="53.0" layoutY="358.0" prefHeight="339.0" prefWidth="178.0">
@@ -144,35 +144,28 @@
             <Image url="@../images/logo2.png" />
          </image>
       </ImageView>
-      <GridPane layoutX="711.0" layoutY="179.0" prefHeight="123.0" prefWidth="407.0">
+      <GridPane layoutX="734.0" layoutY="201.0" prefHeight="92.0" prefWidth="407.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="55.66667175292969" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="28.000015258789062" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="48.33332824707031" minHeight="10.0" prefHeight="42.99998474121094" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField fx:id="txtFecha" GridPane.columnIndex="1" />
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha ">
-               <font>
-                  <Font name="Franklin Gothic Heavy" size="19.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Código Clientes" GridPane.rowIndex="1">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Código Clientes">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Código Empleados" GridPane.rowIndex="2">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Código Empleados" GridPane.rowIndex="1">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
-            <ComboBox fx:id="cmbClientes" prefHeight="25.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox fx:id="cmbEmpleados" prefHeight="25.0" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cmbClientes" prefHeight="25.0" prefWidth="201.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbEmpleados" prefHeight="25.0" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <MenuButton layoutX="1156.0" layoutY="592.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="179.0" stylesheets="@../resourse/SuperKinalCSS.css" text="Regresar" textFill="WHITE">

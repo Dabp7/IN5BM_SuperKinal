@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.diegobercian.controller;
 
 import java.net.URL;
@@ -59,8 +55,6 @@ public class MenuFacturaController implements Initializable {
     @FXML
     private TableColumn colEmpleado;
     @FXML
-    private TextField txtTotal;
-    @FXML
     private TextField txtNumero;
     @FXML
     private TextField txtEstado;
@@ -106,7 +100,6 @@ public class MenuFacturaController implements Initializable {
     public void seleccionarElemento(){
         txtNumero.setText(String.valueOf(((Facturas) tblFacturas.getSelectionModel().getSelectedItem()).getNumeroFactura()));
         txtEstado.setText(((Facturas) tblFacturas.getSelectionModel().getSelectedItem()).getEstado());
-        txtTotal.setText(String.valueOf(((Facturas) tblFacturas.getSelectionModel().getSelectedItem()).getTotalFactura()));
         txtFecha.setText(((Facturas) tblFacturas.getSelectionModel().getSelectedItem()).getFechaFactura());
         cmbClientes.getSelectionModel().select(buscarCliente(((Facturas)tblFacturas.getSelectionModel().getSelectedItem()).getCodigoCliente()));
         cmbEmpleados.getSelectionModel().select(buscarEmpleado(((Facturas)tblFacturas.getSelectionModel().getSelectedItem()).getCodigoEmpleado()));
@@ -280,18 +273,16 @@ public class MenuFacturaController implements Initializable {
         Facturas registro = new Facturas();
         registro.setNumeroFactura(Integer.parseInt(txtNumero.getText()));
         registro.setEstado(txtEstado.getText());
-        registro.setTotalFactura(Double.parseDouble(txtTotal.getText()));
         registro.setFechaFactura(txtFecha.getText());
         registro.setCodigoCliente(((Clientes)cmbClientes.getSelectionModel().getSelectedItem()).getCodigoCliente());
         registro.setCodigoEmpleado(((Empleados)cmbEmpleados.getSelectionModel().getSelectedItem()).getCodigoEmpleado());
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarFactura(?,?,?,?,?,?);");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarFactura(?,?,?,?,?);");
             procedimiento.setInt(1, registro.getNumeroFactura());
             procedimiento.setString(2, registro.getEstado());
-            procedimiento.setDouble(3, registro.getTotalFactura());
-            procedimiento.setString(4, registro.getFechaFactura());
-            procedimiento.setInt(5, registro.getCodigoCliente());
-            procedimiento.setInt(6, registro.getCodigoEmpleado());
+            procedimiento.setString(3, registro.getFechaFactura());
+            procedimiento.setInt(4, registro.getCodigoCliente());
+            procedimiento.setInt(5, registro.getCodigoEmpleado());
             procedimiento.execute();
             listaFacturas.add(registro);
         } catch (Exception e) {
@@ -334,19 +325,17 @@ public class MenuFacturaController implements Initializable {
     
     public void actualizar(){
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarFacturas(?,?,?,?,?,?);");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarFacturas(?,?,?,?,?);");
             Facturas registro = (Facturas)tblFacturas.getSelectionModel().getSelectedItem();
             registro.setEstado(txtEstado.getText());
-            registro.setTotalFactura(Double.parseDouble(txtTotal.getText()));
             registro.setFechaFactura(txtFecha.getText());
             registro.setCodigoCliente(((Clientes)cmbClientes.getSelectionModel().getSelectedItem()).getCodigoCliente());
             registro.setCodigoEmpleado(((Empleados)cmbEmpleados.getSelectionModel().getSelectedItem()).getCodigoEmpleado());
             procedimiento.setInt(1, registro.getNumeroFactura());
             procedimiento.setString(2, registro.getEstado());
-            procedimiento.setDouble(3, registro.getTotalFactura());
-            procedimiento.setString(4, registro.getFechaFactura());
-            procedimiento.setInt(5, registro.getCodigoCliente());
-            procedimiento.setInt(6, registro.getCodigoEmpleado());
+            procedimiento.setString(3, registro.getFechaFactura());
+            procedimiento.setInt(4, registro.getCodigoCliente());
+            procedimiento.setInt(5, registro.getCodigoEmpleado());
             procedimiento.execute();
         }catch(Exception e){
             e.printStackTrace();
@@ -409,7 +398,6 @@ public class MenuFacturaController implements Initializable {
     public void activarControles(){
         txtNumero.setEditable(true);
         txtEstado.setEditable(true);
-        txtTotal.setEditable(true);
         txtFecha.setEditable(true);
         cmbClientes.setDisable(false);
         cmbEmpleados.setDisable(false);
@@ -418,7 +406,6 @@ public class MenuFacturaController implements Initializable {
     public void desactivarControles(){
         txtNumero.setEditable(false);
         txtEstado.setEditable(false);
-        txtTotal.setEditable(false);
         txtFecha.setEditable(false);
         cmbClientes.setDisable(true);
         cmbEmpleados.setDisable(true);
@@ -427,7 +414,6 @@ public class MenuFacturaController implements Initializable {
     public void limpiarControles(){
         txtNumero.clear();
         txtEstado.clear();
-        txtTotal.clear();
         txtFecha.clear();
         cmbClientes.getSelectionModel().clearSelection();
         cmbEmpleados.getSelectionModel().clearSelection();

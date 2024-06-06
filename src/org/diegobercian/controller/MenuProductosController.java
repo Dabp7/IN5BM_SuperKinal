@@ -3,6 +3,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +25,7 @@ import org.diegobercian.bean.Productos;
 import org.diegobercian.bean.Proveedores;
 import org.diegobercian.bean.TipoProducto;
 import org.diegobercian.db.Conexion;
+import org.diegobercian.reportes.GenerarReportes;
 import org.diegobercian.system.Main;
 
 /**
@@ -386,8 +389,11 @@ public class MenuProductosController implements Initializable {
         }
     }
     
-    public void reportes() {
+   public void reportes() {
         switch (tipoDeOperaciones) {
+            case NINGUNO:
+                imprimirReporte();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -399,9 +405,16 @@ public class MenuProductosController implements Initializable {
                 imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
+                
         }
     }
     
+    public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("codigoProveedor", null);
+        GenerarReportes.mostrarReportes("ProductosReporte.jasper", "Reporte Clientes", parametros);
+        
+    }
     
     
     public void activarControles(){

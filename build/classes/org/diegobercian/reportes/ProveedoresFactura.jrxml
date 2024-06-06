@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProveedoresFactura" language="groovy" pageWidth="555" pageHeight="802" columnWidth="515" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc5d6056-afa1-4a25-87b3-4394ed30a377">
+	<property name="ireport.zoom" value="0.7513148009015788"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="e896637c-e9a1-4792-a934-18e17f444487"/>
+	<queryString>
+		<![CDATA[select * from Proveedores]]>
+	</queryString>
+	<field name="codigoProveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NITProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombresProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidosProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contactoPrincipal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="paginaWeb" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="761" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="515" height="761" uuid="26322512-257c-4e8b-a30b-db15099a2df9"/>
+				<imageExpression><![CDATA["C:\\Users\\gaber\\Downloads\\Laboratorio-No.3-20240606T023141Z-001\\Laboratorio-No.3\\src\\org\\diegobercian\\images\\proveedoresFactura.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="104" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="66" y="8" width="432" height="90" backcolor="#E5E5E5" uuid="5476cfd0-36c2-4bb3-8dad-89a5bbe597c1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="165" y="32" width="134" height="20" forecolor="#000000" uuid="06c3b461-10ea-4827-bfe1-1727b8889545"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NITProveedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="76" y="32" width="100" height="20" forecolor="#000000" uuid="745cc25a-de82-4db6-bed2-b7dc65bc3891"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="52" width="159" height="20" forecolor="#000000" uuid="8874feff-84b9-4c88-8bce-8d8e950b91d3"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombresProveedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="76" y="52" width="100" height="20" forecolor="#000000" uuid="f6b88135-199d-403b-a77c-171d6037f903"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="72" width="159" height="20" forecolor="#000000" uuid="c82ce882-e1b1-476b-9208-1a487c795d6b"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccionProveedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="76" y="72" width="100" height="20" forecolor="#000000" uuid="3a8ed255-31be-4f27-b87c-efabc06352d1"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Dirección]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="12" width="144" height="20" forecolor="#000000" uuid="c51b01d4-7e61-47a5-8bf0-74e6d90817de"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoProveedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="76" y="12" width="89" height="20" forecolor="#000000" uuid="f0d31c18-e7e4-408c-8ecd-3c8966bd3d97"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

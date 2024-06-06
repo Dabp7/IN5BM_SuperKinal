@@ -1,2 +1,2 @@
-# IN5BM_SuperKinal
-Proyecto implementando JavaFX, MVC, JDBC
+# Laboratorio-No.3
+PMA - Laboratorio No.3

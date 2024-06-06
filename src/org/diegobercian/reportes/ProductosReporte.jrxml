@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProductosReporte" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9429931-2dcd-4c74-a5bc-741724dc202e">
+	<property name="ireport.zoom" value="1.0000000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<queryString>
+		<![CDATA[select * from vw_Productos;]]>
+	</queryString>
+	<field name="codigoProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcionProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombresProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="802" uuid="ac56382d-2f53-4259-82d4-0fb3aaad0e11"/>
+				<imageExpression><![CDATA["C:\\Users\\gaber\\Downloads\\Laboratorio-No.3-20240606T023141Z-001\\Laboratorio-No.3\\src\\org\\diegobercian\\images\\productosFactura.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="111" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="84" y="12" width="434" height="89" backcolor="#E5E5E5" uuid="0f1c52c0-b0fd-4123-ab81-4c1641a04c08"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="259" y="17" width="145" height="20" forecolor="#000000" uuid="126b9156-00a2-432e-93b7-a03033ac99b2"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="37" width="184" height="20" forecolor="#000000" uuid="f95d2e27-8295-4c2b-b6e6-5fb4f91b8a16"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="57" width="125" height="20" forecolor="#000000" uuid="519b95dc-4d97-49f3-b67c-363bd0d00ef8"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="98" y="17" width="100" height="20" forecolor="#000000" uuid="605d0d0e-5a95-449e-8806-0d16da3263c3"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Codigo: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="98" y="37" width="100" height="20" forecolor="#000000" uuid="6c52a14e-a177-4cfe-913e-0fac6cc921cc"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Descripción: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="98" y="57" width="150" height="20" forecolor="#000000" uuid="6a54b0bb-9e93-475d-83c4-ea8d622fde3d"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Descripcion Producto:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="259" y="77" width="175" height="20" forecolor="#000000" uuid="8a4b83d7-e0dc-4ff6-9c42-977167e1cc01"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombresProveedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="98" y="77" width="100" height="20" forecolor="#000000" uuid="a53cc742-09c9-4ee3-8170-8602bccb31da"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Proveedor:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

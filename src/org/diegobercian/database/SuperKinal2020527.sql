@@ -154,7 +154,7 @@ delimiter $$
 delimiter ;
 
 call sp_agregarClientes(1,'502452698','Diego','Bercian','12 Calle y 6 Avenida','3441421','dbercian');
-call sp_agregarClientes(2,'452021456','Samuel','Pérez','13 Calle y 5 Avenida','2595631','sPerez');
+call sp_agregarClientes(5,'452021456','Samuel','Pérez','13 Calle y 5 Avenida','2595631','sPerez');
 
 
 delimiter $$
@@ -1113,5 +1113,17 @@ for each row
                                     
 	end //
 delimiter ;
+
+-- -------------------------------------
+
+create view vw_Productos as
+select Productos.codigoProducto, Productos.descripcionProducto, TipoProducto.Descripcion, Proveedores.nombresProveedor
+from Productos
+LEFT JOIN TipoProducto ON Productos.codigoTipoProducto = TipoProducto.codigoTipoProducto
+LEFT JOIN Proveedores ON Productos.codigoProveedor = Proveedores.codigoProveedor;
+
+
+select * from vw_Productos;
+
 
 

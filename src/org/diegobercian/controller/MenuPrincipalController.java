@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import org.diegobercian.system.Main;
 
@@ -23,8 +24,16 @@ public class MenuPrincipalController implements Initializable{
     @FXML MenuItem btnMenuProductos;
     @FXML MenuItem btnMenuEmpleados;
     @FXML MenuItem btnMenuFacturas;
+    @FXML MenuItem btnClientesR;
+    @FXML MenuItem btnProductosR;
+    @FXML MenuItem btnProveedoresR;
+    @FXML Button btnMenuHorarios;
+    
     
     private Main escenarioPrincipal;
+    private MenuClientesController clc = new MenuClientesController();
+    private MenuProveedoresController prc = new MenuProveedoresController();
+    private MenuProductosController pro = new MenuProductosController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,8 +66,18 @@ public class MenuPrincipalController implements Initializable{
             escenarioPrincipal.EmpleadosView();
         }if (event.getSource() == btnMenuFacturas) {
             escenarioPrincipal.FacturaView();
+        }if (event.getSource() == btnClientesR) {
+            clc.imprimirReporteClientes();
+        }if (event.getSource() == btnProductosR) {
+            pro.imprimirReporteProductos();
+        }if (event.getSource() == btnProveedoresR) {
+            prc.imprimirReporteProveedores();
+        }if (event.getSource() == btnMenuHorarios) {
+            escenarioPrincipal.HorariosView();
         }
     }
+    
+    
     
     
     

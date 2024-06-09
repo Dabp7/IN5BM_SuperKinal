@@ -310,7 +310,7 @@ public class MenuProveedoresController implements Initializable  {
     public void reportes() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
-                imprimirReporte();
+                imprimirReporteProveedores();
                 break;
             case ACTUALIZAR:
                 desactivarControles();
@@ -327,7 +327,7 @@ public class MenuProveedoresController implements Initializable  {
         }
     }
     
-    public void imprimirReporte(){
+    public void imprimirReporteProveedores(){
         Map parametros = new HashMap();
         parametros.put("codigoProveedor", null);
         GenerarReportes.mostrarReportes("ProveedoresFactura.jasper", "Reporte Proveedores", parametros);

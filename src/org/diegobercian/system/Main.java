@@ -196,6 +196,15 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }  
+     
+     public void HorariosView(){
+        try{
+            MenuHorariosController horariosView = (MenuHorariosController)cambiarEscena("menuHorarios.fxml", 500, 700);
+            horariosView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }  
     
 
     /**

@@ -35,7 +35,7 @@ public class Main extends Application {
         
         this.escenarioPrincipal = escenarioPrincipal;
         this.escenarioPrincipal.setTitle("Kinal Express");
-        MenuPrincipalView();
+        LoginView();
         escenarioPrincipal.getIcons().add(new Image("/org/diegobercian/images/logo3.png"));
         /*Parent root = FXMLLoader.load(getClass().getResource("/org/diegobercian/view/superkinal.fxml"));
         Scene escena = new Scene(root);
@@ -201,6 +201,24 @@ public class Main extends Application {
         try{
             MenuHorariosController horariosView = (MenuHorariosController)cambiarEscena("menuHorarios.fxml", 500, 700);
             horariosView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }  
+     
+     public void LoginView(){
+        try{
+            MenuLoginController loginView = (MenuLoginController)cambiarEscena("menuLogin.fxml", 930, 600);
+            loginView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }  
+     
+     public void RegistroView(){
+        try{
+            MenuRegistroController registroView = (MenuRegistroController)cambiarEscena("menuRegistro.fxml", 400, 500);
+            registroView.setEscenarioPrincipal(this);
         }catch(Exception e){
             e.printStackTrace();
         }

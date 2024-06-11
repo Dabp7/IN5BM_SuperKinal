@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuRegistroController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="470.0" layoutX="20.0" layoutY="14.0" stroke="#14213e" strokeType="INSIDE" strokeWidth="5.0" width="361.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="54.0" layoutY="124.0" stroke="#14213d" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="3.0" width="300.0" />
+      <Text fill="#14213d" layoutX="79.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo" y="-8.0">
+         <font>
+            <Font name="Arial" size="25.0" />
+         </font>
+      </Text>
+      <Text fill="#14213d" layoutX="151.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN" y="-8.0">
+         <font>
+            <Font name="Arial" size="30.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" layoutX="54.0" layoutY="266.0" stroke="#14213d" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="3.0" width="300.0" />
+      <Text fill="#14213d" layoutX="73.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" y="-8.0">
+         <font>
+            <Font name="Arial" size="25.0" />
+         </font>
+      </Text>
+      <PasswordField fx:id="txtContraR" layoutX="73.0" layoutY="316.0" prefHeight="30.0" prefWidth="230.0" />
+      <Button fx:id="btnCrear" alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="397.0" mnemonicParsing="false" onAction="#crearUsuario" prefHeight="45.0" prefWidth="130.0" styleClass="Button1" stylesheets="@../resourse/SuperKinalCSS.css" text="Crear" textFill="WHITE" />
+      <Button fx:id="btnRegresar" alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="397.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="130.0" styleClass="Button1" stylesheets="@../resourse/SuperKinalCSS.css" text="Volver" textFill="WHITE" />
+      <TextField fx:id="txtCorreoR" layoutX="79.0" layoutY="174.0" prefHeight="30.0" prefWidth="225.0" />
+      <ImageView fitHeight="82.0" fitWidth="84.0" layoutX="299.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo3.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

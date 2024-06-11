@@ -6,6 +6,24 @@ use DBKinalExpress2020527;
 
 set global time_zone = '-6:00';
 
+create table Usuarios(
+	idUsuario int auto_increment,
+    ingresoUsuario varchar(60),
+    ingresoClave varchar(50),
+    primary key PK_idUsuario(idUsuario)
+);
+
+insert into Usuarios(ingresoUsuario, ingresoClave)
+values('Dabp','123456');
+
+select * from Usuarios;
+
+delete from Usuarios where idUsuario = 120;
+
+select * from Usuarios where Usuarios.ingresoUsuario = 'Dabp' and Usuarios.ingresoClave = '123456';
+select * from Usuarios where Usuarios.ingresoUsuario = 'Torres';
+
+
 create table Clientes(
 	codigoCliente int not null,
 	NITClientes varchar(10),

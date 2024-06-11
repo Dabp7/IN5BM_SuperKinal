@@ -18,7 +18,10 @@ values('Dabp','123456');
 
 select * from Usuarios;
 
+delete from Usuarios where idUsuario = 120;
+
 select * from Usuarios where Usuarios.ingresoUsuario = 'Dabp' and Usuarios.ingresoClave = '123456';
+select * from Usuarios where Usuarios.ingresoUsuario = 'Torres';
 
 
 create table Clientes(
@@ -1139,6 +1142,11 @@ LEFT JOIN Proveedores ON Productos.codigoProveedor = Proveedores.codigoProveedor
 
 
 select * from vw_Productos;
+
+select * from DetalleFactura
+	join Factura on DetalleFactura.numeroFactura = Factura.numeroFactura
+    join Clientes on Factura.codigoCliente = Clientes.codigoClientes
+    join Productos on DetalleFactura.codigoProducto = Productos.codigoProducto
 
 
 

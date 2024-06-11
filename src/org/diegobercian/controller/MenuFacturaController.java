@@ -5,6 +5,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +27,7 @@ import org.diegobercian.bean.Clientes;
 import org.diegobercian.bean.Empleados;
 import org.diegobercian.bean.Facturas;
 import org.diegobercian.db.Conexion;
+import org.diegobercian.reportes.GenerarReportes;
 import org.diegobercian.system.Main;
 
 /**
@@ -380,6 +383,9 @@ public class MenuFacturaController implements Initializable {
     
     public void reportes() {
         switch (tipoDeOperaciones) {
+            case NINGUNO:
+                imprimirReporteFacturas();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -391,7 +397,16 @@ public class MenuFacturaController implements Initializable {
                 imgBuscar.setImage(new Image("/org/diegobercian/images/buscar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
+                
         }
+    }
+    
+    public void imprimirReporteFacturas(){
+        Map parametros = new HashMap();
+        int facId = Integer.valueOf(((Facturas)tblFacturas.getSelectionModel().getSelectedItem()).getNumeroFactura());
+        parametros.put(facId, facId);
+        GenerarReportes.mostrarReportes("reporteFactura.jasper", "Factura", parametros);
+        
     }
     
 

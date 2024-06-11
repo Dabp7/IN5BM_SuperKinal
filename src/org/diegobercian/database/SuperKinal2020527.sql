@@ -1143,5 +1143,10 @@ LEFT JOIN Proveedores ON Productos.codigoProveedor = Proveedores.codigoProveedor
 
 select * from vw_Productos;
 
+select * from DetalleFactura
+	join Factura on DetalleFactura.numeroFactura = Factura.numeroFactura
+    join Clientes on Factura.codigoCliente = Clientes.codigoClientes
+    join Productos on DetalleFactura.codigoProducto = Productos.codigoProducto
+
 
 

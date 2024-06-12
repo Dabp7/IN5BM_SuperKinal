@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteFactura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f94d4617-6d7f-4cdb-8402-abc01df9dcc9">
-	<property name="ireport.zoom" value="1.4641000000000033"/>
+	<property name="ireport.zoom" value="0.5131581182307077"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="182"/>
 	<parameter name="numeroFactura" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -85,8 +85,8 @@
 	<background>
 		<band height="802" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="555" height="802" uuid="9aaf3da3-cf70-42f1-bfde-5dc5ef67a158"/>
-				<imageExpression><![CDATA["C:\\Users\\Informatica\\Downloads\\Reps\\IN5BM_SuperKinal\\src\\org\\diegobercian\\images\\Facturas.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="555" height="802" uuid="cf819c3e-e93d-4489-b895-59291bf6f895"/>
+				<imageExpression><![CDATA["C:\\Users\\gaber\\Downloads\\Reps\\IN5BM_SuperKinal\\src\\org\\diegobercian\\images\\Facturas.png"]]></imageExpression>
 			</image>
 		</band>
 	</background>
@@ -100,7 +100,7 @@
 				<textElement>
 					<font fontName="Arial Black" size="20"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ "No. Factura: " + $F{numeroFactura}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["No. Factura: " + $F{numeroFactura}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="339" y="50" width="231" height="20" forecolor="#FFFFFF" uuid="cb801e0b-ae08-4249-80a6-f540c4db9b95"/>
@@ -167,7 +167,7 @@
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="259" y="68" width="175" height="20" forecolor="#FFFFFF" uuid="29f2b2c6-2927-40ef-87ba-da56ee7f3de3"/>
+				<reportElement x="241" y="68" width="175" height="20" forecolor="#FFFFFF" uuid="29f2b2c6-2927-40ef-87ba-da56ee7f3de3"/>
 				<textElement>
 					<font size="15"/>
 				</textElement>
@@ -205,15 +205,14 @@
 				<textFieldExpression><![CDATA["Subtotal sin IVA: " + "Q." + ($F{precioUnitario}/1.12)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="350" y="223" width="100" height="20" forecolor="#FFFFFF" uuid="25a2839f-1d26-4609-9f38-d6afa5caf447"/>
+				<reportElement x="350" y="223" width="190" height="20" forecolor="#FFFFFF" uuid="25a2839f-1d26-4609-9f38-d6afa5caf447"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["IVA: " + "Q." + ($F{precioUnitario} - ($F{precioUnitario}/1.12))
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA["IVA: " + "Q." + ($F{precioUnitario} - ($F{precioUnitario}/1.12))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="350" y="253" width="100" height="20" forecolor="#FFFFFF" uuid="17f24efb-89a1-4728-950d-21a1356bf390"/>
+				<reportElement x="350" y="253" width="205" height="20" forecolor="#FFFFFF" uuid="17f24efb-89a1-4728-950d-21a1356bf390"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>

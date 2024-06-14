@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteFactura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f94d4617-6d7f-4cdb-8402-abc01df9dcc9">
-	<property name="ireport.zoom" value="0.5131581182307077"/>
+	<property name="ireport.zoom" value="1.1000000000000028"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="182"/>
+	<property name="ireport.y" value="470"/>
 	<parameter name="numeroFactura" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -202,28 +202,28 @@
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Subtotal sin IVA: " + "Q." + ($F{precioUnitario}/1.12)]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Subtotal sin IVA: " + "Q. " + ($F{precioUnitario}/1.12)]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="350" y="223" width="190" height="20" forecolor="#FFFFFF" uuid="25a2839f-1d26-4609-9f38-d6afa5caf447"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["IVA: " + "Q." + ($F{precioUnitario} - ($F{precioUnitario}/1.12))]]></textFieldExpression>
+				<textFieldExpression><![CDATA["IVA: " + "Q. " + ($F{precioUnitario} - ($F{precioUnitario}/1.12))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="350" y="253" width="205" height="20" forecolor="#FFFFFF" uuid="17f24efb-89a1-4728-950d-21a1356bf390"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Total: " + "Q."+ $F{totalFactura}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Total: " + "Q. "+ $F{totalFactura}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="350" y="283" width="311" height="20" forecolor="#FFFFFF" uuid="03e17ac0-d9ea-45cc-b8c3-9f528cb042d7"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Total Factura: " + "Q."+ $F{precioUnitario} * $F{cantidad}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Total Factura: " + "Q. "+ $F{precioUnitario} * $F{cantidad}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

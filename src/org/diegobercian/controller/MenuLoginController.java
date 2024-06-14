@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
+import org.diegobercian.bean.Usuarios;
 import org.diegobercian.db.Conexion;
 import org.diegobercian.system.Main;
 
@@ -34,6 +35,7 @@ public class MenuLoginController implements Initializable  {
     @FXML
     private Button btnRegistro;
     private Main escenarioPrincipal;
+
     
     
     public void validaUsuario(){

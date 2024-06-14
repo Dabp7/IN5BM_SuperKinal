@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,8 +13,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuPrincipalController">
    <children>
@@ -26,9 +25,7 @@
         <menus>
           <Menu fx:id="btnMenuClientes" mnemonicParsing="false" text="Modulos">
             <items>
-              <MenuItem fx:id="btnMenuClientes" mnemonicParsing="false" onAction="#handleButtonAction" text="Clientes" />
                   <MenuItem fx:id="btnMenuProveedor" mnemonicParsing="false" onAction="#handleButtonAction" text="Proveedores" />
-                  <MenuItem fx:id="btnMenuCompras" mnemonicParsing="false" onAction="#handleButtonAction" text="Compras" />
                   <MenuItem fx:id="btnMenuProductos" mnemonicParsing="false" onAction="#handleButtonAction" text="Productos" />
                   <MenuItem fx:id="btnMenuEmpleados" mnemonicParsing="false" onAction="#handleButtonAction" text="Empleados" />
                   <MenuItem fx:id="btnMenuFacturas" mnemonicParsing="false" onAction="#handleButtonAction" text="Facturas" />
@@ -95,7 +92,7 @@
                   <URL value="@../resourse/SuperKinalCSS.css" />
                </stylesheets>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="451.0" styleClass="Button" text="Inventario" textFill="WHITE">
+            <Button fx:id="btnCompras" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="150.0" prefWidth="451.0" styleClass="Button" text="Compras" textFill="WHITE">
                <GridPane.margin>
                   <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
                </GridPane.margin>
@@ -111,7 +108,7 @@
                   <URL value="@../resourse/SuperKinalCSS.css" />
                </stylesheets>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="187.0" prefWidth="450.0" styleClass="Button" text="Usuarios en linea" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="btnClientes" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="187.0" prefWidth="450.0" styleClass="Button" text="Clientes" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
                </GridPane.margin>
@@ -127,7 +124,7 @@
                   <URL value="@../resourse/SuperKinalCSS.css" />
                </stylesheets>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="152.0" prefWidth="429.0" styleClass="Button" text="Ubicaciones" textFill="WHITE" GridPane.columnIndex="1">
+            <Button fx:id="btnMenuUbicaciones" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="152.0" prefWidth="429.0" styleClass="Button" text="Ubicaciones" textFill="WHITE" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
                </GridPane.margin>
@@ -145,10 +142,17 @@
             </Button>
          </children>
       </GridPane>
-      <Text layoutX="930.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
+      <MenuButton fx:id="btnUsuario" layoutX="952.0" layoutY="56.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="42.0" style="-fx-background-color: #E5E5E5;">
+        <items>
+          <MenuItem fx:id="btnSesionCerrar" mnemonicParsing="false" onAction="#handleButtonAction" text="Cerrar Sesión" />
+        </items>
+         <graphic>
+            <ImageView fitHeight="22.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/usuarios2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MenuButton>
    </children>
 </AnchorPane>

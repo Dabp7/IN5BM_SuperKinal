@@ -5,6 +5,7 @@
  */
 package org.diegobercian.controller;
 
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -70,6 +71,7 @@ public class MenuRegistroController implements Initializable {
             e.printStackTrace();
         }
     }
+    
     
     public Usuarios buscarRegistro(String correo){
         Usuarios resultado = null;

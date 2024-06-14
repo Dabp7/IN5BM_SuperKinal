@@ -172,7 +172,10 @@ delimiter $$
 delimiter ;
 
 call sp_agregarClientes(1,'502452698','Diego','Bercian','12 Calle y 6 Avenida','3441421','dbercian');
-call sp_agregarClientes(5,'452021456','Samuel','Pérez','13 Calle y 5 Avenida','2595631','sPerez');
+call sp_agregarClientes(2,'452021456','Samuel','Pérez','13 Calle y 5 Avenida','2595631','sPerez');
+call sp_agregarClientes(3,'654123111','Gustavo','Lopez','13 Calle y 5 Avenida','14572410','sPerez');
+call sp_agregarClientes(4,'984984321','Sandra','Gutierrez','13 Calle y 5 Avenida','46135201','sPerez');
+call sp_agregarClientes(6,'132954981','David','Verdezoto','13 Calle y 5 Avenida','14172400','sPerez');
 
 
 delimiter $$
@@ -237,7 +240,10 @@ delimiter ;
 
 call sp_agregarProveedores(1, '5485', 'David', 'Arevalo', '6 calle 4-76 zona 7', 'Arcos Dorados, C.A.', 'Mateo', 'arcosdorados.com');
 call sp_agregarProveedores(2, '5285', 'Adrián', 'Figueroa', '8 calle 4-43 zona 12', 'Carlos Fernández, E. I. R. L.', 'Luis', 'EIRL.com');
-call sp_agregarProveedores(3, '5280', 'Gustavo', 'Verdezoto', '5 calle 4-56 zona 2	', 'Importaciones PFV.', 'Byron', 'PFV.com');
+call sp_agregarProveedores(3, '8952', 'Gustavo', 'Verdezoto', '5 calle 8-56 zona 2	', 'Importaciones PFV.', 'Byron', 'PFV.com');
+call sp_agregarProveedores(4, '6532', 'Byron', 'Castro', '4 calle 4-56 zona 5	', 'Importaciones PFV.', 'Byron', 'PFV.com');
+call sp_agregarProveedores(5, '1204', 'Astrid', 'Perez', '10 calle 6-14 zona 8	', 'Importaciones PFV.', 'Byron', 'PFV.com');
+call sp_agregarProveedores(6, '6985', 'Margarita', 'Tubac', '13 calle 2-89 zona 10	', 'Importaciones PFV.', 'Byron', 'PFV.com');
 
 delimiter $$
 	create procedure sp_listarProveedores()
@@ -364,7 +370,10 @@ delimiter ;
 
 call sp_agregarTipoProducto(1, 'Carnes');
 call sp_agregarTipoProducto(2, 'Bebidas');
-call sp_agregarTipoProducto(3, 'Comida rápida');
+call sp_agregarTipoProducto(3, 'Gaseosas');
+call sp_agregarTipoProducto(4, 'Vegetales');
+call sp_agregarTipoProducto(5, 'Cereales');
+call sp_agregarTipoProducto(6, 'Leches');
 
  
 delimiter $$
@@ -488,8 +497,12 @@ begin
 end $$
 delimiter ;
  
-call sp_agregarProductos('abc','Alta Calidad','imagen.PNG',1,2);
-call sp_agregarProductos('xyz','Alta Calidad','imagen2.PNG',1,2);
+call sp_agregarProductos('abc','Carnes rojas','imagen.PNG',1,1);
+call sp_agregarProductos('xyz','Jugo de Limon','imagen2.PNG',2,2);
+call sp_agregarProductos('ive','Coca cola','imagen3.PNG',3,3);
+call sp_agregarProductos('cas','Tomate','imagen4.PNG',4,4);
+call sp_agregarProductos('mar','Korn  flakes','imagen5.PNG',5,5);
+call sp_agregarProductos('opq','Leche milk','imagen6.PNG',6,6);
  
 delimiter $$
 create procedure sp_listarProductos()
@@ -1143,10 +1156,6 @@ LEFT JOIN Proveedores ON Productos.codigoProveedor = Proveedores.codigoProveedor
 
 select * from vw_Productos;
 
-select * from DetalleFactura
-	join Factura on DetalleFactura.numeroFactura = Factura.numeroFactura
-    join Clientes on Factura.codigoCliente = Clientes.codigoClientes
-    join Productos on DetalleFactura.codigoProducto = Productos.codigoProducto
 
 
 

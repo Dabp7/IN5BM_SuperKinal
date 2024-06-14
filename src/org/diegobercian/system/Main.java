@@ -17,6 +17,7 @@ import javafx.scene.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.diegobercian.bean.Usuarios;
 import org.diegobercian.controller.*;
 
 
@@ -219,6 +220,15 @@ public class Main extends Application {
         try{
             MenuRegistroController registroView = (MenuRegistroController)cambiarEscena("menuRegistro.fxml", 400, 500);
             registroView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }  
+     
+     public void UbicacionesView(){
+        try{
+            MenuUbicacionesController ubicacionesView = (MenuUbicacionesController)cambiarEscena("menuUbicaciones.fxml", 1020, 720);
+            ubicacionesView.setEscenarioPrincipal(this);
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteFactura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f94d4617-6d7f-4cdb-8402-abc01df9dcc9">
-	<property name="ireport.zoom" value="1.1000000000000028"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="470"/>
+	<property name="ireport.y" value="178"/>
 	<parameter name="numeroFactura" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -198,28 +198,28 @@
 				<reportElement x="76" y="57" width="442" height="3" forecolor="#FFFFFF" uuid="9302de1a-0629-40ff-a43a-59076322fe83"/>
 			</line>
 			<textField>
-				<reportElement x="350" y="194" width="321" height="19" forecolor="#FFFFFF" uuid="6122871c-79f2-4c6d-b080-2285b5d63cbe"/>
+				<reportElement x="337" y="204" width="205" height="19" forecolor="#FFFFFF" uuid="6122871c-79f2-4c6d-b080-2285b5d63cbe"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Subtotal sin IVA: " + "Q. " + ($F{precioUnitario}/1.12)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="350" y="223" width="190" height="20" forecolor="#FFFFFF" uuid="25a2839f-1d26-4609-9f38-d6afa5caf447"/>
+				<reportElement x="337" y="233" width="190" height="20" forecolor="#FFFFFF" uuid="25a2839f-1d26-4609-9f38-d6afa5caf447"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["IVA: " + "Q. " + ($F{precioUnitario} - ($F{precioUnitario}/1.12))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="350" y="253" width="205" height="20" forecolor="#FFFFFF" uuid="17f24efb-89a1-4728-950d-21a1356bf390"/>
+				<reportElement x="337" y="263" width="205" height="20" forecolor="#FFFFFF" uuid="17f24efb-89a1-4728-950d-21a1356bf390"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Total: " + "Q. "+ $F{totalFactura}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Total sin IVA: " + "Q. "+ ($F{cantidad}*($F{precioUnitario}/1.12))]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="350" y="283" width="311" height="20" forecolor="#FFFFFF" uuid="03e17ac0-d9ea-45cc-b8c3-9f528cb042d7"/>
+				<reportElement x="337" y="293" width="217" height="20" forecolor="#FFFFFF" uuid="03e17ac0-d9ea-45cc-b8c3-9f528cb042d7"/>
 				<textElement>
 					<font size="15" isBold="true"/>
 				</textElement>
@@ -228,20 +228,35 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="120" splitType="Stretch">
+		<band height="167" splitType="Stretch">
 			<staticText>
-				<reportElement x="65" y="36" width="351" height="40" forecolor="#FFFFFF" uuid="2962621a-4a10-4b88-a8b1-89225726b267"/>
+				<reportElement x="63" y="20" width="351" height="40" forecolor="#FFFFFF" uuid="2962621a-4a10-4b88-a8b1-89225726b267"/>
 				<textElement>
 					<font fontName="Arial Black" size="22"/>
 				</textElement>
 				<text><![CDATA[¡Gracias por su compra!]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="63" y="61" width="165" height="29" forecolor="#FFFFFF" uuid="95a4c362-6ec8-4946-9166-f1940e01441e"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Super Kinal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="90" width="274" height="27" forecolor="#FFFFFF" uuid="4e8ef03c-23fa-481b-8194-79a5f9bf9a3b"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Diego Adolfo Bercian Perez]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="117" width="178" height="26" forecolor="#FFFFFF" uuid="da90516e-169a-47de-8d37-3818b1b8e6a9"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[+502 4909 9817]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
-	<pageFooter>
-		<band height="68" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

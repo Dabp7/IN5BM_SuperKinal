@@ -1,12 +1,13 @@
 
 package org.diegobercian.bean;
+import java.math.BigDecimal;
 
 public class Empleados {
     
     private int codigoEmpleado;
     private String nombresEmpleado;
     private String apellidosEmpleado;
-    private Double sueldo;
+    private BigDecimal sueldo;
     private String direccion;
     private String turno;
     private int codigoCargoEmpleado;
@@ -15,7 +16,7 @@ public class Empleados {
         
     }
 
-    public Empleados(int codigoEmpleado, String nombresEmpleado, String apellidosEmpleado, Double sueldo, String direccion, String turno, int codigoCargoEmpleado) {
+    public Empleados(int codigoEmpleado, String nombresEmpleado, String apellidosEmpleado, BigDecimal sueldo, String direccion, String turno, int codigoCargoEmpleado) {
         this.codigoEmpleado = codigoEmpleado;
         this.nombresEmpleado = nombresEmpleado;
         this.apellidosEmpleado = apellidosEmpleado;
@@ -49,11 +50,11 @@ public class Empleados {
         this.apellidosEmpleado = apellidosEmpleado;
     }
 
-    public Double getSueldo() {
+    public BigDecimal getSueldo() {
         return sueldo;
     }
 
-    public void setSueldo(Double sueldo) {
+    public void setSueldo(BigDecimal sueldo) {
         this.sueldo = sueldo;
     }
 

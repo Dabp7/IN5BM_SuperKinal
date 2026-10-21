@@ -17,7 +17,7 @@ import org.diegobercian.system.Main;
  */
 
 public class MenuPrincipalController implements Initializable{
-    
+
     @FXML MenuItem btnMenuClientes;
     @FXML MenuItem btnVistaProgramador;
     @FXML MenuItem btnMenuProveedor;
@@ -34,8 +34,8 @@ public class MenuPrincipalController implements Initializable{
     @FXML Button btnClientes;
     @FXML Button btnMenuUbicaciones;
     @FXML MenuItem btnSesionCerrar;
-    
-    
+
+
     private Main escenarioPrincipal;
     private Usuarios us = new Usuarios();
     private MenuClientesController clc = new MenuClientesController();
@@ -44,7 +44,7 @@ public class MenuPrincipalController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+
     }
 
     public Main getEscenarioPrincipal() {
@@ -54,16 +54,16 @@ public class MenuPrincipalController implements Initializable{
     public void setEscenarioPrincipal(Main escenarioPrincipal) {
         this.escenarioPrincipal = escenarioPrincipal;
     }
-    
+
     @FXML
     public void handleButtonAction(ActionEvent event) {
-        if (event.getSource() == btnClientes) {
+        if (event.getSource() == btnClientes || event.getSource() == btnMenuClientes) {
             escenarioPrincipal.menuClientesView();
         }if (event.getSource() == btnVistaProgramador) {
             escenarioPrincipal.programadorView();
         }if (event.getSource() == btnMenuProveedor) {
             escenarioPrincipal.ProveedoresView();
-        }if (event.getSource() == btnCompras) {
+        }if (event.getSource() == btnCompras || event.getSource() == btnMenuCompras) {
             escenarioPrincipal.ComprasView();
         }if (event.getSource() == btnMenuTipoProducto) {
             escenarioPrincipal.TipoProductoView();
@@ -87,11 +87,11 @@ public class MenuPrincipalController implements Initializable{
             escenarioPrincipal.UbicacionesView();
         }
     }
-    
-    
-     
-    
-    
-    
-    
+
+
+
+
+
+
+
 }

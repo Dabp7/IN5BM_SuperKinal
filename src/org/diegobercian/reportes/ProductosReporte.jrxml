@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProductosReporte" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9429931-2dcd-4c74-a5bc-741724dc202e">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProductosReporte" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9429931-2dcd-4c74-a5bc-741724dc202e">
 	<property name="ireport.zoom" value="1.0000000000000009"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="48"/>
 	<queryString>
-		<![CDATA[select * from vw_Productos;]]>
+		<![CDATA[SELECT codigoProducto,descripcionProducto,Descripcion,nombresProveedor FROM vw_Productos ORDER BY codigoProducto;]]>
 	</queryString>
 	<field name="codigoProducto" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -22,7 +22,7 @@
 		<band height="802" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="555" height="802" uuid="ac56382d-2f53-4259-82d4-0fb3aaad0e11"/>
-				<imageExpression><![CDATA["C:\\Users\\gaber\\Downloads\\Laboratorio-No.3-20240606T023141Z-001\\Laboratorio-No.3\\src\\org\\diegobercian\\images\\productosFactura.png"]]></imageExpression>
+				<imageExpression><![CDATA[org.diegobercian.reportes.GenerarReportes.class.getResource("/org/diegobercian/images/productosFactura.png")]]></imageExpression>
 			</image>
 		</band>
 	</background>

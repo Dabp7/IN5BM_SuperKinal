@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package org.diegobercian.bean;
+import java.math.BigDecimal;
 
 /**
  *
@@ -11,7 +12,7 @@ package org.diegobercian.bean;
  */
 public class DetalleCompras {
     private int codigoDetalleCompra;
-    private Double costoUnitario;
+    private BigDecimal costoUnitario;
     private int cantidad;
     private String codigoProducto;
     private int numeroDocumento;
@@ -20,7 +21,7 @@ public class DetalleCompras {
         
     }
 
-    public DetalleCompras(int codigoDetalleCompra, Double costoUnitario, int cantidad, String codigoProducto, int numeroDocumento) {
+    public DetalleCompras(int codigoDetalleCompra, BigDecimal costoUnitario, int cantidad, String codigoProducto, int numeroDocumento) {
         this.codigoDetalleCompra = codigoDetalleCompra;
         this.costoUnitario = costoUnitario;
         this.cantidad = cantidad;
@@ -36,11 +37,11 @@ public class DetalleCompras {
         this.codigoDetalleCompra = codigoDetalleCompra;
     }
 
-    public Double getCostoUnitario() {
+    public BigDecimal getCostoUnitario() {
         return costoUnitario;
     }
 
-    public void setCostoUnitario(Double costoUnitario) {
+    public void setCostoUnitario(BigDecimal costoUnitario) {
         this.costoUnitario = costoUnitario;
     }
 

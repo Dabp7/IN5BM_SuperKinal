@@ -1,0 +1,9 @@
+/target/
+/build/
+/dist/
+/work/
+/nbproject/private/
+.env
+*.log
+
+/lib/

@@ -16,7 +16,7 @@ CREATE TABLE Usuarios (
 ) ENGINE=InnoDB;
 
 CREATE TABLE Clientes (
-    codigoCliente int NOT NULL,
+    codigoCliente int NOT NULL AUTO_INCREMENT,
     NITClientes varchar(10) NOT NULL,
     nombresCliente varchar(50) NOT NULL,
     apellidosCliente varchar(50) NOT NULL,
@@ -24,7 +24,6 @@ CREATE TABLE Clientes (
     telefonoCliente varchar(8) NOT NULL,
     correoCliente varchar(45) NOT NULL,
     PRIMARY KEY (codigoCliente),
-    CONSTRAINT ck_Clientes_0 CHECK (codigoCliente > 0),
     CONSTRAINT ck_Clientes_1 CHECK (CHAR_LENGTH(TRIM(NITClientes)) > 0),
     CONSTRAINT ck_Clientes_2 CHECK (CHAR_LENGTH(TRIM(nombresCliente)) > 0),
     CONSTRAINT ck_Clientes_3 CHECK (CHAR_LENGTH(TRIM(apellidosCliente)) > 0),
@@ -34,7 +33,7 @@ CREATE TABLE Clientes (
 ) ENGINE=InnoDB;
 
 CREATE TABLE Proveedores (
-    codigoProveedor int NOT NULL,
+    codigoProveedor int NOT NULL AUTO_INCREMENT,
     NITProveedor varchar(10) NOT NULL,
     nombresProveedor varchar(60) NOT NULL,
     apellidosProveedor varchar(60) NOT NULL,
@@ -43,7 +42,6 @@ CREATE TABLE Proveedores (
     contactoPrincipal varchar(100) NOT NULL,
     paginaWeb varchar(50) NOT NULL,
     PRIMARY KEY (codigoProveedor),
-    CONSTRAINT ck_Proveedores_0 CHECK (codigoProveedor > 0),
     CONSTRAINT ck_Proveedores_1 CHECK (CHAR_LENGTH(TRIM(NITProveedor)) > 0),
     CONSTRAINT ck_Proveedores_2 CHECK (CHAR_LENGTH(TRIM(nombresProveedor)) > 0),
     CONSTRAINT ck_Proveedores_3 CHECK (CHAR_LENGTH(TRIM(apellidosProveedor)) > 0),
@@ -53,31 +51,28 @@ CREATE TABLE Proveedores (
 ) ENGINE=InnoDB;
 
 CREATE TABLE Compras (
-    numeroDocumento int NOT NULL,
+    numeroDocumento int NOT NULL AUTO_INCREMENT,
     fechaDocumento date NOT NULL,
     descripcion varchar(60) NOT NULL,
     totalDocumento decimal(10,2) NOT NULL DEFAULT 0,
     PRIMARY KEY (numeroDocumento),
-    CONSTRAINT ck_Compras_0 CHECK (numeroDocumento > 0),
     CONSTRAINT ck_Compras_1 CHECK (CHAR_LENGTH(TRIM(descripcion)) > 0),
     CONSTRAINT ck_Compras_2 CHECK (totalDocumento >= 0)
 ) ENGINE=InnoDB;
 
 CREATE TABLE CargoEmpleado (
-    codigoCargoEmpleado int NOT NULL,
+    codigoCargoEmpleado int NOT NULL AUTO_INCREMENT,
     nombreCargo varchar(45) NOT NULL,
     descripcionCargo varchar(45) NOT NULL,
     PRIMARY KEY (codigoCargoEmpleado),
-    CONSTRAINT ck_CargoEmpleado_0 CHECK (codigoCargoEmpleado > 0),
     CONSTRAINT ck_CargoEmpleado_1 CHECK (CHAR_LENGTH(TRIM(nombreCargo)) > 0),
     CONSTRAINT ck_CargoEmpleado_2 CHECK (CHAR_LENGTH(TRIM(descripcionCargo)) > 0)
 ) ENGINE=InnoDB;
 
 CREATE TABLE TipoProducto (
-    codigoTipoProducto int NOT NULL,
+    codigoTipoProducto int NOT NULL AUTO_INCREMENT,
     descripcion varchar(45) NOT NULL,
     PRIMARY KEY (codigoTipoProducto),
-    CONSTRAINT ck_TipoProducto_0 CHECK (codigoTipoProducto > 0),
     CONSTRAINT ck_TipoProducto_1 CHECK (CHAR_LENGTH(TRIM(descripcion)) > 0)
 ) ENGINE=InnoDB;
 
@@ -105,7 +100,7 @@ CREATE TABLE Productos (
 ) ENGINE=InnoDB;
 
 CREATE TABLE Empleados (
-    codigoEmpleado int NOT NULL,
+    codigoEmpleado int NOT NULL AUTO_INCREMENT,
     nombresEmpleado varchar(50) NOT NULL,
     apellidosEmpleado varchar(50) NOT NULL,
     sueldo decimal(10,2) NOT NULL,
@@ -114,7 +109,6 @@ CREATE TABLE Empleados (
     codigoCargoEmpleado int NOT NULL,
     PRIMARY KEY (codigoEmpleado),
     CONSTRAINT FK_Empleados_CargoEmpleado FOREIGN KEY (codigoCargoEmpleado) REFERENCES CargoEmpleado(codigoCargoEmpleado) ON DELETE RESTRICT,
-    CONSTRAINT ck_Empleados_0 CHECK (codigoEmpleado > 0),
     CONSTRAINT ck_Empleados_1 CHECK (CHAR_LENGTH(TRIM(nombresEmpleado)) > 0),
     CONSTRAINT ck_Empleados_2 CHECK (CHAR_LENGTH(TRIM(apellidosEmpleado)) > 0),
     CONSTRAINT ck_Empleados_3 CHECK (sueldo >= 0),
@@ -124,33 +118,31 @@ CREATE TABLE Empleados (
 ) ENGINE=InnoDB;
 
 CREATE TABLE EmailProveedor (
-    codigoEmailProveedor int NOT NULL,
+    codigoEmailProveedor int NOT NULL AUTO_INCREMENT,
     emailProveedor varchar(50) NOT NULL,
     descripcion varchar(100) NOT NULL,
     codigoProveedor int NOT NULL,
     PRIMARY KEY (codigoEmailProveedor),
     CONSTRAINT FK_EmailProveedor_Proveedores FOREIGN KEY (codigoProveedor) REFERENCES Proveedores(codigoProveedor) ON DELETE RESTRICT,
-    CONSTRAINT ck_EmailProveedor_0 CHECK (codigoEmailProveedor > 0),
     CONSTRAINT ck_EmailProveedor_1 CHECK (CHAR_LENGTH(TRIM(emailProveedor)) > 0),
     CONSTRAINT ck_EmailProveedor_2 CHECK (CHAR_LENGTH(TRIM(descripcion)) > 0),
     CONSTRAINT ck_EmailProveedor_3 CHECK (codigoProveedor > 0)
 ) ENGINE=InnoDB;
 
 CREATE TABLE TelefonoProveedor (
-    codigoTelefonoProveedor int NOT NULL,
+    codigoTelefonoProveedor int NOT NULL AUTO_INCREMENT,
     numeroPrincipal varchar(8) NOT NULL,
     numeroSecundario varchar(8) NOT NULL,
     observaciones varchar(45) NOT NULL,
     codigoProveedor int NOT NULL,
     PRIMARY KEY (codigoTelefonoProveedor),
     CONSTRAINT FK_TelefonoProveedor_Proveedores FOREIGN KEY (codigoProveedor) REFERENCES Proveedores(codigoProveedor) ON DELETE RESTRICT,
-    CONSTRAINT ck_TelefonoProveedor_0 CHECK (codigoTelefonoProveedor > 0),
     CONSTRAINT ck_TelefonoProveedor_1 CHECK (CHAR_LENGTH(TRIM(numeroPrincipal)) > 0),
     CONSTRAINT ck_TelefonoProveedor_2 CHECK (codigoProveedor > 0)
 ) ENGINE=InnoDB;
 
 CREATE TABLE DetalleCompra (
-    codigoDetalleCompra int NOT NULL,
+    codigoDetalleCompra int NOT NULL AUTO_INCREMENT,
     costoUnitario decimal(10,2) NOT NULL,
     cantidad int NOT NULL,
     codigoProducto varchar(15) NOT NULL,
@@ -158,7 +150,6 @@ CREATE TABLE DetalleCompra (
     PRIMARY KEY (codigoDetalleCompra),
     CONSTRAINT FK_DetalleCompra_Productos FOREIGN KEY (codigoProducto) REFERENCES Productos(codigoProducto) ON DELETE RESTRICT,
     CONSTRAINT FK_DetalleCompra_Compras FOREIGN KEY (numeroDocumento) REFERENCES Compras(numeroDocumento) ON DELETE RESTRICT,
-    CONSTRAINT ck_DetalleCompra_0 CHECK (codigoDetalleCompra > 0),
     CONSTRAINT ck_DetalleCompra_1 CHECK (costoUnitario >= 0),
     CONSTRAINT ck_DetalleCompra_2 CHECK (cantidad > 0),
     CONSTRAINT ck_DetalleCompra_3 CHECK (CHAR_LENGTH(TRIM(codigoProducto)) > 0),
@@ -166,7 +157,7 @@ CREATE TABLE DetalleCompra (
 ) ENGINE=InnoDB;
 
 CREATE TABLE Factura (
-    numeroFactura int NOT NULL,
+    numeroFactura int NOT NULL AUTO_INCREMENT,
     estado varchar(50) NOT NULL,
     totalFactura decimal(10,2) NOT NULL DEFAULT 0,
     fechaFactura date NOT NULL,
@@ -175,7 +166,6 @@ CREATE TABLE Factura (
     PRIMARY KEY (numeroFactura),
     CONSTRAINT FK_Factura_Clientes FOREIGN KEY (codigoCliente) REFERENCES Clientes(codigoCliente) ON DELETE RESTRICT,
     CONSTRAINT FK_Factura_Empleados FOREIGN KEY (codigoEmpleado) REFERENCES Empleados(codigoEmpleado) ON DELETE RESTRICT,
-    CONSTRAINT ck_Factura_0 CHECK (numeroFactura > 0),
     CONSTRAINT ck_Factura_1 CHECK (CHAR_LENGTH(TRIM(estado)) > 0),
     CONSTRAINT ck_Factura_2 CHECK (totalFactura >= 0),
     CONSTRAINT ck_Factura_3 CHECK (CHAR_LENGTH(TRIM(fechaFactura)) > 0),
@@ -184,7 +174,7 @@ CREATE TABLE Factura (
 ) ENGINE=InnoDB;
 
 CREATE TABLE DetalleFactura (
-    codigoDetalleFactura int NOT NULL,
+    codigoDetalleFactura int NOT NULL AUTO_INCREMENT,
     precioUnitario decimal(10,2) NOT NULL DEFAULT 0,
     cantidad int NOT NULL,
     numeroFactura int NOT NULL,
@@ -192,7 +182,6 @@ CREATE TABLE DetalleFactura (
     PRIMARY KEY (codigoDetalleFactura),
     CONSTRAINT FK_DetalleFactura_Factura FOREIGN KEY (numeroFactura) REFERENCES Factura(numeroFactura) ON DELETE RESTRICT,
     CONSTRAINT FK_DetalleFactura FOREIGN KEY (codigoProducto) REFERENCES Productos(codigoProducto) ON DELETE RESTRICT,
-    CONSTRAINT ck_DetalleFactura_0 CHECK (codigoDetalleFactura > 0),
     CONSTRAINT ck_DetalleFactura_1 CHECK (precioUnitario >= 0),
     CONSTRAINT ck_DetalleFactura_2 CHECK (cantidad > 0),
     CONSTRAINT ck_DetalleFactura_3 CHECK (numeroFactura > 0),
@@ -210,12 +199,28 @@ CREATE TABLE MovimientosInventario (
     INDEX ix_mov_producto_fecha (codigoProducto, creado)
 ) ENGINE=InnoDB;
 
+CREATE TABLE SecuenciasProducto (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
+) ENGINE=InnoDB;
+
 DELIMITER $$
+CREATE PROCEDURE sp_nuevoCodigoProducto(OUT p_codigo VARCHAR(15))
+BEGIN
+    DECLARE v_id BIGINT;
+    REPEAT
+        INSERT INTO SecuenciasProducto(id) VALUES (NULL);
+        SET v_id = LAST_INSERT_ID();
+        IF v_id > 99999999999999 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Se agotaron los códigos de producto'; END IF;
+        SET p_codigo = CONCAT('P', LPAD(v_id,14,'0'));
+    UNTIL NOT EXISTS(SELECT 1 FROM Productos WHERE codigoProducto=p_codigo) END REPEAT;
+END $$
 CREATE PROCEDURE sp_agregarClientes(IN p_codigoCliente int, IN p_NITClientes varchar(10), IN p_nombresCliente varchar(50), IN p_apellidosCliente varchar(50), IN p_direccionCliente varchar(150), IN p_telefonoCliente varchar(8), IN p_correoCliente varchar(45))
 BEGIN
 		insert into Clientes(codigoCliente, NITClientes, nombresCliente, apellidosCliente, direccionCliente, telefonoCliente, correoCliente)
 		values (p_codigoCliente, p_NITClientes, p_nombresCliente, p_apellidosCliente, p_direccionCliente, p_telefonoCliente, p_correoCliente);
-	END $$
+
+    SELECT COALESCE(NULLIF(p_codigoCliente,0), LAST_INSERT_ID()) AS codigoGenerado;
+END $$
 
 CREATE PROCEDURE sp_listarClientes()
 BEGIN
@@ -254,7 +259,9 @@ CREATE PROCEDURE sp_agregarProveedores(IN p_codigoProveedor int, IN p_NITProveed
 BEGIN
 		insert into Proveedores(codigoProveedor, NITProveedor, nombresProveedor, apellidosProveedor, direccionProveedor, razonSocial, contactoPrincipal, paginaWeb)
 		values (p_codigoProveedor, p_NITProveedor, p_nombresProveedor, p_apellidosProveedor, p_direccionProveedor, p_razonSocial, p_contactoPrincipal, p_paginaWeb);
-	END $$
+
+    SELECT COALESCE(NULLIF(p_codigoProveedor,0), LAST_INSERT_ID()) AS codigoGenerado;
+END $$
 
 CREATE PROCEDURE sp_listarProveedores()
 BEGIN
@@ -294,7 +301,9 @@ CREATE PROCEDURE sp_agregarCargoEmpleado(IN p_codigoCargoEmpleado int, IN p_nomb
 BEGIN
 		insert into CargoEmpleado(codigoCargoEmpleado, nombreCargo, descripcionCargo)
 		values (p_codigoCargoEmpleado, p_nombreCargo, p_descripcionCargo);
-	END $$
+
+    SELECT COALESCE(NULLIF(p_codigoCargoEmpleado,0), LAST_INSERT_ID()) AS codigoGenerado;
+END $$
 
 CREATE PROCEDURE sp_listarCargoEmpleado()
 BEGIN
@@ -329,7 +338,9 @@ CREATE PROCEDURE sp_agregarTipoProducto(IN p_codigoTipoProducto int, IN p_descri
 BEGIN
 		insert into TipoProducto(codigoTipoProducto, descripcion)
 		values (p_codigoTipoProducto, p_descripcion);
-	END $$
+
+    SELECT COALESCE(NULLIF(p_codigoTipoProducto,0), LAST_INSERT_ID()) AS codigoGenerado;
+END $$
 
 CREATE PROCEDURE sp_listarTipoProducto()
 BEGIN
@@ -363,6 +374,8 @@ CREATE PROCEDURE sp_agregarCompras(IN p_numeroDocumento int, IN p_fechaDocumento
 BEGIN
 	insert into Compras(numeroDocumento, fechaDocumento,descripcion)
     values (p_numeroDocumento, p_fechaDocumento,p_descripcion);
+
+    SELECT COALESCE(NULLIF(p_numeroDocumento,0), LAST_INSERT_ID()) AS codigoGenerado;
 END $$
 
 CREATE PROCEDURE sp_listarCompras()
@@ -405,8 +418,12 @@ END $$
 
 CREATE PROCEDURE sp_agregarProductos(IN p_codigoProducto varchar(15), IN p_descripcionProducto varchar(45), IN p_imagenProducto varchar(45), IN p_codigoTipoProducto int(11), IN p_codigoProveedor int)
 BEGIN
+    IF p_codigoProducto IS NULL OR TRIM(p_codigoProducto)='' THEN CALL sp_nuevoCodigoProducto(p_codigoProducto); END IF;
+
 	insert into Productos(codigoProducto,descripcionProducto,imagenProducto,codigoTipoProducto,codigoProveedor)
     values (p_codigoProducto,p_descripcionProducto,p_imagenProducto,p_codigoTipoProducto,p_codigoProveedor);
+
+    SELECT p_codigoProducto AS codigoGenerado;
 END $$
 
 CREATE PROCEDURE sp_listarProductos()
@@ -444,6 +461,8 @@ CREATE PROCEDURE sp_agregarEmpleados(IN p_codigoEmpleado int, IN p_nombresEmplea
 BEGIN
 	insert into Empleados(codigoEmpleado, nombresEmpleado, apellidosEmpleado, sueldo, direccion, turno, codigoCargoEmpleado)
     values (p_codigoEmpleado, p_nombresEmpleado, p_apellidosEmpleado, p_sueldo, p_direccion, p_turno, p_codigoCargoEmpleado);
+
+    SELECT COALESCE(NULLIF(p_codigoEmpleado,0), LAST_INSERT_ID()) AS codigoGenerado;
 END $$
 
 CREATE PROCEDURE sp_listarEmpleados()
@@ -474,6 +493,8 @@ CREATE PROCEDURE sp_agregarEmailProveedor(IN p_codigoEmailProveedor int, IN p_em
 BEGIN
 	insert into EmailProveedor(codigoEmailProveedor, emailProveedor, descripcion, codigoProveedor)
     values(p_codigoEmailProveedor, p_emailProveedor, p_descripcion, p_codigoProveedor);
+
+    SELECT COALESCE(NULLIF(p_codigoEmailProveedor,0), LAST_INSERT_ID()) AS codigoGenerado;
 END $$
 
 CREATE PROCEDURE sp_listarEmailProveedor()
@@ -510,6 +531,8 @@ CREATE PROCEDURE sp_agregarTelefonoProveedor(IN p_codigoTelefonoProveedor int, I
 BEGIN
 	insert into TelefonoProveedor(codigoTelefonoProveedor, numeroPrincipal, numeroSecundario, observaciones, codigoProveedor)
     values (p_codigoTelefonoProveedor, p_numeroPrincipal, p_numeroSecundario, p_observaciones, p_codigoProveedor);
+
+    SELECT COALESCE(NULLIF(p_codigoTelefonoProveedor,0), LAST_INSERT_ID()) AS codigoGenerado;
 END $$
 
 CREATE PROCEDURE sp_listarTelefonoProveedor()
@@ -547,6 +570,8 @@ CREATE PROCEDURE sp_agregarFactura(IN p_numeroFactura int, IN p_estado varchar(5
 BEGIN
 	insert into Factura(numeroFactura,estado,fechaFactura,codigoCliente,codigoEmpleado)
     values (p_numeroFactura,p_estado,p_fechaFactura,p_codigoCliente,p_codigoEmpleado);
+
+    SELECT COALESCE(NULLIF(p_numeroFactura,0), LAST_INSERT_ID()) AS codigoGenerado;
 END $$
 
 CREATE PROCEDURE sp_listarFacturas()
@@ -593,6 +618,8 @@ CREATE PROCEDURE sp_agregarDetalleFactura(IN p_codigoDetalleFactura int, IN p_ca
 BEGIN
 	insert into DetalleFactura(codigoDetalleFactura, cantidad, numeroFactura, codigoProducto)
     values (p_codigoDetalleFactura, p_cantidad, p_numeroFactura, p_codigoProducto);
+
+    SELECT COALESCE(NULLIF(p_codigoDetalleFactura,0), LAST_INSERT_ID()) AS codigoGenerado;
 END $$
 
 CREATE PROCEDURE sp_listarDetalleFactura()
@@ -630,6 +657,8 @@ BEGIN
 	insert into DetalleCompra (codigoDetalleCompra, costoUnitario, cantidad, codigoProducto, numeroDocumento)
     values(p_codigoDc, p_costo,p_cant, p_codProd, p_numDoc);
 
+
+    SELECT COALESCE(NULLIF(p_codigoDc,0), LAST_INSERT_ID()) AS codigoGenerado;
 END $$
 
 CREATE PROCEDURE sp_listarDetalleCompra()
@@ -679,18 +708,22 @@ BEGIN
         IF ROW_COUNT() <> 1 THEN
             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Existencia insuficiente o producto inexistente';
         END IF;
+        IF p_referencia > 0 THEN
         INSERT INTO MovimientosInventario(codigoProducto, variacion, origen, referencia)
         VALUES(p_producto, p_delta, p_origen, p_referencia);
+        END IF;
     END IF;
 END $$
 
 CREATE TRIGGER tr_compra_before_insert BEFORE INSERT ON DetalleCompra FOR EACH ROW
 BEGIN
-CALL sp_movimientoInventario(NEW.codigoProducto, 1 * NEW.cantidad, 'compra:alta', NEW.codigoDetalleCompra);
+CALL sp_movimientoInventario(NEW.codigoProducto, 1 * NEW.cantidad, 'compra:alta', 0);
 END $$
 
 CREATE TRIGGER tr_compra_after_insert AFTER INSERT ON DetalleCompra FOR EACH ROW
 BEGIN
+INSERT INTO MovimientosInventario(codigoProducto,variacion,origen,referencia) VALUES(NEW.codigoProducto,NEW.cantidad,'compra:alta',NEW.codigoDetalleCompra);
+
 UPDATE Compras SET totalDocumento = totalDocumento + NEW.costoUnitario * NEW.cantidad WHERE numeroDocumento = NEW.numeroDocumento;
 UPDATE Productos SET precioUnitario = ROUND(NEW.costoUnitario * 1.40, 2), precioDocena = ROUND(NEW.costoUnitario * 1.35, 2), precioMayor = ROUND(NEW.costoUnitario * 1.25, 2) WHERE codigoProducto = NEW.codigoProducto;
 END $$
@@ -724,11 +757,13 @@ END $$
 CREATE TRIGGER tr_venta_before_insert BEFORE INSERT ON DetalleFactura FOR EACH ROW
 BEGIN
 SET NEW.precioUnitario = (SELECT precioUnitario FROM Productos WHERE codigoProducto = NEW.codigoProducto);
-CALL sp_movimientoInventario(NEW.codigoProducto, -1 * NEW.cantidad, 'venta:alta', NEW.codigoDetalleFactura);
+CALL sp_movimientoInventario(NEW.codigoProducto, -1 * NEW.cantidad, 'venta:alta', 0);
 END $$
 
 CREATE TRIGGER tr_venta_after_insert AFTER INSERT ON DetalleFactura FOR EACH ROW
 BEGIN
+INSERT INTO MovimientosInventario(codigoProducto,variacion,origen,referencia) VALUES(NEW.codigoProducto,-NEW.cantidad,'venta:alta',NEW.codigoDetalleFactura);
+
 UPDATE Factura SET totalFactura = totalFactura + NEW.precioUnitario * NEW.cantidad WHERE numeroFactura = NEW.numeroFactura;
 END $$
 
@@ -757,6 +792,28 @@ CREATE TRIGGER tr_venta_after_delete AFTER DELETE ON DetalleFactura FOR EACH ROW
 BEGIN
 UPDATE Factura SET totalFactura = totalFactura - OLD.precioUnitario * OLD.cantidad WHERE numeroFactura = OLD.numeroFactura;
 END $$
+CREATE TRIGGER tr_id_Clientes_insert BEFORE INSERT ON Clientes FOR EACH ROW BEGIN IF NEW.codigoCliente < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_Clientes_update BEFORE UPDATE ON Clientes FOR EACH ROW BEGIN IF NEW.codigoCliente <> OLD.codigoCliente THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_Proveedores_insert BEFORE INSERT ON Proveedores FOR EACH ROW BEGIN IF NEW.codigoProveedor < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_Proveedores_update BEFORE UPDATE ON Proveedores FOR EACH ROW BEGIN IF NEW.codigoProveedor <> OLD.codigoProveedor THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_Compras_insert BEFORE INSERT ON Compras FOR EACH ROW BEGIN IF NEW.numeroDocumento < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_Compras_update BEFORE UPDATE ON Compras FOR EACH ROW BEGIN IF NEW.numeroDocumento <> OLD.numeroDocumento THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_CargoEmpleado_insert BEFORE INSERT ON CargoEmpleado FOR EACH ROW BEGIN IF NEW.codigoCargoEmpleado < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_CargoEmpleado_update BEFORE UPDATE ON CargoEmpleado FOR EACH ROW BEGIN IF NEW.codigoCargoEmpleado <> OLD.codigoCargoEmpleado THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_TipoProducto_insert BEFORE INSERT ON TipoProducto FOR EACH ROW BEGIN IF NEW.codigoTipoProducto < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_TipoProducto_update BEFORE UPDATE ON TipoProducto FOR EACH ROW BEGIN IF NEW.codigoTipoProducto <> OLD.codigoTipoProducto THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_Empleados_insert BEFORE INSERT ON Empleados FOR EACH ROW BEGIN IF NEW.codigoEmpleado < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_Empleados_update BEFORE UPDATE ON Empleados FOR EACH ROW BEGIN IF NEW.codigoEmpleado <> OLD.codigoEmpleado THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_EmailProveedor_insert BEFORE INSERT ON EmailProveedor FOR EACH ROW BEGIN IF NEW.codigoEmailProveedor < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_EmailProveedor_update BEFORE UPDATE ON EmailProveedor FOR EACH ROW BEGIN IF NEW.codigoEmailProveedor <> OLD.codigoEmailProveedor THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_TelefonoProveedor_insert BEFORE INSERT ON TelefonoProveedor FOR EACH ROW BEGIN IF NEW.codigoTelefonoProveedor < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_TelefonoProveedor_update BEFORE UPDATE ON TelefonoProveedor FOR EACH ROW BEGIN IF NEW.codigoTelefonoProveedor <> OLD.codigoTelefonoProveedor THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_DetalleCompra_insert BEFORE INSERT ON DetalleCompra FOR EACH ROW BEGIN IF NEW.codigoDetalleCompra < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_DetalleCompra_update BEFORE UPDATE ON DetalleCompra FOR EACH ROW BEGIN IF NEW.codigoDetalleCompra <> OLD.codigoDetalleCompra THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_Factura_insert BEFORE INSERT ON Factura FOR EACH ROW BEGIN IF NEW.numeroFactura < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_Factura_update BEFORE UPDATE ON Factura FOR EACH ROW BEGIN IF NEW.numeroFactura <> OLD.numeroFactura THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
+CREATE TRIGGER tr_id_DetalleFactura_insert BEFORE INSERT ON DetalleFactura FOR EACH ROW BEGIN IF NEW.codigoDetalleFactura < 0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Código inválido'; END IF; END $$
+CREATE TRIGGER tr_id_DetalleFactura_update BEFORE UPDATE ON DetalleFactura FOR EACH ROW BEGIN IF NEW.codigoDetalleFactura <> OLD.codigoDetalleFactura THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El código del registro no se puede modificar'; END IF; END $$
 DELIMITER ;
 
 CREATE VIEW vw_Productos AS SELECT p.codigoProducto, p.descripcionProducto, t.descripcion AS Descripcion, v.nombresProveedor FROM Productos p JOIN TipoProducto t ON p.codigoTipoProducto=t.codigoTipoProducto JOIN Proveedores v ON p.codigoProveedor=v.codigoProveedor;

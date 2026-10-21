@@ -10,6 +10,9 @@ public final class CrudRepository {
     public List<Map<String,Object>> page(String table, String key, List<String> columns, int offset, int limit) throws SQLException {
         return query("SELECT " + String.join(",", columns) + " FROM " + table + " ORDER BY " + key + " LIMIT ? OFFSET ?", limit, offset);
     }
+    public long position(String table,String key,Object id) throws SQLException {
+        return ((Number)query("SELECT COUNT(*) AS total FROM "+table+" WHERE "+key+" < ?",id).get(0).get("total")).longValue();
+    }
     public long count(String table) throws SQLException {
         return ((Number)query("SELECT COUNT(*) AS total FROM " + table).get(0).get("total")).longValue();
     }
@@ -32,12 +35,23 @@ public final class CrudRepository {
             }
         }
     }
-    public void call(String procedure, List<Object> values) throws SQLException {
+    public Object call(String procedure, List<Object> values) throws SQLException {
         String marks = String.join(",", Collections.nCopies(values.size(), "?"));
         try (Connection c = Conexion.getInstance().getConexion()) {
             c.setAutoCommit(false);
             try (CallableStatement s = c.prepareCall("{call " + procedure + "(" + marks + ")}")) {
-                bind(s, values); s.execute(); c.commit();
+                bind(s, values);
+                Object generated = null;
+                boolean result = s.execute();
+                while (result || s.getUpdateCount() != -1) {
+                    if (result) {
+                        try (ResultSet rows = s.getResultSet()) {
+                            if (rows.getMetaData().getColumnCount()==1 && "codigoGenerado".equalsIgnoreCase(rows.getMetaData().getColumnLabel(1)) && rows.next()) generated=rows.getObject(1);
+                        }
+                    }
+                    result=s.getMoreResults();
+                }
+                c.commit(); return generated;
             } catch (SQLException e) { c.rollback(); throw e; }
         }
     }

@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import org.diegobercian.repository.CrudRepository;
 import org.diegobercian.service.Validation;
 import org.diegobercian.ui.Async;
+import org.diegobercian.ui.Labels;
 import org.diegobercian.reportes.GenerarReportes;
 import org.diegobercian.system.Main;
 
@@ -30,9 +31,11 @@ public abstract class CrudController {
     private Map<String,Object> selected;
     private boolean busy;
     private int generation;
+    private Object pendingSelection;
     private Pagination pages;
     private final Button refresh = new Button("Actualizar datos / Reintentar");
     private static final int PAGE_SIZE = 100;
+    private final Label formHint=new Label(), statusMessage=new Label(), calculated=new Label(), recordCount=new Label();
 
     public static final class Choice {
         public final Object id; private final String label;
@@ -45,8 +48,15 @@ public abstract class CrudController {
         final Map<String,Choice> choices = new HashMap<>();
         Field(String column, String type, int length, Control control, boolean optional) {
             this.column=column; this.type=type; this.length=length; this.control=control; this.optional=optional;
-            control.setAccessibleText(column);
-            if (control instanceof TextField) ((TextField)control).setPromptText(type.equals("date") ? "AAAA-MM-DD" : column);
+            control.setAccessibleText(Labels.caption(column));
+            if (control instanceof TextField) ((TextField)control).setPromptText(Labels.caption(column));
+            if (control instanceof DatePicker) {
+                DatePicker date=(DatePicker)control;date.setPromptText("AAAA-MM-DD");
+                date.setConverter(new javafx.util.StringConverter<java.time.LocalDate>() {
+                    @Override public String toString(java.time.LocalDate value){return value==null?"":value.toString();}
+                    @Override public java.time.LocalDate fromString(String value){return value==null||value.trim().isEmpty()?null:java.time.LocalDate.parse(value.trim());}
+                });
+            }
         }
         Field lookup(String table, String key, String label) { foreignTable=table;foreignKey=key;foreignLabel=label;return this; }
     }
@@ -65,17 +75,35 @@ public abstract class CrudController {
         pages.currentPageIndexProperty().addListener((o,old,value) -> { if (!busy) cargarDatos(); });
         refresh.setOnAction(e -> cargarDatos());
         refresh.setAccessibleText("Actualizar datos y catálogos o reintentar conexión");
-        // Keep the original screen coordinates while giving the table a compact paging footer.
-        if (table.getParent() instanceof AnchorPane) {
-            AnchorPane parent=(AnchorPane)table.getParent();
-            double x=table.getLayoutX(), y=table.getLayoutY(), width=table.getPrefWidth(), height=table.getPrefHeight();
-            parent.getChildren().remove(table);
-            HBox footer=new HBox(12,refresh,pages); footer.setPrefHeight(45);
-            VBox box=new VBox(4,table,footer);box.setLayoutX(x);box.setLayoutY(y);box.setPrefSize(width,height);
-            table.setPrefHeight(height-50); table.setMinHeight(100); VBox.setVgrow(table,Priority.ALWAYS);
-            parent.getChildren().add(box);
+        table.setEditable(false);
+        for (TableColumn<Map<String,Object>,?> col:table.getColumns()) col.setEditable(false);
+        pages.setMaxPageIndicatorCount(3);pages.setMinWidth(0);
+        refresh.setText("Actualizar");
+        if (table.getParent() instanceof VBox) {
+            FlowPane footer=new FlowPane(12,8,refresh,pages,recordCount);footer.setMinWidth(0);
+            ((VBox)table.getParent()).getChildren().add(footer);
         }
+        if (fields[0].control.getParent().getParent().getParent() instanceof VBox) {
+            VBox body=(VBox)fields[0].control.getParent().getParent().getParent();
+            formHint.setWrapText(true);formHint.setMinHeight(Region.USE_PREF_SIZE);formHint.getStyleClass().add("muted");
+            statusMessage.setWrapText(true);statusMessage.setMinHeight(Region.USE_PREF_SIZE);statusMessage.getStyleClass().add("status-message");
+            statusMessage.setVisible(false);statusMessage.setManaged(false);
+            calculated.setWrapText(true);calculated.setMinHeight(Region.USE_PREF_SIZE);calculated.getStyleClass().add("muted");
+            calculated.setVisible(false);calculated.setManaged(false);
+            body.getChildren().addAll(0,Arrays.asList(statusMessage,formHint,calculated));
+        }
+        for (Field f:fields) if(f.control.getParent() instanceof VBox) {
+            Node label=((VBox)f.control.getParent()).getChildren().get(0);
+            if(label instanceof Label)((Label)label).setLabelFor(f.control);
+        }
+        table.widthProperty().addListener((o,a,b)->resizeColumns(b.doubleValue()));
         state(); cargarDatos();
+    }
+    private void resizeColumns(double width) {
+        double total=0;
+        for(TableColumn<Map<String,Object>,?> col:table.getColumns())total+=Math.max(110,col.getText().length()*9);
+        double scale=Math.max(1,(width-20)/total);
+        for(TableColumn<Map<String,Object>,?> col:table.getColumns())col.setPrefWidth(Math.max(110,col.getText().length()*9)*scale);
     }
     protected void column(TableColumn<Map<String,Object>,Object> col, String property) {
         col.setCellValueFactory(row -> new ReadOnlyObjectWrapper<>(row.getValue().get(property)));
@@ -86,11 +114,13 @@ public abstract class CrudController {
     @FXML public void cargarDatos() {
         if (busy || mode != Mode.VIEW) return;
         final int request=++generation, offset=pages.getCurrentPageIndex()*PAGE_SIZE;
+        final Object focus=pendingSelection;
         setBusy(true);
         Async.run(() -> {
             Map<String,Object> result=new HashMap<>();
             long count=repository.count(tableName);
-            int actualOffset=(int)Math.min(offset,Math.max(0,(count-1)/PAGE_SIZE)*PAGE_SIZE);
+            int requestedOffset=focus==null?offset:(int)(repository.position(tableName,key,focus)/PAGE_SIZE)*PAGE_SIZE;
+            int actualOffset=(int)Math.min(requestedOffset,Math.max(0,(count-1)/PAGE_SIZE)*PAGE_SIZE);
             result.put("count",count);
             result.put("page",actualOffset/PAGE_SIZE);
             result.put("rows",repository.page(tableName,key,columns,actualOffset,PAGE_SIZE));
@@ -110,16 +140,23 @@ public abstract class CrudController {
             pages.setPageCount(Math.max(1,(int)(((Long)data.get("count")+PAGE_SIZE-1)/PAGE_SIZE)));
             pages.setCurrentPageIndex((Integer)data.get("page"));
             table.setPlaceholder(new Label("No hay registros"));
+            recordCount.setText(data.get("count")+" registros");
             setBusy(false);
+            pendingSelection=null;
+            if(focus!=null) for(Map<String,Object> row:table.getItems())if(String.valueOf(row.get(key)).equals(String.valueOf(focus))){table.getSelectionModel().select(row);break;}
         }, error -> { setBusy(false);table.setPlaceholder(new Label("No se cargaron los datos. Pulse Reintentar."));Async.error(error); });
     }
     @FXML public void seleccionarElemento() {
         if (mode!=Mode.VIEW || busy) return;
         selected=table.getSelectionModel().getSelectedItem();
-        if (selected==null) return;
+        if (selected==null) {calculated.setVisible(false);calculated.setManaged(false);return;}
+        List<String> totals=new ArrayList<>();
+        for(String column:columns) if(column.startsWith("precio") || column.startsWith("total") || "existencia".equals(column)) totals.add(Labels.caption(column)+": "+selected.get(column));
+        calculated.setText(String.join("   ·   ",totals));calculated.setVisible(!totals.isEmpty());calculated.setManaged(!totals.isEmpty());
         for (Field f:fields) {
             Object value=selected.get(f.column);
             if (f.control instanceof TextField) ((TextField)f.control).setText(value==null?"":String.valueOf(value));
+            else if (f.control instanceof DatePicker) ((DatePicker)f.control).setValue((java.time.LocalDate)value);
             else ((ComboBox<Choice>)f.control).getSelectionModel().select(f.choices.get(String.valueOf(value)));
         }
     }
@@ -127,7 +164,7 @@ public abstract class CrudController {
         if (busy) return;
         if (mode==Mode.ADD) { guardar(); return; }
         if (mode!=Mode.VIEW) return;
-        mode=Mode.ADD;selected=null;limpiarControles();state();fields[0].control.requestFocus();
+        mode=Mode.ADD;selected=null;limpiarControles();state();statusMessage.setVisible(false);statusMessage.setManaged(false);fields[1].control.requestFocus();
     }
     @FXML public void editar() {
         if (busy) return;
@@ -138,11 +175,17 @@ public abstract class CrudController {
     private Map<String,Object> snapshot() {
         Map<String,Object> values=new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         for (Field f:fields) {
+            f.control.getStyleClass().remove("invalid");
+            if(f.column.equalsIgnoreCase(key)) { values.put(f.column, mode==Mode.ADD?null:selected.get(key));continue; }
             if (f.control instanceof ComboBox) {
                 Choice choice=((ComboBox<Choice>)f.control).getValue();
-                if (choice==null) throw new IllegalArgumentException(f.column+": seleccione una opción.");
+                if (choice==null) throw new IllegalArgumentException(Labels.caption(f.column)+": seleccione una opción.");
                 values.put(f.column,choice.id);
-            } else values.put(f.column,Validation.parse(f.column,f.type,f.length,((TextField)f.control).getText(),f.optional));
+            } else {
+                String input=f.control instanceof DatePicker?((DatePicker)f.control).getEditor().getText():((TextField)f.control).getText();
+                try { values.put(f.column,Validation.parse(Labels.caption(f.column),f.type,f.length,input,f.optional)); }
+                catch(IllegalArgumentException error) {f.control.getStyleClass().add("invalid");f.control.requestFocus();throw error;}
+            }
         }
         return values;
     }
@@ -156,8 +199,10 @@ public abstract class CrudController {
             List<Object> params=new ArrayList<>();
             for (String column:updating?updateOrder:addOrder) params.add(values.containsKey(column)?values.get(column):selected.get(column));
             setBusy(true);
-            Async.run(() -> { repository.call(updating?updateProcedure:addProcedure,params);return true; }, ok -> {
-                mode=Mode.VIEW;selected=null;setBusy(false);limpiarControles();cargarDatos();
+            Async.run(() -> repository.call(updating?updateProcedure:addProcedure,params), generated -> {
+                mode=Mode.VIEW;selected=null;setBusy(false);limpiarControles();
+                statusMessage.setText(updating?"Cambios guardados.":"Registro guardado. Código asignado: "+generated);
+                statusMessage.setVisible(true);statusMessage.setManaged(true);pendingSelection=updating?values.get(key):generated;cargarDatos();
             }, error -> {setBusy(false);Async.error(error);});
         } catch (IllegalArgumentException e) { Async.error(e); }
     }
@@ -194,17 +239,30 @@ public abstract class CrudController {
     public void imprimirReporteProveedores() { GenerarReportes.mostrarReportes("ProveedoresFactura.jasper","Proveedores",new HashMap<>()); }
     public void imprimirReporteFacturas() {reportes();}
     public void limpiarControles() {
-        for(Field f:fields) if(f.control instanceof TextField) ((TextField)f.control).clear();else ((ComboBox<?>)f.control).getSelectionModel().clearSelection();
+        for(Field f:fields) {
+            f.control.getStyleClass().remove("invalid");
+            if(f.control instanceof TextField)((TextField)f.control).clear();
+            else if(f.control instanceof DatePicker){((DatePicker)f.control).setValue(null);((DatePicker)f.control).getEditor().clear();}
+            else ((ComboBox<?>)f.control).getSelectionModel().clearSelection();
+        }
+        calculated.setVisible(false);calculated.setManaged(false);
         table.getSelectionModel().clearSelection();
     }
     private void setBusy(boolean value) {busy=value;state();}
     private void state() {
         table.setDisable(busy || mode!=Mode.VIEW);pages.setDisable(busy || mode!=Mode.VIEW);refresh.setDisable(busy || mode!=Mode.VIEW);
         add.setText(mode==Mode.ADD?"Guardar":"Agregar");edit.setText(mode==Mode.EDIT?"Actualizar":"Editar");
-        remove.setText(mode!=Mode.VIEW?"Cancelar":"Eliminar");reports.setText(mode!=Mode.VIEW?"Cancelar":"Reportes");
+        remove.setText(mode!=Mode.VIEW?"Cancelar":"Eliminar");reports.setText("Reportes");
+        add.setVisible(mode!=Mode.EDIT);add.setManaged(mode!=Mode.EDIT);
+        edit.setVisible(mode!=Mode.ADD);edit.setManaged(mode!=Mode.ADD);
+        reports.setVisible(mode==Mode.VIEW);reports.setManaged(mode==Mode.VIEW);
         add.setDisable(busy || mode==Mode.EDIT);edit.setDisable(busy || mode==Mode.ADD);remove.setDisable(busy);reports.setDisable(busy);
+        formHint.setText(mode==Mode.ADD?"El código se asignará automáticamente al guardar. Completa los campos con *.":mode==Mode.EDIT?"Edita los datos habilitados. El código y los valores calculados están protegidos.":"Selecciona una fila para consultar sus datos. Usa Editar para hacer cambios.");
         for (Field f:fields) {
-            boolean enabled=!busy && mode!=Mode.VIEW && !(mode==Mode.EDIT && f.column.equalsIgnoreCase(key));
+            boolean identity=f.column.equalsIgnoreCase(key);
+            Node cell=f.control.getParent();cell.setVisible(!(identity && mode==Mode.ADD));cell.setManaged(!(identity && mode==Mode.ADD));
+            boolean enabled=!busy && mode!=Mode.VIEW && !identity;
+            f.control.setFocusTraversable(enabled);
             if (f.control instanceof TextField) ((TextField)f.control).setEditable(enabled);else f.control.setDisable(!enabled);
         }
     }

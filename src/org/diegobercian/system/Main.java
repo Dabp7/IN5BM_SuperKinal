@@ -36,14 +36,17 @@ public class Main extends Application {
     public void start(Stage escenarioPrincipal) throws Exception {
         
         this.escenarioPrincipal = escenarioPrincipal;
-        this.escenarioPrincipal.setTitle("Kinal Express");
+        this.escenarioPrincipal.setTitle("SuperKinal");
+        javafx.geometry.Rectangle2D bounds=javafx.stage.Screen.getPrimary().getVisualBounds();
+        this.escenarioPrincipal.setMinWidth(Math.min(360,bounds.getWidth()));
+        this.escenarioPrincipal.setMinHeight(Math.min(320,bounds.getHeight()));
         LoginView();
         escenarioPrincipal.getIcons().add(new Image("/org/diegobercian/images/logo3.png"));
         /*Parent root = FXMLLoader.load(getClass().getResource("/org/diegobercian/view/superkinal.fxml"));
         Scene escena = new Scene(root);
         escenarioPrincipal.setScene(escena);*/
         escenarioPrincipal.show();
-        if (getParameters().getRaw().contains("--smoke-test")) {
+        if (getParameters()!=null && getParameters().getRaw().contains("--smoke-test")) {
             javafx.application.Platform.runLater(() -> {
                 System.out.println("SuperKinal smoke test OK");
                 javafx.application.Platform.exit();
@@ -60,16 +63,14 @@ public class Main extends Application {
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(Main.class.getResource("/org/diegobercian/view/" + fxmlname));
         
-        AnchorPane content;
+        Parent content;
         try (InputStream input = file) { content = loader.load(input); }
-        content.setMinSize(width, height);
-        ScrollPane viewport = new ScrollPane(content);
-        viewport.setFitToWidth(true);
-        viewport.setFitToHeight(true);
-        escena = new Scene(viewport, width, height);
-        escenarioPrincipal.setScene(escena);
-        escenarioPrincipal.sizeToScene();   
-        
+        if (escena==null) {
+            javafx.geometry.Rectangle2D bounds=javafx.stage.Screen.getPrimary().getVisualBounds();
+            escena=new Scene(content,Math.min(1100,Math.max(360,bounds.getWidth()-64)),Math.min(760,Math.max(320,bounds.getHeight()-96)));
+            escenarioPrincipal.setScene(escena);
+        } else escena.setRoot(content);
+
         resultado = (Initializable)loader.getController();
         
         return resultado;

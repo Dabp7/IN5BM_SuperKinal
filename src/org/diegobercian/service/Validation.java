@@ -22,7 +22,7 @@ public final class Validation {
             }
             if ("date".equals(type)) return LocalDate.parse(value);
             if (value.length() > length) throw new IllegalArgumentException(label + ": máximo " + length + " caracteres.");
-            String name=label.toLowerCase(java.util.Locale.ROOT);
+            String name=java.text.Normalizer.normalize(label,java.text.Normalizer.Form.NFD).replaceAll("\\p{M}","").toLowerCase(java.util.Locale.ROOT);
             if (!value.isEmpty() && (name.contains("correo") || name.contains("email")) && !value.matches("[^\\s@]+@[^\\s@]+\\.[^\\s@]+")) throw new IllegalArgumentException(label + ": ingrese un correo válido.");
             if (!value.isEmpty() && (name.contains("telefono") || name.contains("numeroPrincipal".toLowerCase()) || name.contains("numerosecundario")) && !value.matches("[0-9]{8}")) throw new IllegalArgumentException(label + ": ingrese 8 dígitos.");
             return value;

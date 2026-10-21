@@ -19,6 +19,7 @@ import org.diegobercian.system.Main;
  */
 public class MenuUbicacionesController implements Initializable {
 
+    @FXML private javafx.scene.image.ImageView mapImage;
     @FXML private Button btnRegresar;
     private Main escenarioPrincipal;
     
@@ -38,7 +39,7 @@ public class MenuUbicacionesController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        mapImage.fitWidthProperty().bind(javafx.beans.binding.Bindings.max(0,((javafx.scene.layout.Region)mapImage.getParent()).widthProperty().subtract(48)));
     }    
     
 }

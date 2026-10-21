@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package org.diegobercian.bean;
+import java.math.BigDecimal;
 
 /**
  *
@@ -12,9 +13,9 @@ package org.diegobercian.bean;
 public class Productos {
     private String codigoProducto;
     private String descripcionProducto;
-    private Double precioUnitario;
-    private Double precioDocena;
-    private Double precioMayor;
+    private BigDecimal precioUnitario;
+    private BigDecimal precioDocena;
+    private BigDecimal precioMayor;
     private String imagenProducto;
     private int existencia;
     private int codigoTipoProducto;
@@ -24,7 +25,7 @@ public class Productos {
         
     }
 
-    public Productos(String codigoProducto, String descripcionProducto, Double precioUnitario, Double precioDocena, Double precioMayor, String imagenProducto, int existencia, int codigoTipoProducto, int codigoProveedor) {
+    public Productos(String codigoProducto, String descripcionProducto, BigDecimal precioUnitario, BigDecimal precioDocena, BigDecimal precioMayor, String imagenProducto, int existencia, int codigoTipoProducto, int codigoProveedor) {
         this.codigoProducto = codigoProducto;
         this.descripcionProducto = descripcionProducto;
         this.precioUnitario = precioUnitario;
@@ -52,27 +53,27 @@ public class Productos {
         this.descripcionProducto = descripcionProducto;
     }
 
-    public Double getPrecioUnitario() {
+    public BigDecimal getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(Double precioUnitario) {
+    public void setPrecioUnitario(BigDecimal precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 
-    public Double getPrecioDocena() {
+    public BigDecimal getPrecioDocena() {
         return precioDocena;
     }
 
-    public void setPrecioDocena(Double precioDocena) {
+    public void setPrecioDocena(BigDecimal precioDocena) {
         this.precioDocena = precioDocena;
     }
 
-    public Double getPrecioMayor() {
+    public BigDecimal getPrecioMayor() {
         return precioMayor;
     }
 
-    public void setPrecioMayor(Double precioMayor) {
+    public void setPrecioMayor(BigDecimal precioMayor) {
         this.precioMayor = precioMayor;
     }
 

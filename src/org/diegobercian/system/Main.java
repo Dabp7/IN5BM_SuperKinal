@@ -16,6 +16,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import org.diegobercian.bean.Usuarios;
 import org.diegobercian.controller.*;
@@ -42,6 +43,12 @@ public class Main extends Application {
         Scene escena = new Scene(root);
         escenarioPrincipal.setScene(escena);*/
         escenarioPrincipal.show();
+        if (getParameters().getRaw().contains("--smoke-test")) {
+            javafx.application.Platform.runLater(() -> {
+                System.out.println("SuperKinal smoke test OK");
+                javafx.application.Platform.exit();
+            });
+        }
 
     }
     
@@ -53,7 +60,13 @@ public class Main extends Application {
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(Main.class.getResource("/org/diegobercian/view/" + fxmlname));
         
-        escena = new Scene((AnchorPane)loader.load(file), width, height);
+        AnchorPane content;
+        try (InputStream input = file) { content = loader.load(input); }
+        content.setMinSize(width, height);
+        ScrollPane viewport = new ScrollPane(content);
+        viewport.setFitToWidth(true);
+        viewport.setFitToHeight(true);
+        escena = new Scene(viewport, width, height);
         escenarioPrincipal.setScene(escena);
         escenarioPrincipal.sizeToScene();   
         

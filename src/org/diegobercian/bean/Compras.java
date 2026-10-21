@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package org.diegobercian.bean;
+import java.time.LocalDate;
+import java.math.BigDecimal;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 
@@ -13,15 +15,15 @@ import javafx.scene.control.DatePicker;
  */
 public class Compras{
     private int numeroDocumento;
-    private String fechaDocumento;
+    private LocalDate fechaDocumento;
     private String descripcion;
-    private Double totalDocumento;
+    private BigDecimal totalDocumento;
 
     public Compras() {
         
     }
 
-    public Compras(int numeroDocumento, String fechaDocumento, String descripcion, Double totalDocumento) {
+    public Compras(int numeroDocumento, LocalDate fechaDocumento, String descripcion, BigDecimal totalDocumento) {
         this.numeroDocumento = numeroDocumento;
         this.fechaDocumento = fechaDocumento;
         this.descripcion = descripcion;
@@ -36,11 +38,11 @@ public class Compras{
         this.numeroDocumento = numeroDocumento;
     }
 
-    public String getFechaDocumento() {
+    public LocalDate getFechaDocumento() {
         return fechaDocumento;
     }
 
-    public void setFechaDocumento(String fechaDocumento) {
+    public void setFechaDocumento(LocalDate fechaDocumento) {
         this.fechaDocumento = fechaDocumento;
     }
 
@@ -52,11 +54,11 @@ public class Compras{
         this.descripcion = descripcion;
     }
 
-    public Double getTotalDocumento() {
+    public BigDecimal getTotalDocumento() {
         return totalDocumento;
     }
 
-    public void setTotalDocumento(Double totalDocumento) {
+    public void setTotalDocumento(BigDecimal totalDocumento) {
         this.totalDocumento = totalDocumento;
     }
 

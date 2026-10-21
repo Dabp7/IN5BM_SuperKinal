@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1020.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuUbicacionesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1020.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuUbicacionesController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKSLATEBLUE" height="358.0" layoutX="646.0" layoutY="197.0" stroke="#e5e5e5" strokeType="INSIDE" strokeWidth="7.0" width="274.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="651.0" layoutX="28.0" layoutY="35.0" stroke="#fca311" strokeType="INSIDE" strokeWidth="7.0" width="969.0" />

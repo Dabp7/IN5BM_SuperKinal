@@ -1,0 +1,55 @@
+name: Verify SuperKinal
+on:
+  push:
+    branches: [master]
+  pull_request:
+concurrency:
+  group: superkinal-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    services:
+      mysql:
+        image: mysql:8.0.46
+        env:
+          MYSQL_ROOT_PASSWORD: test-only
+        ports: ["3307:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping -ptest-only"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    env:
+      SUPERKINAL_RUN_INTEGRATION: '1'
+      SUPERKINAL_DB_USER: root
+      SUPERKINAL_DB_PASSWORD: test-only
+      SUPERKINAL_DB_URL: jdbc:mysql://127.0.0.1:3307/superkinal_audit_test?sslMode=DISABLED&allowPublicKeyRetrieval=true&serverTimezone=America/Guatemala
+      MYSQL_PWD: test-only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: '8'
+          java-package: jdk+fx
+          cache: maven
+      - name: Install JavaFX desktop libraries
+        run: sudo apt-get update && sudo apt-get install -y xvfb libgtk2.0-0 libxtst6 libxi6 libxrender1
+      - name: Install isolated test schema
+        run: sed 's/DBKinalExpress2020527/superkinal_audit_test/g' database/schema.sql | mysql -h127.0.0.1 -P3307 -uroot
+      - name: Build, database, reports and JavaFX tests
+        run: xvfb-run -a mvn -B clean verify
+      - name: Migration tests
+        run: python3 tests/test_migration.py --mysql /usr/bin/mysql --port 3307
+      - name: Run packaged application
+        run: xvfb-run -a java -jar target/superkinal-2.0.0.jar --smoke-test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: superkinal-validation
+          path: |
+            target/surefire-reports/
+            target/*-test.pdf
+            target/superkinal-2.0.0.jar
+            target/lib/

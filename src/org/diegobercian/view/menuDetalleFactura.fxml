@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1355.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuDetalleFacturaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1355.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuDetalleFacturaController">
    <children>
       <TableView fx:id="tblDetalleFactura" layoutX="299.0" layoutY="355.0" onMouseClicked="#seleccionarElemento" prefHeight="333.0" prefWidth="801.0" style="-fx-background-color: #E5E6E5; -fx-border-color: #000000; -fx-border-width: 3;" stylesheets="@../resourse/SuperKinalCSS.css">
          <columns>

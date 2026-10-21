@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuLoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" styleClass="Pane" stylesheets="@../resourse/SuperKinalCSS.css" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuLoginController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e5e5e5" height="607.0" layoutX="456.0" layoutY="-6.0" stroke="#14212d" strokeType="INSIDE" width="481.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="135.0" layoutX="528.0" layoutY="108.0" stroke="#14213d" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="3.0" width="331.0" />

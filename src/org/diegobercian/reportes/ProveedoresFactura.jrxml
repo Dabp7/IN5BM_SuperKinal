@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProveedoresFactura" language="groovy" pageWidth="555" pageHeight="802" columnWidth="515" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc5d6056-afa1-4a25-87b3-4394ed30a377">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProveedoresFactura" language="java" pageWidth="555" pageHeight="802" columnWidth="515" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc5d6056-afa1-4a25-87b3-4394ed30a377">
 	<property name="ireport.zoom" value="0.7513148009015788"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<subDataset name="dataset1" uuid="e896637c-e9a1-4792-a934-18e17f444487"/>
 	<queryString>
-		<![CDATA[select * from Proveedores]]>
+		<![CDATA[SELECT codigoProveedor,NITProveedor,nombresProveedor,apellidosProveedor,direccionProveedor,razonSocial,contactoPrincipal,paginaWeb FROM Proveedores ORDER BY codigoProveedor]]>
 	</queryString>
 	<field name="codigoProveedor" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -35,7 +35,7 @@
 		<band height="761" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="515" height="761" uuid="26322512-257c-4e8b-a30b-db15099a2df9"/>
-				<imageExpression><![CDATA["C:\\Users\\gaber\\Downloads\\Laboratorio-No.3-20240606T023141Z-001\\Laboratorio-No.3\\src\\org\\diegobercian\\images\\proveedoresFactura.png"]]></imageExpression>
+				<imageExpression><![CDATA[org.diegobercian.reportes.GenerarReportes.class.getResource("/org/diegobercian/images/proveedoresFactura.png")]]></imageExpression>
 			</image>
 		</band>
 	</background>

@@ -14,17 +14,20 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diegobercian.controller.MenuPrincipalController">
    <children>
       <ImageView fitHeight="720.0" fitWidth="1020.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fondo.png" />
          </image>
       </ImageView>
-      <MenuBar layoutX="-9.0" layoutY="-5.0" prefHeight="21.0" prefWidth="1030.0" styleClass="menubar" stylesheets="@SuperKinal_2020527IN5BM/src/org/diegobercian/resourse/SuperKinalCSS.css">
+      <MenuBar layoutX="-9.0" layoutY="-5.0" prefHeight="21.0" prefWidth="1030.0" styleClass="menubar" stylesheets="@../resourse/SuperKinalCSS.css">
         <menus>
-          <Menu fx:id="btnMenuClientes" mnemonicParsing="false" text="Modulos">
+          <Menu mnemonicParsing="false" text="Modulos">
             <items>
+                  <MenuItem fx:id="btnMenuClientes" mnemonicParsing="false" onAction="#handleButtonAction" text="Clientes" />
+                  <MenuItem fx:id="btnMenuCompras" mnemonicParsing="false" onAction="#handleButtonAction" text="Compras" />
+                  <MenuItem fx:id="btnMenuTipoProducto" mnemonicParsing="false" onAction="#handleButtonAction" text="Tipos de producto" />
                   <MenuItem fx:id="btnMenuProveedor" mnemonicParsing="false" onAction="#handleButtonAction" text="Proveedores" />
                   <MenuItem fx:id="btnMenuProductos" mnemonicParsing="false" onAction="#handleButtonAction" text="Productos" />
                   <MenuItem fx:id="btnMenuEmpleados" mnemonicParsing="false" onAction="#handleButtonAction" text="Empleados" />
@@ -88,7 +91,7 @@
                   </ImageView>
                </graphic>
                <stylesheets>
-                  <URL value="@SuperKinal_2020527IN5BM/src/org/diegobercian/resourse/SuperKinalCSS.css" />
+                  <URL value="@../resourse/SuperKinalCSS.css" />
                   <URL value="@../resourse/SuperKinalCSS.css" />
                </stylesheets>
             </Button>
@@ -104,7 +107,7 @@
                   </ImageView>
                </graphic>
                <stylesheets>
-                  <URL value="@SuperKinal_2020527IN5BM/src/org/diegobercian/resourse/SuperKinalCSS.css" />
+                  <URL value="@../resourse/SuperKinalCSS.css" />
                   <URL value="@../resourse/SuperKinalCSS.css" />
                </stylesheets>
             </Button>
@@ -120,7 +123,7 @@
                   </ImageView>
                </graphic>
                <stylesheets>
-                  <URL value="@SuperKinal_2020527IN5BM/src/org/diegobercian/resourse/SuperKinalCSS.css" />
+                  <URL value="@../resourse/SuperKinalCSS.css" />
                   <URL value="@../resourse/SuperKinalCSS.css" />
                </stylesheets>
             </Button>
@@ -136,7 +139,7 @@
                   </ImageView>
                </graphic>
                <stylesheets>
-                  <URL value="@SuperKinal_2020527IN5BM/src/org/diegobercian/resourse/SuperKinalCSS.css" />
+                  <URL value="@../resourse/SuperKinalCSS.css" />
                   <URL value="@../resourse/SuperKinalCSS.css" />
                </stylesheets>
             </Button>

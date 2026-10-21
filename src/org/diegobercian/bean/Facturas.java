@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package org.diegobercian.bean;
+import java.time.LocalDate;
+import java.math.BigDecimal;
 
 /**
  *
@@ -13,8 +15,8 @@ public class Facturas {
     
     private int numeroFactura;
     private String estado;
-    private Double totalFactura;
-    private String fechaFactura;
+    private BigDecimal totalFactura;
+    private LocalDate fechaFactura;
     private int codigoCliente;
     private int codigoEmpleado;
 
@@ -22,7 +24,7 @@ public class Facturas {
         
     }
 
-    public Facturas(int numeroFactura, String estado, Double totalFactura, String fechaFactura, int codigoCliente, int codigoEmpleado) {
+    public Facturas(int numeroFactura, String estado, BigDecimal totalFactura, LocalDate fechaFactura, int codigoCliente, int codigoEmpleado) {
         this.numeroFactura = numeroFactura;
         this.estado = estado;
         this.totalFactura = totalFactura;
@@ -47,19 +49,19 @@ public class Facturas {
         this.estado = estado;
     }
 
-    public Double getTotalFactura() {
+    public BigDecimal getTotalFactura() {
         return totalFactura;
     }
 
-    public void setTotalFactura(Double totalFactura) {
+    public void setTotalFactura(BigDecimal totalFactura) {
         this.totalFactura = totalFactura;
     }
 
-    public String getFechaFactura() {
+    public LocalDate getFechaFactura() {
         return fechaFactura;
     }
 
-    public void setFechaFactura(String fechaFactura) {
+    public void setFechaFactura(LocalDate fechaFactura) {
         this.fechaFactura = fechaFactura;
     }
 

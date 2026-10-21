@@ -1,3 +1,65 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9442db44df2801567a4632e8fc6bc774839cc8b37e75e05b573b40f45c982bd1
-size 1136
+.menubar{
+    -fx-background-color: #E5E5E5;
+
+}
+
+.Button{
+    -fx-background-color: #483D8B;
+    -fx-border-color: #000000;
+    -fx-border-width: 3;
+    -fx-border-radius: 30 ;
+    -fx-background-radius: 30;
+    -fx-font-size: 15px;
+
+}
+
+.button:hover{
+    -fx-background-color: #1672CC;
+    -fx-font-size: 15px;
+    -fx-effect: dropshadow( one-pass-box, black, 10, 0, 0, 0);
+
+}
+
+.Pane{
+    -fx-background-color: #14213D;
+
+}
+
+
+.tabla{
+
+    -fx-background-color: #E5E5E5;
+    -fx-border-color: #000000;
+    -fx-border-width: 3;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler{
+    -fx-cell-size: 20;
+    -fx-background-color: #FCA311;
+}
+
+.table-row-cell:selected{
+    -fx-background-color:#1672CC ;
+}
+
+
+.Button1{
+    -fx-background-color: #14213D;
+    -fx-border-color: #000000;
+    -fx-border-width: 3;
+    -fx-border-radius: 30 ;
+    -fx-background-radius: 30;
+    -fx-font-size: 15px;
+
+}
+
+.Button1:hover{
+    -fx-background-color: #1672CC;
+    -fx-font-size: 15px;
+    -fx-effect: dropshadow( one-pass-box, black, 10, 0, 0, 0);
+
+}
+
+
+.button:focused, .text-field:focused, .combo-box:focused { -fx-border-color: #0a61a8; -fx-border-width: 2; }

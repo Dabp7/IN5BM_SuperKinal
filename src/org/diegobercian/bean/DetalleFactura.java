@@ -1,5 +1,6 @@
 
 package org.diegobercian.bean;
+import java.math.BigDecimal;
 
 /**
  *
@@ -8,7 +9,7 @@ package org.diegobercian.bean;
 public class DetalleFactura {
     
     private int codigoDetalleFactura;
-    private Double precioUnitario;
+    private BigDecimal precioUnitario;
     private int cantidad;
     private int numeroFactura;
     private String codigoProducto;
@@ -17,7 +18,7 @@ public class DetalleFactura {
         
     }
 
-    public DetalleFactura(int codigoDetalleFactura, Double precioUnitario, int cantidad, int numeroFactura, String codigoProducto) {
+    public DetalleFactura(int codigoDetalleFactura, BigDecimal precioUnitario, int cantidad, int numeroFactura, String codigoProducto) {
         this.codigoDetalleFactura = codigoDetalleFactura;
         this.precioUnitario = precioUnitario;
         this.cantidad = cantidad;
@@ -33,11 +34,11 @@ public class DetalleFactura {
         this.codigoDetalleFactura = codigoDetalleFactura;
     }
 
-    public Double getPrecioUnitario() {
+    public BigDecimal getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(Double precioUnitario) {
+    public void setPrecioUnitario(BigDecimal precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 

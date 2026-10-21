@@ -421,9 +421,9 @@ END $$
 
 CREATE PROCEDURE sp_actualizarProductos(IN p_codigoProducto varchar(15), IN p_descripcionProducto varchar(45), IN p_imagenProducto varchar(45), IN p_codigoTipoProducto int(11), IN p_codigoProveedor int)
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM productos WHERE codigoProducto = p_codigoProducto FOR UPDATE) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El registro ya no existe; actualice los datos'; END IF;
+    IF NOT EXISTS (SELECT 1 FROM Productos WHERE codigoProducto = p_codigoProducto FOR UPDATE) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El registro ya no existe; actualice los datos'; END IF;
 
-	update productos
+	update Productos
     set
 		Productos.descripcionProducto = p_descripcionProducto,
         Productos.imagenProducto = p_imagenProducto,

@@ -18,6 +18,17 @@ public class ValidationTest {
         assertThrows(IllegalArgumentException.class,()->Validation.parse("correo","text",60,"bad",false));
         assertThrows(IllegalArgumentException.class,()->AuthService.validate("user",new char[0],true));
     }
+    @Test public void sqlTableIdentifiersUsePortableCasing() throws Exception {
+        String schema=new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("database/schema.sql")),java.nio.charset.StandardCharsets.UTF_8);
+        java.util.Map<String,String> tables=new java.util.HashMap<>();
+        java.util.regex.Matcher ddl=java.util.regex.Pattern.compile("CREATE TABLE (\\w+)").matcher(schema);
+        while(ddl.find())tables.put(ddl.group(1).toLowerCase(java.util.Locale.ROOT),ddl.group(1));
+        java.util.regex.Matcher references=java.util.regex.Pattern.compile("(?i)(?:FROM|JOIN|UPDATE|INTO|REFERENCES)\\s+(\\w+)").matcher(schema);
+        while(references.find()) {
+            String name=references.group(1), canonical=tables.get(name.toLowerCase(java.util.Locale.ROOT));
+            if(canonical!=null)assertEquals(canonical,name);
+        }
+    }
     @Test public void saltedPasswordsAndVerification() throws Exception {
         String one=PasswordHash.hash("una clave larga 2026".toCharArray()),two=PasswordHash.hash("una clave larga 2026".toCharArray());
         assertNotEquals(one,two);assertTrue(PasswordHash.verify("una clave larga 2026".toCharArray(),one));

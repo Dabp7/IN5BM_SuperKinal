@@ -36,6 +36,7 @@ run(migration,False)
 assert run(f'USE {name}; SELECT totalFactura FROM Factura;')=='999.00'
 run(f'USE {name};UPDATE Factura SET fechaFactura="2026-10-20";')
 run(migration)
+run((root/'database/migrations/V003__identificadores_automaticos.sql').read_text(encoding='utf-8').replace('DBKinalExpress2020527',name))
 assert run(f'USE {name}; SELECT totalDocumento FROM Compras;')=='100.00'
 assert run(f'USE {name}; SELECT totalFactura FROM Factura;')=='42.00'
 assert run(f'USE {name}; SELECT existencia FROM Productos;')=='7'
@@ -46,4 +47,10 @@ run(f"USE {name};CALL sp_agregarDetalleFactura(2,1,1,'P1');")
 assert run(f'USE {name}; SELECT existencia FROM Productos;')=='6'
 assert run(f'USE {name}; SELECT totalFactura FROM Factura;')=='56.00'
 run(f"USE {name};DELETE FROM Productos WHERE codigoProducto='P1';",False)
+generated=run(f"USE {name};CALL sp_agregarProductos(NULL,'Nuevo','',1,1);")
+assert generated.startswith('P') and len(generated)==15
+assert run(f'USE {name}; SELECT codigoProducto FROM Productos WHERE codigoProducto=\"P1\";')=='P1'
+auto_id=run(f"USE {name};CALL sp_agregarDetalleCompra(NULL,2,1,'P1',1);")
+assert int(auto_id)>1
+assert run(f"USE {name};SELECT COUNT(*) FROM MovimientosInventario WHERE origen='compra:alta' AND referencia={auto_id};")=='1'
 print('PASS: migration preserves rows, balances and historical prices; repairs totals; rejects duplicate users and invalid dates before altering data.')

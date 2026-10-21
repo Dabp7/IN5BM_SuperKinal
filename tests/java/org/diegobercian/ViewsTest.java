@@ -51,12 +51,12 @@ public class ViewsTest {
         }
         assertEquals(18,count);
     }
-    @Test public void savingAndDuplicateFailureKeepCorrectFormState() throws Exception {
+    @Test public void savingAndDatabaseFailureKeepCorrectFormState() throws Exception {
         MenuResult result=fx(()->{FXMLLoader loader=new FXMLLoader(getClass().getResource("/org/diegobercian/view/menuCliente.fxml"));loader.load();return new MenuResult(loader.getController());});
         CrudController controller=result.controller;awaitIdle(controller);
         fx(()->{controller.agregar();setClient(controller,"900001");controller.guardar();return null;});awaitIdle(controller);
         assertEquals("VIEW",fx(()->field(controller,"mode").toString()));
-        fx(()->{controller.agregar();setClient(controller,"900001");controller.guardar();return null;});awaitIdle(controller);
+        fx(()->{controller.agregar();setClient(controller,"900001");Field procedure=CrudController.class.getDeclaredField("addProcedure");procedure.setAccessible(true);procedure.set(controller,"sp_inexistente_para_prueba");controller.guardar();return null;});awaitIdle(controller);
         assertEquals("ADD",fx(()->field(controller,"mode").toString()));
         assertEquals("NombrePrueba",fx(()->((TextField)field(controller,"txtNombreC")).getText()));
         fx(()->{controller.cancelar();return null;});

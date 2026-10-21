@@ -18,6 +18,7 @@ import org.diegobercian.system.Main;
 
 public class MenuPrincipalController implements Initializable{
 
+    @FXML private Button btnProductosInicio,btnProveedoresInicio,btnEmpleadosInicio,btnFacturasInicio;
     @FXML MenuItem btnMenuClientes;
     @FXML MenuItem btnVistaProgramador;
     @FXML MenuItem btnMenuProveedor;
@@ -61,17 +62,17 @@ public class MenuPrincipalController implements Initializable{
             escenarioPrincipal.menuClientesView();
         }if (event.getSource() == btnVistaProgramador) {
             escenarioPrincipal.programadorView();
-        }if (event.getSource() == btnMenuProveedor) {
+        }if (event.getSource() == btnMenuProveedor || event.getSource() == btnProveedoresInicio) {
             escenarioPrincipal.ProveedoresView();
         }if (event.getSource() == btnCompras || event.getSource() == btnMenuCompras) {
             escenarioPrincipal.ComprasView();
         }if (event.getSource() == btnMenuTipoProducto) {
             escenarioPrincipal.TipoProductoView();
-        }if (event.getSource() == btnMenuProductos) {
+        }if (event.getSource() == btnMenuProductos || event.getSource() == btnProductosInicio) {
             escenarioPrincipal.ProductosView();
-        }if (event.getSource() == btnMenuEmpleados) {
+        }if (event.getSource() == btnMenuEmpleados || event.getSource() == btnEmpleadosInicio) {
             escenarioPrincipal.EmpleadosView();
-        }if (event.getSource() == btnMenuFacturas) {
+        }if (event.getSource() == btnMenuFacturas || event.getSource() == btnFacturasInicio) {
             escenarioPrincipal.FacturaView();
         }if (event.getSource() == btnClientesR) {
             clc.imprimirReporteClientes();

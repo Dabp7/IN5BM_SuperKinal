@@ -20,8 +20,9 @@ El esquema usa `DBKinalExpress2020527`. Para otro nombre, ajustar ese nombre en 
 ## Actualizar una instalación anterior
 
 1. Detener la aplicación y crear un respaldo que incluya datos, rutinas y triggers. Ensayar primero en una copia.
-2. Ejecutar **una sola vez**, sin la opción `--force`, `database/migrations/V002__auditoria.sql`. Valida los datos antes de alterar las tablas. Si encuentra nulos, negativos, usuarios duplicados o fechas inválidas, corregirlos y reintentar. Las fechas deben ser `AAAA-MM-DD`.
-3. Configurar la conexión y ejecutar el conversor de contraseñas:
+2. Si la base todavía es la versión original, ejecutar **una sola vez**, sin la opción `--force`, `database/migrations/V002__auditoria.sql`. Si V002 ya fue aplicada, omitir este paso. Valida nulos, negativos, usuarios duplicados y fechas antes de alterar las tablas; las fechas deben ser `AAAA-MM-DD`.
+3. Ejecutar **una sola vez** `database/migrations/V003__identificadores_automaticos.sql`. Activa la generación automática de identificadores conservando todos los códigos y relaciones existentes. Las bases nuevas instaladas con `database/schema.sql` ya incluyen ambos cambios.
+4. Configurar la conexión y ejecutar el conversor de contraseñas (es seguro repetirlo):
 
 ```powershell
 java -cp "target/superkinal-2.0.0.jar;target/lib/*" org.diegobercian.service.AuthService
@@ -54,13 +55,15 @@ Conservar `target/lib/` junto al JAR. Maven fija las dependencias, compila las c
 
 ## Reglas de operación
 
-- Los códigos se introducen manualmente y son únicos. Cantidades y códigos numéricos deben ser positivos; importes no negativos y con hasta dos decimales.
+- Los identificadores se asignan al guardar: códigos numéricos autoincrementables y códigos de producto con formato `P` seguido de 14 dígitos. El formulario de alta no muestra ni exige ese campo. Los códigos anteriores se conservan y ningún código puede editarse desde el formulario. Las cantidades son positivas y los importes no negativos, con hasta dos decimales.
 - Cada compra aumenta el saldo y cada venta lo descuenta de forma atómica. Cambiar cantidades o productos aplica la diferencia. Borrar una línea revierte su movimiento; no se permite revertir una compra si dejaría existencias negativas.
 - Los precios de venta conservan los márgenes originales: costo × 1.40, × 1.35 y × 1.25. El costo vigente es el de la última línea de compra ingresada o editada. Borrar una compra conserva los precios vigentes.
 - Cada detalle de venta fija el precio del producto al crearse. Editar su cantidad o moverlo de factura conserva ese precio; cambiar de producto toma el precio del nuevo producto. Actualizar el catálogo no modifica ventas anteriores.
 - El total de cada documento se actualiza mediante diferencias dentro de la misma transacción. No se elimina un catálogo o documento con registros relacionados. El historial de movimientos también protege productos usados anteriormente.
 - Una compra puede contener productos de distintos proveedores; el proveedor se conserva en el catálogo de productos. No se atribuye un único proveedor a toda la compra.
-- Los listados se consultan en páginas de 100 registros. Carga, guardado, login y reportes se ejecutan fuera del hilo de la interfaz. Los selectores conservan mapas por identificador para seleccionar sin consultas adicionales.
+- Las 18 pantallas se adaptan al ancho disponible. Los formularios pasan de tres a dos o una columna y las acciones se redistribuyen; la navegación conserva el tamaño elegido para la ventana. Las pantallas estrechas desplazan el contenido verticalmente y las tablas anchas conservan su desplazamiento horizontal interno.
+- Los campos se habilitan solamente durante alta o edición; códigos, precios calculados, existencias y totales están protegidos. Las fechas usan calendario y los campos opcionales se distinguen de los obligatorios.
+- Los listados se consultan en páginas de 100 registros. Al guardar, la lista localiza y selecciona el registro creado o editado y confirma su código. Carga, guardado, login y reportes se ejecutan fuera del hilo de la interfaz. Los selectores conservan mapas por identificador para seleccionar sin consultas adicionales.
 - Clientes, productos, proveedores y facturas tienen reportes. En los otros módulos el botón explica que no hay un reporte disponible; durante edición sirve para cancelar.
 - El reporte de factura conserva el desglose de IVA del proyecto original (12% incluido) y calcula el total con decimales. Este proyecto académico no implementa facturación electrónica ni emisión fiscal.
 
@@ -74,6 +77,6 @@ Con `JAVA_HOME` apuntando a JDK 8 con JavaFX:
 
 El script crea un directorio nuevo bajo `work/`, arranca MySQL en un puerto separado y lo apaga al finalizar. Rechaza el puerto habitual y los puertos ocupados. No usa la base de trabajo. Ejecuta compilación, pruebas de SQL, formularios, login, concurrencia, cuatro reportes, 10 000 productos, migración y arranque del JAR.
 
-`mvn verify` sin el entorno de integración ejecuta las pruebas unitarias y omite deliberadamente las pruebas con base y escritorio. GitHub Actions ejecuta la batería completa con MySQL y una pantalla virtual. Los resultados y reportes de prueba quedan en `target/` y se adjuntan al workflow.
+`mvn verify` sin el entorno de integración ejecuta las pruebas unitarias y omite deliberadamente las pruebas con base y escritorio. GitHub Actions ejecuta la batería completa con MySQL y una pantalla virtual. Los resultados, reportes y capturas quedan en `target/` y se adjuntan al workflow. Las pruebas de distribución cubren 360×740, 768×720, 1366×768 y 1920×1080; comprueban que los campos no se solapen y que los códigos automáticos estén ocultos al agregar.
 
 Consultar `docs/CORRECCIONES.md` para la cobertura de la auditoría y los límites de verificación.

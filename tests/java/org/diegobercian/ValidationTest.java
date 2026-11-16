@@ -16,6 +16,7 @@ public class ValidationTest {
         assertThrows(IllegalArgumentException.class,()->Validation.parse("fecha","date",0,"2026-02-29",false));
         assertThrows(IllegalArgumentException.class,()->Validation.parse("nombre","text",3,"largo",false));
         assertThrows(IllegalArgumentException.class,()->Validation.parse("correo","text",60,"bad",false));
+        assertThrows(IllegalArgumentException.class,()->Validation.parse("Teléfono","text",8,"abcdefgh",false));
         assertThrows(IllegalArgumentException.class,()->AuthService.validate("user",new char[0],true));
     }
     @Test public void sqlTableIdentifiersUsePortableCasing() throws Exception {

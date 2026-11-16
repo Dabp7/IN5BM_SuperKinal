@@ -49,6 +49,7 @@ jobs:
         with:
           name: superkinal-validation
           path: |
+            target/ui-screenshots/
             target/surefire-reports/
             target/*-test.pdf
             target/superkinal-2.0.0.jar

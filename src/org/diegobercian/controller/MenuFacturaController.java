@@ -25,7 +25,7 @@ public class MenuFacturaController extends CrudController implements Initializab
     @FXML private Button btnEditar;
     @FXML private Button btnEliminar;
     @FXML private Button btnReportes;
-    @FXML private TextField txtFecha;
+    @FXML private DatePicker txtFecha;
     @FXML private ComboBox<Choice> cmbClientes;
     @FXML private ComboBox<Choice> cmbEmpleados;
 

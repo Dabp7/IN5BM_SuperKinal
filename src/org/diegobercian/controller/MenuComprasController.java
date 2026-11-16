@@ -13,7 +13,7 @@ public class MenuComprasController extends CrudController implements Initializab
     @FXML private MenuItem btnRegresar;
     @FXML private MenuItem btnDetalleCompras;
     @FXML private TextField txtDoc;
-    @FXML private TextField txtFecha;
+    @FXML private DatePicker txtFecha;
     @FXML private TextField txtDescripcion;
     @FXML private TableView<Map<String,Object>> tblCompras;
     @FXML private TableColumn<Map<String,Object>,Object> colDoc;

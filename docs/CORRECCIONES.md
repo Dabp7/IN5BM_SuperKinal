@@ -44,3 +44,13 @@ Las pruebas incluyen los doce contratos CRUD, integridad monetaria, inventario, 
 La migración se prueba desde las tablas originales con filas existentes, totales erróneos, usuarios duplicados y fechas inválidas. Conserva los saldos existentes como apertura: no inventa una recuperación de históricos que ya fueron alterados o eliminados.
 
 No se valida una impresora física ni se certifica accesibilidad con lectores de pantalla. Las pruebas JavaFX ejercitan carga, selección, navegación corregida, guardado y error con base real; no equivalen a una revisión manual de todas las combinaciones de pantalla, datos y dispositivos. La instancia de prueba es independiente de la base del usuario.
+
+
+## Segunda pasada: ventanas y formularios adaptables
+
+- Se sustituyeron las 18 vistas de posiciones fijas por contenedores adaptables: formularios de una, dos o tres columnas, acciones que se redistribuyen y tablas con desplazamiento interno.
+- Cambiar de módulo conserva las dimensiones elegidas por el usuario. La ventana inicial se limita al área útil del monitor; las pantallas estrechas desplazan el contenido verticalmente sin exigir un escritorio grande.
+- Los identificadores no aparecen al agregar; se generan al confirmar la escritura. Durante edición y consulta están protegidos. Los campos calculados permanecen de solo lectura y no son requisitos de alta.
+- V003 activa AUTO_INCREMENT en los once módulos numéricos y agrega una secuencia transaccional para códigos de producto. Conserva los códigos anteriores. El libro de inventario registra el identificador real del detalle una vez asignado, evitando referencias cero durante un alta automática.
+- Fechas con calendario, nombres de campos legibles, campos opcionales identificados, foco y errores visibles. Después de guardar se muestra el código y se localiza el registro en su página.
+- Las pruebas cubren las 18 vistas en cuatro resoluciones, altura y ancho de los campos, alta de productos sin código, selección del registro guardado, protección de identificadores y persistencia del tamaño de ventana. Las capturas se adjuntan a GitHub Actions.

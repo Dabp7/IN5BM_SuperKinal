@@ -38,6 +38,20 @@ public class IntegrationTest {
             call("sp_agregarProductos","P"+i,"Producto"+i,"",1,1);
         }
     }
+    @Test public void automaticIdentifiersAreUniqueAndLedgerUsesAssignedCodes() throws Exception {
+        Object first=repo.call("sp_agregarClientes",Arrays.asList(null,"123","Auto","Apellido","Direccion","12345678","test@example.com"));
+        Object second=repo.call("sp_agregarClientes",Arrays.asList(null,"123","Auto2","Apellido","Direccion","12345678","test@example.com"));
+        assertNotNull(first);assertNotEquals(first,second);
+        Object product=repo.call("sp_agregarProductos",Arrays.asList(null,"Producto automático","",1,1));
+        assertTrue(product.toString().matches("P[0-9]{14}"));
+        Object other=repo.call("sp_agregarProductos",Arrays.asList(null,"Otro producto","",1,1));assertNotEquals(product,other);
+        Object purchase=repo.call("sp_agregarDetalleCompra",Arrays.asList(null,new BigDecimal("10"),3,product,1));
+        Object sale=repo.call("sp_agregarDetalleFactura",Arrays.asList(null,1,1,product));
+        amount("SELECT COUNT(*) FROM MovimientosInventario WHERE origen='compra:alta' AND referencia="+purchase,"1");
+        amount("SELECT COUNT(*) FROM MovimientosInventario WHERE origen='venta:alta' AND referencia="+sale,"1");
+        amount("SELECT existencia FROM Productos WHERE codigoProducto='"+product+"'","2");
+        assertThrows(SQLException.class,()->call("sp_agregarClientes",-5,"123","Auto","Apellido","Direccion","12345678","test@example.com"));
+    }
     @Test public void searchesReturnOnlyRequestedRow() throws Exception {
         for(String p:new String[]{"Clientes","Proveedores","CargoEmpleado","TipoProducto","Compras","Facturas","Empleados"}) {
             try(Connection c=connection();CallableStatement s=c.prepareCall("{call sp_buscar"+p+"(?)}")) {

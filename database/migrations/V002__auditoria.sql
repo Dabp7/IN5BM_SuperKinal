@@ -1,4 +1,6 @@
 -- Backup first. Stop the application. MySQL DDL commits implicitly; this migration is one-time.
+SET @superkinal_previous_safe_updates = @@SESSION.SQL_SAFE_UPDATES;
+SET SESSION SQL_SAFE_UPDATES = 0;
 USE DBKinalExpress2020527;
 DROP PROCEDURE IF EXISTS sp_preflight_auditoria;
 DELIMITER $$
@@ -831,3 +833,4 @@ DELIMITER ;
 
 DROP VIEW IF EXISTS vw_Productos;
 CREATE VIEW vw_Productos AS SELECT p.codigoProducto, p.descripcionProducto, t.descripcion AS Descripcion, v.nombresProveedor FROM Productos p JOIN TipoProducto t ON p.codigoTipoProducto=t.codigoTipoProducto JOIN Proveedores v ON p.codigoProveedor=v.codigoProveedor;
+SET SESSION SQL_SAFE_UPDATES = @superkinal_previous_safe_updates;

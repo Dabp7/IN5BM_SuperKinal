@@ -63,3 +63,48 @@
 
 
 .button:focused, .text-field:focused, .combo-box:focused { -fx-border-color: #0a61a8; -fx-border-width: 2; }
+
+/* Responsive layouts keep the original palette, imagery and control styles. */
+.app-root, .login-root, .login-root > .viewport { -fx-background-color: #14213D; }
+.home-root {
+    -fx-background-color: #14213D;
+    -fx-background-image: url("../images/fondo.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+.home-header, .home-header .menu-bar { -fx-background-color: #E5E5E5; }
+.home-body { -fx-padding: 18 24 48; -fx-alignment: bottom-center; }
+.page-header { -fx-padding: 14 20 0; }
+.page-body { -fx-padding: 12 20 20; }
+.page-title { -fx-font-size: 34px; -fx-text-fill: white; }
+.centered { -fx-alignment: center; -fx-text-alignment: center; }
+.field-label, .muted, .form-footnote { -fx-text-fill: white; }
+.field-label { -fx-font-size: 14px; }
+.muted { -fx-font-size: 13px; }
+.info-body .info-line { -fx-font-size: 20px; -fx-text-fill: white; -fx-alignment: center; }
+.status-message { -fx-padding: 6 10; -fx-background-color: #E5E5E5; -fx-text-fill: #14213D; }
+.Button, .Button1 { -fx-text-fill: white; -fx-padding: 5 9; }
+.menu-button.Button > .label { -fx-text-fill: white; -fx-padding: 0 4 0 0; }
+.menu-button.Button > .arrow-button { -fx-padding: 0 6 0 2; }
+.menu-button.Button > .arrow-button > .arrow { -fx-background-color: white; }
+.Button:hover { -fx-background-color: #1672CC; }
+.module-card { -fx-font-size: 17px; }
+.module-card:hover { -fx-font-size: 17px; }
+.text-field:readonly { -fx-background-color: #E5E5E5; -fx-text-fill: #14213D; }
+.text-field.invalid, .date-picker.invalid, .combo-box.invalid { -fx-border-color: #b42318; -fx-border-width: 2; }
+.app-root .scroll-pane, .app-root .scroll-pane > .viewport,
+.home-root .scroll-pane, .home-root .scroll-pane > .viewport { -fx-background-color: transparent; }
+.table-view .column-header, .table-view .column-header-background .filler { -fx-size: 29; }
+.record-count, .app-root .pagination .page-information { -fx-text-fill: white; }
+.login-brand { -fx-padding: 18 28 24; -fx-background-color: #14213D; }
+.welcome-title, .welcome-copy, .social-link { -fx-text-fill: white; }
+.welcome-title { -fx-font-family: "Arial Black"; -fx-font-size: 32px; }
+.welcome-copy { -fx-font-size: 17px; }
+.auth-root, .auth-root > .viewport, .auth-card, .login-panel { -fx-background-color: #E5E5E5; }
+.auth-shell { -fx-padding: 16; }
+.auth-card { -fx-padding: 24; }
+.login-title { -fx-text-fill: #14213D; -fx-font-size: 34px; -fx-alignment: center; }
+.login-field { -fx-padding: 14 16; -fx-border-color: #14213D; -fx-border-width: 3; -fx-border-radius: 5; }
+.login-field .field-label { -fx-text-fill: #14213D; -fx-font-size: 20px; }
+.map-box { -fx-padding: 0; }

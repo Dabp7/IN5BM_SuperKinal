@@ -8,8 +8,11 @@ import java.util.stream.Collectors;
 /** Reflows real controls into one, two or three columns; no coordinate scaling. */
 public final class ResponsiveGrid extends Pane {
     private static final double GAP=16;
+    private int maxColumns=3;
     public ResponsiveGrid() {getStyleClass().add("responsive-grid");setMinWidth(0);widthProperty().addListener((o,a,b)->requestLayout());}
-    public int columnsFor(double width) {return width>=940?3:width>=600?2:1;}
+    public int getMaxColumns() {return maxColumns;}
+    public void setMaxColumns(int value) {maxColumns=Math.max(1,value);requestLayout();}
+    public int columnsFor(double width) {return Math.min(maxColumns,width>=940?3:width>=600?2:1);}
     private List<Node> visibleChildren() {return getChildren().stream().filter(Node::isManaged).collect(Collectors.toList());}
     private double rowHeight(List<Node> nodes,int start,int cols,double width) {
         double height=0;

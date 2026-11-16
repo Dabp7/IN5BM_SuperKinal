@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.diegobercian.repository.CrudRepository;
 import org.diegobercian.service.Validation;
@@ -26,6 +28,7 @@ public abstract class CrudController {
     private List<String> columns;
     private Field[] fields;
     private Button add, edit, remove, reports;
+    private Image saveIcon, updateIcon, cancelIcon, addIcon, editIcon, removeIcon;
     private enum Mode { VIEW, ADD, EDIT }
     private Mode mode = Mode.VIEW;
     private Map<String,Object> selected;
@@ -65,6 +68,10 @@ public abstract class CrudController {
             String deleteProcedure, String[] addOrder, String[] updateOrder, String report) {
         this.table=table;this.tableName=tableName;this.columns=Arrays.asList(columns);key=columns[0];this.fields=fields;
         this.add=add;this.edit=edit;this.remove=remove;this.reports=reports;
+        addIcon=originalIcon(add);editIcon=originalIcon(edit);removeIcon=originalIcon(remove);
+        if(addIcon!=null)saveIcon=loadIcon("guardar.png");
+        if(editIcon!=null)updateIcon=loadIcon("actualizar.png");
+        if(removeIcon!=null)cancelIcon=loadIcon("cancelar.png");
         this.addProcedure=addProcedure;this.updateProcedure=updateProcedure;this.deleteProcedure=deleteProcedure;
         this.addOrder=addOrder;this.updateOrder=updateOrder;this.report=report;
         table.setPlaceholder(new Label("Cargando datos…"));
@@ -79,6 +86,7 @@ public abstract class CrudController {
         for (TableColumn<Map<String,Object>,?> col:table.getColumns()) col.setEditable(false);
         pages.setMaxPageIndicatorCount(3);pages.setMinWidth(0);
         refresh.setText("Actualizar");
+        recordCount.getStyleClass().add("record-count");
         if (table.getParent() instanceof VBox) {
             FlowPane footer=new FlowPane(12,8,refresh,pages,recordCount);footer.setMinWidth(0);
             ((VBox)table.getParent()).getChildren().add(footer);
@@ -98,6 +106,15 @@ public abstract class CrudController {
         }
         table.widthProperty().addListener((o,a,b)->resizeColumns(b.doubleValue()));
         state(); cargarDatos();
+    }
+    private static Image originalIcon(Button button) {
+        return button.getGraphic() instanceof ImageView ? ((ImageView)button.getGraphic()).getImage() : null;
+    }
+    private static Image loadIcon(String file) {
+        return new Image(CrudController.class.getResource("/org/diegobercian/images/"+file).toExternalForm());
+    }
+    private static void setIcon(Button button,Image image) {
+        if(image!=null)((ImageView)button.getGraphic()).setImage(image);
     }
     private void resizeColumns(double width) {
         double total=0;
@@ -253,6 +270,9 @@ public abstract class CrudController {
         table.setDisable(busy || mode!=Mode.VIEW);pages.setDisable(busy || mode!=Mode.VIEW);refresh.setDisable(busy || mode!=Mode.VIEW);
         add.setText(mode==Mode.ADD?"Guardar":"Agregar");edit.setText(mode==Mode.EDIT?"Actualizar":"Editar");
         remove.setText(mode!=Mode.VIEW?"Cancelar":"Eliminar");reports.setText("Reportes");
+        setIcon(add,mode==Mode.ADD?saveIcon:addIcon);
+        setIcon(edit,mode==Mode.EDIT?updateIcon:editIcon);
+        setIcon(remove,mode!=Mode.VIEW?cancelIcon:removeIcon);
         add.setVisible(mode!=Mode.EDIT);add.setManaged(mode!=Mode.EDIT);
         edit.setVisible(mode!=Mode.ADD);edit.setManaged(mode!=Mode.ADD);
         reports.setVisible(mode==Mode.VIEW);reports.setManaged(mode==Mode.VIEW);

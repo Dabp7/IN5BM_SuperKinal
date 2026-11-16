@@ -2,28 +2,58 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.Insets?>
 <?import org.diegobercian.ui.ResponsiveGrid?>
-<ScrollPane xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" styleClass="auth-root" stylesheets="@../resourse/App.css" fx:controller="org.diegobercian.controller.MenuLoginController">
+<?import org.diegobercian.ui.ResponsivePair?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml/1" fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" styleClass="login-root" stylesheets="@../resourse/SuperKinalCSS.css" fx:controller="org.diegobercian.controller.MenuLoginController" xmlns="http://javafx.com/javafx/8.0.202">
   <content>
-    <StackPane styleClass="auth-shell">
-      <VBox spacing="18" minWidth="0" maxWidth="440" maxHeight="-Infinity" styleClass="auth-card">
-        <Label text="SUPERKINAL" styleClass="brand" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-        <Label text="Bienvenido" styleClass="page-title" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-        <Label text="Ingresa con tu usuario para continuar." styleClass="muted" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-        <VBox spacing="6">
-          <Label text="Usuario" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-          <TextField fx:id="txtCorreo" promptText="Tu nombre de usuario" minWidth="0" prefHeight="40"/>
-        </VBox>
-        <VBox spacing="6">
-          <Label text="Contraseña" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-          <PasswordField fx:id="txtContra" promptText="Tu contraseña" minWidth="0" prefHeight="40"/>
-        </VBox>
-        <FlowPane hgap="10" vgap="10">
-          <Button fx:id="btnInicio" text="Iniciar sesión" onAction="#validaUsuario" styleClass="primary-button" minHeight="38" minWidth="92" wrapText="true"/>
-          <Button fx:id="btnRegistro" text="Crear cuenta" onAction="#handleButtonAction" styleClass="button" minHeight="38" minWidth="92" wrapText="true"/>
+    <ResponsivePair breakpoint="710">
+      <VBox styleClass="login-brand" spacing="18" alignment="CENTER_LEFT" minWidth="0">
+        <ImageView fitWidth="130" fitHeight="130" preserveRatio="true" mouseTransparent="true">
+          <image>
+            <Image url="@../images/logo1.png" />
+          </image>
+        </ImageView>
+        <Label text="Hola, Bienvenido" styleClass="welcome-title" wrapText="true" minWidth="0" minHeight="-Infinity" maxWidth="Infinity" />
+        <Label text="SuperKinal, funcionalidades, reportes y control" styleClass="welcome-copy" wrapText="true" minWidth="0" minHeight="-Infinity" maxWidth="Infinity" />
+        <FlowPane hgap="10" vgap="4" alignment="CENTER_LEFT">
+          <Label text="¡Síguenos!" styleClass="welcome-copy" wrapText="true" minWidth="0" minHeight="-Infinity" maxWidth="Infinity" />
+          <Hyperlink text="Facebook" styleClass="social-link">
+            <graphic>
+              <ImageView fitWidth="33" fitHeight="33" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/fb.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Hyperlink>
+          <Hyperlink text="Instagram" styleClass="social-link">
+            <graphic>
+              <ImageView fitWidth="33" fitHeight="33" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/ig.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Hyperlink>
         </FlowPane>
       </VBox>
-    </StackPane>
+      <StackPane minWidth="0" styleClass="login-panel">
+        <VBox spacing="18" minWidth="0" maxWidth="380" maxHeight="-Infinity" styleClass="auth-card" alignment="CENTER">
+          <Label text="LOGIN" styleClass="login-title" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity" />
+          <VBox spacing="6" styleClass="login-field">
+            <Label text="Usuario" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity" />
+            <TextField fx:id="txtCorreo" promptText="Tu nombre de usuario" minWidth="0" prefHeight="40" />
+          </VBox>
+          <VBox spacing="6" styleClass="login-field">
+            <Label text="Contraseña" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity" />
+            <PasswordField fx:id="txtContra" promptText="Tu contraseña" minWidth="0" prefHeight="40" />
+          </VBox>
+          <FlowPane hgap="10" vgap="10" alignment="CENTER">
+            <Button fx:id="btnInicio" text="Iniciar sesión" onAction="#validaUsuario" styleClass="Button1" minHeight="38" minWidth="92" wrapText="true" />
+            <Button fx:id="btnRegistro" text="Registrarse" onAction="#handleButtonAction" styleClass="Button1" minHeight="38" minWidth="92" wrapText="true" />
+          </FlowPane>
+        </VBox>
+      </StackPane>
+    </ResponsivePair>
   </content>
 </ScrollPane>

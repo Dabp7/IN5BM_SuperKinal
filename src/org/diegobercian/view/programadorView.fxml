@@ -2,25 +2,86 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.Insets?>
 <?import org.diegobercian.ui.ResponsiveGrid?>
-<BorderPane xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" minWidth="0" styleClass="app-root" stylesheets="@../resourse/App.css" fx:controller="org.diegobercian.controller.ProgramadorController">
+<?import org.diegobercian.ui.ResponsivePair?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" minWidth="0" styleClass="app-root" stylesheets="@../resourse/SuperKinalCSS.css" fx:controller="org.diegobercian.controller.ProgramadorController" xmlns="http://javafx.com/javafx/8.0.202">
   <top>
     <VBox spacing="12" styleClass="page-header">
-      <Label text="Acerca del proyecto" styleClass="page-title" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-      <Button fx:id="btnRegresarP" text="Volver al inicio" onAction="#handleButtonAction" styleClass="button" minHeight="38" minWidth="92" wrapText="true"/>
+      <Label text="Programador" styleClass="page-title centered" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity" />
+      <Button fx:id="btnRegresarP" text="Regresar" onAction="#handleButtonAction" styleClass="Button" minHeight="38" minWidth="92" wrapText="true">
+        <graphic>
+          <ImageView fitWidth="27" fitHeight="27" preserveRatio="true" mouseTransparent="true">
+            <image>
+              <Image url="@../images/atras.png" />
+            </image>
+          </ImageView>
+        </graphic>
+      </Button>
     </VBox>
   </top>
   <center>
     <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER">
       <content>
-        <VBox spacing="18" minWidth="0" styleClass="page-body">
-          <Label text="Programador: Diego Adolfo Bercian Pérez" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-          <Label text="Teléfono: 49099817" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-          <Label text="Correo: dbercian-2020527@kinal.edu.gt" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-          <Label text="Carnet: 2020527" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-          <Label text="Fecha de nacimiento: 11/11/2006" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-          <Label text="Código técnico: IN5BM" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
+        <VBox spacing="18" minWidth="0" styleClass="page-body info-body" alignment="TOP_CENTER">
+          <ImageView fitWidth="102" fitHeight="102" preserveRatio="true" mouseTransparent="true">
+            <image>
+              <Image url="@../images/logo1.png" />
+            </image>
+          </ImageView>
+          <Label text="Programador: Diego Adolfo Bercian Pérez" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity">
+            <graphic>
+              <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/usuario.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Label>
+          <Label text="Teléfono: 49099817" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity">
+            <graphic>
+              <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/telefono.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Label>
+          <Label text="Correo: dbercian-2020527@kinal.edu.gt" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity">
+            <graphic>
+              <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/correo.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Label>
+          <Label text="Carnet: 2020527" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity">
+            <graphic>
+              <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/carnet.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Label>
+          <Label text="Fecha de nacimiento: 11/11/2006" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity">
+            <graphic>
+              <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/calendario.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Label>
+          <Label text="Código técnico: IN5BM" styleClass="info-line" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity">
+            <graphic>
+              <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/seccion.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Label>
         </VBox>
       </content>
     </ScrollPane>

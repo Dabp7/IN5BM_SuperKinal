@@ -2,25 +2,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.Insets?>
 <?import org.diegobercian.ui.ResponsiveGrid?>
-<BorderPane xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" minWidth="0" styleClass="app-root" stylesheets="@../resourse/App.css" fx:controller="org.diegobercian.controller.MenuCargoEmpleadoController">
+<?import org.diegobercian.ui.ResponsivePair?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" minWidth="0" styleClass="app-root" stylesheets="@../resourse/SuperKinalCSS.css" fx:controller="org.diegobercian.controller.MenuCargoEmpleadoController" xmlns="http://javafx.com/javafx/8.0.202">
   <top>
     <VBox spacing="12" styleClass="page-header">
-      <Label text="Cargos de empleados" styleClass="page-title" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-      <Label text="Consulta los registros o elige Agregar para crear uno nuevo." styleClass="muted" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-      <FlowPane hgap="8" vgap="8">
-        <Button fx:id="btnAgregar" text="Agregar" onAction="#agregar" styleClass="primary-button" minHeight="38" minWidth="92" wrapText="true"/>
-        <Button fx:id="btnEditar" text="Editar" onAction="#editar" styleClass="button" minHeight="38" minWidth="92" wrapText="true"/>
-        <Button fx:id="btnEliminar" text="Eliminar" onAction="#eliminar" styleClass="button" minHeight="38" minWidth="92" wrapText="true"/>
-        <Button fx:id="btnReportes" text="Reportes" onAction="#reportes" styleClass="button" minHeight="38" minWidth="92" wrapText="true"/>
-        <MenuButton text="Ir a…" minHeight="38">
-          <items>
-            <MenuItem fx:id="btnRegresar" text="Inicio" onAction="#handleButtonAction"/>
-            <MenuItem fx:id="btnMenuEmpleado" text="Empleados" onAction="#handleButtonAction"/>
-          </items>
-        </MenuButton>
-      </FlowPane>
+      <HBox alignment="CENTER" spacing="16" minWidth="0">
+        <Label text="Cargos de empleados" styleClass="page-title" wrapText="true" minHeight="-Infinity" minWidth="0" />
+      </HBox>
     </VBox>
   </top>
   <center>
@@ -30,30 +19,81 @@
           <ResponsiveGrid fx:id="formGrid">
             <children>
               <VBox spacing="6" minWidth="0" styleClass="field-cell">
-                <Label text="Cargo (automático)" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-                <TextField fx:id="txtCodigoCE" minWidth="0" maxWidth="Infinity" prefHeight="38"/>
+                <Label text="Cargo (automático)" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity" />
+                <TextField fx:id="txtCodigoCE" minWidth="0" maxWidth="Infinity" prefHeight="38" />
               </VBox>
               <VBox spacing="6" minWidth="0" styleClass="field-cell">
-                <Label text="Nombre del cargo *" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-                <TextField fx:id="txtNombreCE" minWidth="0" maxWidth="Infinity" prefHeight="38"/>
+                <Label text="Nombre del cargo *" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity" />
+                <TextField fx:id="txtNombreCE" minWidth="0" maxWidth="Infinity" prefHeight="38" />
               </VBox>
               <VBox spacing="6" minWidth="0" styleClass="field-cell">
-                <Label text="Descripción *" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-                <TextField fx:id="txtDescripcionCE" minWidth="0" maxWidth="Infinity" prefHeight="38"/>
+                <Label text="Descripción *" styleClass="field-label" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity" />
+                <TextField fx:id="txtDescripcionCE" minWidth="0" maxWidth="Infinity" prefHeight="38" />
               </VBox>
             </children>
           </ResponsiveGrid>
-          <Label text="Los campos con * son obligatorios." styleClass="form-footnote" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-          <VBox spacing="10" minWidth="0" VBox.vgrow="ALWAYS">
-            <Label text="Registros" styleClass="section-title" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-            <TableView fx:id="tblCargoEmpleado" minWidth="0" minHeight="220" prefHeight="320" maxHeight="Infinity" editable="false" VBox.vgrow="ALWAYS">
-              <columns>
-                <TableColumn fx:id="colCodigoCE" text="Cargo" minWidth="85" prefWidth="110" editable="false"/>
-                <TableColumn fx:id="colNombreCE" text="Nombre del cargo" minWidth="85" prefWidth="144" editable="false"/>
-                <TableColumn fx:id="colDescripcionCE" text="Descripción" minWidth="85" prefWidth="110" editable="false"/>
-              </columns>
-            </TableView>
-          </VBox>
+          <ResponsivePair firstWidth="168" breakpoint="790" gap="16" VBox.vgrow="ALWAYS">
+            <TilePane tileAlignment="CENTER" alignment="TOP_LEFT" hgap="8" vgap="8" prefColumns="1" prefTileWidth="142" minWidth="0">
+              <Button fx:id="btnAgregar" text="Agregar" onAction="#agregar" styleClass="Button" minHeight="46" minWidth="92" wrapText="true" maxWidth="Infinity">
+                <graphic>
+                  <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                    <image>
+                      <Image url="@../images/agregar.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Button>
+              <Button fx:id="btnEditar" text="Editar" onAction="#editar" styleClass="Button" minHeight="46" minWidth="92" wrapText="true" maxWidth="Infinity">
+                <graphic>
+                  <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                    <image>
+                      <Image url="@../images/editar.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Button>
+              <Button fx:id="btnEliminar" text="Eliminar" onAction="#eliminar" styleClass="Button" minHeight="46" minWidth="92" wrapText="true" maxWidth="Infinity">
+                <graphic>
+                  <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                    <image>
+                      <Image url="@../images/eliminar.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Button>
+              <Button fx:id="btnReportes" text="Reportes" onAction="#reportes" styleClass="Button" minHeight="46" minWidth="92" wrapText="true" maxWidth="Infinity">
+                <graphic>
+                  <ImageView fitWidth="28" fitHeight="28" preserveRatio="true" mouseTransparent="true">
+                    <image>
+                      <Image url="@../images/buscar.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Button>
+              <MenuButton text="Regresar" minHeight="46" styleClass="Button">
+                <items>
+                  <MenuItem fx:id="btnRegresar" text="Menu Principal" onAction="#handleButtonAction" />
+                  <MenuItem fx:id="btnMenuEmpleado" text="Empleado" onAction="#handleButtonAction" />
+                </items>
+                <graphic>
+                  <ImageView fitWidth="26" fitHeight="26" preserveRatio="true" mouseTransparent="true">
+                    <image>
+                      <Image url="@../images/atras.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </MenuButton>
+            </TilePane>
+            <VBox spacing="10" minWidth="0" VBox.vgrow="ALWAYS">
+              <TableView fx:id="tblCargoEmpleado" minWidth="0" minHeight="220" prefHeight="320" maxHeight="Infinity" editable="false" VBox.vgrow="ALWAYS" styleClass="tabla">
+                <columns>
+                  <TableColumn fx:id="colCodigoCE" text="Cargo" minWidth="85" prefWidth="110" editable="false" />
+                  <TableColumn fx:id="colNombreCE" text="Nombre del cargo" minWidth="85" prefWidth="144" editable="false" />
+                  <TableColumn fx:id="colDescripcionCE" text="Descripción" minWidth="85" prefWidth="110" editable="false" />
+                </columns>
+              </TableView>
+            </VBox>
+          </ResponsivePair>
         </VBox>
       </content>
     </ScrollPane>

@@ -11,7 +11,11 @@ Aplicación de escritorio JavaFX para clientes, proveedores, compras, productos,
 
 Abrir `pom.xml` como proyecto Maven en el IDE. El build ya no depende de NetBeans 8.2, rutas de una computadora particular ni archivos JAR guardados en el repositorio.
 
+En NetBeans, seleccionar JDK 8 con JavaFX para el proyecto. Se incluye `nbactions.xml` para ejecutar (`F6`) y depurar el proyecto desde el IDE; ambas acciones compilan primero los recursos y reportes. Si el proyecto ya estaba abierto al actualizar estos archivos, cerrarlo y abrirlo de nuevo para recargar las acciones. Las variables de conexión deben estar configuradas antes de iniciar NetBeans.
+
 ## Instalar una base nueva
+
+La conexión también puede guardarse fuera del repositorio en `%APPDATA%\SuperKinal\database.properties` (Windows) o `~/.config/SuperKinal/database.properties` (otros sistemas), usando las claves `SUPERKINAL_DB_USER`, `SUPERKINAL_DB_PASSWORD` y `SUPERKINAL_DB_URL`. El archivo se lee en UTF-8 como Java Properties. Las propiedades de Java y las variables de entorno tienen prioridad sobre este archivo. Esto permite ejecutar desde NetBeans sin depender de que el IDE herede las variables de Windows. No incluir credenciales en Git.
 
 Ejecutar `database/schema.sql` con el cliente MySQL sobre una base vacía. No contiene DROP DATABASE, credenciales, usuarios de prueba ni ejemplos destructivos. El archivo original `src/org/diegobercian/database/SuperKinal2020527.sql` contiene la misma instalación segura para conservar su ubicación conocida.
 
@@ -61,7 +65,7 @@ Conservar `target/lib/` junto al JAR. Maven fija las dependencias, compila las c
 - Cada detalle de venta fija el precio del producto al crearse. Editar su cantidad o moverlo de factura conserva ese precio; cambiar de producto toma el precio del nuevo producto. Actualizar el catálogo no modifica ventas anteriores.
 - El total de cada documento se actualiza mediante diferencias dentro de la misma transacción. No se elimina un catálogo o documento con registros relacionados. El historial de movimientos también protege productos usados anteriormente.
 - Una compra puede contener productos de distintos proveedores; el proveedor se conserva en el catálogo de productos. No se atribuye un único proveedor a toda la compra.
-- Las 18 pantallas se adaptan al ancho disponible. Los formularios pasan de tres a dos o una columna y las acciones se redistribuyen; la navegación conserva el tamaño elegido para la ventana. Las pantallas estrechas desplazan el contenido verticalmente y las tablas anchas conservan su desplazamiento horizontal interno.
+- Las 18 pantallas conservan la identidad visual original: fondo, paleta, logotipos, iconos y menús. Los formularios pasan de tres a dos o una columna y las acciones se redistribuyen; la navegación conserva el tamaño elegido para la ventana. Las pantallas estrechas desplazan el contenido verticalmente y las tablas anchas conservan su desplazamiento horizontal interno.
 - Los campos se habilitan solamente durante alta o edición; códigos, precios calculados, existencias y totales están protegidos. Las fechas usan calendario y los campos opcionales se distinguen de los obligatorios.
 - Los listados se consultan en páginas de 100 registros. Al guardar, la lista localiza y selecciona el registro creado o editado y confirma su código. Carga, guardado, login y reportes se ejecutan fuera del hilo de la interfaz. Los selectores conservan mapas por identificador para seleccionar sin consultas adicionales.
 - Clientes, productos, proveedores y facturas tienen reportes. En los otros módulos el botón explica que no hay un reporte disponible; durante edición sirve para cancelar.

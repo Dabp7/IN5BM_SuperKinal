@@ -2,37 +2,67 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.Insets?>
 <?import org.diegobercian.ui.ResponsiveGrid?>
-<BorderPane xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" minWidth="0" styleClass="app-root" stylesheets="@../resourse/App.css" fx:controller="org.diegobercian.controller.MenuPrincipalController">
+<?import org.diegobercian.ui.ResponsivePair?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" minWidth="0" styleClass="home-root" stylesheets="@../resourse/SuperKinalCSS.css" fx:controller="org.diegobercian.controller.MenuPrincipalController" xmlns="http://javafx.com/javafx/8.0.202">
   <top>
-    <VBox spacing="12" styleClass="page-header">
-      <Label text="SuperKinal" styleClass="page-title" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-      <Label text="Compras, ventas y gestión de tu inventario." styleClass="muted" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
+    <VBox spacing="0" styleClass="home-header">
       <MenuBar>
         <menus>
           <Menu text="Módulos">
             <items>
-              <MenuItem fx:id="btnMenuClientes" text="Clientes" onAction="#handleButtonAction"/>
-              <MenuItem fx:id="btnMenuCompras" text="Compras" onAction="#handleButtonAction"/>
-              <MenuItem fx:id="btnMenuProveedor" text="Proveedores" onAction="#handleButtonAction"/>
-              <MenuItem fx:id="btnMenuProductos" text="Productos" onAction="#handleButtonAction"/>
-              <MenuItem fx:id="btnMenuTipoProducto" text="Tipos de producto" onAction="#handleButtonAction"/>
-              <MenuItem fx:id="btnMenuEmpleados" text="Empleados" onAction="#handleButtonAction"/>
-              <MenuItem fx:id="btnMenuFacturas" text="Facturas" onAction="#handleButtonAction"/>
+              <MenuItem fx:id="btnMenuClientes" text="Clientes" onAction="#handleButtonAction" />
+              <MenuItem fx:id="btnMenuCompras" text="Compras" onAction="#handleButtonAction" />
+              <MenuItem fx:id="btnMenuProveedor" text="Proveedores" onAction="#handleButtonAction" />
+              <MenuItem fx:id="btnMenuProductos" text="Productos" onAction="#handleButtonAction" />
+              <MenuItem fx:id="btnMenuTipoProducto" text="Tipos de producto" onAction="#handleButtonAction" />
+              <MenuItem fx:id="btnMenuEmpleados" text="Empleados" onAction="#handleButtonAction" />
+              <MenuItem fx:id="btnMenuFacturas" text="Facturas" onAction="#handleButtonAction" />
             </items>
+            <graphic>
+              <ImageView fitWidth="19" fitHeight="19" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/modulos.png" />
+                </image>
+              </ImageView>
+            </graphic>
           </Menu>
           <Menu text="Reportes">
             <items>
-              <MenuItem fx:id="btnClientesR" text="Clientes" onAction="#handleButtonAction"/>
-              <MenuItem fx:id="btnProductosR" text="Productos" onAction="#handleButtonAction"/>
-              <MenuItem fx:id="btnProveedoresR" text="Proveedores" onAction="#handleButtonAction"/>
+              <MenuItem fx:id="btnClientesR" text="Clientes Reportes" onAction="#handleButtonAction" />
+              <MenuItem fx:id="btnProductosR" text="Productos Reportes" onAction="#handleButtonAction" />
+              <MenuItem fx:id="btnProveedoresR" text="Proveedores Reportes" onAction="#handleButtonAction" />
             </items>
+            <graphic>
+              <ImageView fitWidth="19" fitHeight="19" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/reporte.png" />
+                </image>
+              </ImageView>
+            </graphic>
           </Menu>
-          <Menu text="Cuenta">
+          <Menu text="Acerca de">
             <items>
-              <MenuItem fx:id="btnVistaProgramador" text="Acerca del proyecto" onAction="#handleButtonAction"/>
-              <MenuItem fx:id="btnSesionCerrar" text="Cerrar sesión" onAction="#handleButtonAction"/>
+              <MenuItem fx:id="btnVistaProgramador" text="Sobre mí" onAction="#handleButtonAction" />
+            </items>
+            <graphic>
+              <ImageView fitWidth="19" fitHeight="19" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/info.png" />
+                </image>
+              </ImageView>
+            </graphic>
+          </Menu>
+          <Menu text="Usuario">
+            <graphic>
+              <ImageView fitWidth="19" fitHeight="19" preserveRatio="true" mouseTransparent="true">
+                <image>
+                  <Image url="@../images/usuarios2.png" />
+                </image>
+              </ImageView>
+            </graphic>
+            <items>
+              <MenuItem fx:id="btnSesionCerrar" text="Cerrar Sesión" onAction="#handleButtonAction" />
             </items>
           </Menu>
         </menus>
@@ -42,18 +72,45 @@
   <center>
     <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER">
       <content>
-        <VBox spacing="20" minWidth="0" styleClass="page-body">
-          <Label text="¿Qué quieres administrar?" styleClass="section-title" wrapText="true" minHeight="-Infinity" minWidth="0" maxWidth="Infinity"/>
-          <ResponsiveGrid>
+        <VBox spacing="20" minWidth="0" styleClass="home-body">
+          <ResponsiveGrid maxColumns="2">
             <children>
-              <Button fx:id="btnClientes" text="Clientes&#10;Datos y contacto" onAction="#handleButtonAction" styleClass="module-card" minWidth="0" maxWidth="Infinity" prefHeight="100" wrapText="true"/>
-              <Button fx:id="btnCompras" text="Compras&#10;Ingreso de mercadería" onAction="#handleButtonAction" styleClass="module-card" minWidth="0" maxWidth="Infinity" prefHeight="100" wrapText="true"/>
-              <Button fx:id="btnProductosInicio" text="Productos&#10;Catálogo y existencias" onAction="#handleButtonAction" styleClass="module-card" minWidth="0" maxWidth="Infinity" prefHeight="100" wrapText="true"/>
-              <Button fx:id="btnProveedoresInicio" text="Proveedores&#10;Contactos de abastecimiento" onAction="#handleButtonAction" styleClass="module-card" minWidth="0" maxWidth="Infinity" prefHeight="100" wrapText="true"/>
-              <Button fx:id="btnEmpleadosInicio" text="Empleados&#10;Personal y cargos" onAction="#handleButtonAction" styleClass="module-card" minWidth="0" maxWidth="Infinity" prefHeight="100" wrapText="true"/>
-              <Button fx:id="btnFacturasInicio" text="Facturas&#10;Ventas y detalles" onAction="#handleButtonAction" styleClass="module-card" minWidth="0" maxWidth="Infinity" prefHeight="100" wrapText="true"/>
-              <Button fx:id="btnMenuHorarios" text="Horarios&#10;Atención de la tienda" onAction="#handleButtonAction" styleClass="module-card" minWidth="0" maxWidth="Infinity" prefHeight="100" wrapText="true"/>
-              <Button fx:id="btnMenuUbicaciones" text="Ubicaciones&#10;Puntos de atención" onAction="#handleButtonAction" styleClass="module-card" minWidth="0" maxWidth="Infinity" prefHeight="100" wrapText="true"/>
+              <Button fx:id="btnCompras" text="Compras" onAction="#handleButtonAction" styleClass="Button,module-card" minWidth="0" maxWidth="Infinity" prefHeight="125" wrapText="true">
+                <graphic>
+                  <ImageView fitWidth="62" fitHeight="62" preserveRatio="true" mouseTransparent="true">
+                    <image>
+                      <Image url="@../images/carrito.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Button>
+              <Button fx:id="btnMenuUbicaciones" text="Ubicaciones" onAction="#handleButtonAction" styleClass="Button,module-card" minWidth="0" maxWidth="Infinity" prefHeight="125" wrapText="true">
+                <graphic>
+                  <ImageView fitWidth="62" fitHeight="62" preserveRatio="true" mouseTransparent="true">
+                    <image>
+                      <Image url="@../images/ubicacion.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Button>
+              <Button fx:id="btnMenuHorarios" text="Horarios" onAction="#handleButtonAction" styleClass="Button,module-card" minWidth="0" maxWidth="Infinity" prefHeight="125" wrapText="true">
+                <graphic>
+                  <ImageView fitWidth="62" fitHeight="62" preserveRatio="true" mouseTransparent="true">
+                    <image>
+                      <Image url="@../images/hora.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Button>
+              <Button fx:id="btnClientes" text="Clientes" onAction="#handleButtonAction" styleClass="Button,module-card" minWidth="0" maxWidth="Infinity" prefHeight="125" wrapText="true">
+                <graphic>
+                  <ImageView fitWidth="62" fitHeight="62" preserveRatio="true" mouseTransparent="true">
+                    <image>
+                      <Image url="@../images/usuarios.png" />
+                    </image>
+                  </ImageView>
+                </graphic>
+              </Button>
             </children>
           </ResponsiveGrid>
         </VBox>

@@ -8,6 +8,7 @@ import java.util.concurrent.*;
 import java.io.*;
 import org.diegobercian.db.Conexion;
 import org.diegobercian.service.AuthService;
+import org.diegobercian.demo.DemoData;
 import org.diegobercian.repository.CrudRepository;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.util.JRLoader;
@@ -47,6 +48,23 @@ public class IntegrationTest {
         assertThrows(SQLException.class,()->call("sp_actualizarClientes",999,"123","Nombre","Apellido","Direccion","12345678","test@example.com"));
         assertEquals("NombrePrueba",scalar("SELECT nombresCliente FROM Clientes WHERE codigoCliente=1"));
         assertEquals("123456789",scalar("SELECT NITClientes FROM Clientes WHERE codigoCliente=1"));
+    }
+    @Test public void syntheticDemoHasConsistentStockTotalsAndHashedLogin() throws Exception {
+        try(Connection c=connection();Statement statement=c.createStatement()) {
+            statement.execute("SET FOREIGN_KEY_CHECKS=0");
+            for(String table:new String[]{"MovimientosInventario","DetalleFactura","DetalleCompra","Factura","Compras","Productos","Empleados","TelefonoProveedor","EmailProveedor","Clientes","Proveedores","CargoEmpleado","TipoProducto","Usuarios"})statement.execute("TRUNCATE TABLE "+table);
+            statement.execute("SET FOREIGN_KEY_CHECKS=1");
+        }
+        DemoData.seed();
+        amount("SELECT COUNT(*) FROM Clientes","3");
+        amount("SELECT existencia FROM Productos WHERE codigoProducto='CAFE-DEMO'","28");
+        amount("SELECT existencia FROM Productos WHERE codigoProducto='ARROZ-DEMO'","37");
+        amount("SELECT totalFactura FROM Factura WHERE numeroFactura=1","122.50");
+        amount("SELECT totalFactura FROM Factura WHERE numeroFactura=2","25.20");
+        assertTrue(new AuthService().login(DemoData.USER,DemoData.PASSWORD.toCharArray()));
+        assertTrue(scalar("SELECT ingresoClave FROM Usuarios WHERE ingresoUsuario='demo'").toString().startsWith("pbkdf2-sha256$"));
+        assertThrows(SQLException.class,DemoData::seed);
+        amount("SELECT COUNT(*) FROM Clientes","3");
     }
     @Test public void correctDeleteTargets() throws Exception {
         call("sp_agregarCargoEmpleado",3,"Temporal","Descripcion");call("sp_agregarTipoProducto",3,"Temporal");

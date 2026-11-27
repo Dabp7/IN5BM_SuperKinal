@@ -2,6 +2,16 @@
 
 Aplicación de escritorio JavaFX para clientes, proveedores, compras, productos, empleados y facturas. Proyecto académico IN5BM, actualizado a partir de la auditoría de 44 hallazgos.
 
+## Demo con datos ficticios
+
+Para ejecutar una instalación aislada, con tres clientes, inventario y dos facturas de muestra:
+
+```powershell
+.\scripts\demo.ps1 -MySqlBin 'C:\Program Files\MySQL\MySQL Server 8.0\bin'
+```
+
+Usar **demo / Demo-Kinal-2026!** únicamente en esa demo. El script no utiliza la base personal: crea su propio servidor en el puerto 33318 y lo apaga al cerrar la app. [Capturas, recorrido y requisitos de la demo](docs/demo/README.md), [decisiones y corrección reproducida](docs/architecture-demo.md).
+
 ## Requisitos
 
 - JDK 8 que incluya JavaFX. Se recomienda una distribución Zulu FX 8 actualizada.

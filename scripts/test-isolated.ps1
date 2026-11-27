@@ -9,6 +9,13 @@ $taskData = Join-Path $taskRoot ('work\mysql-test-' + [guid]::NewGuid().ToString
 $taskProcess = $null
 $taskVariables = @('SUPERKINAL_DB_URL','SUPERKINAL_DB_USER','SUPERKINAL_DB_PASSWORD','SUPERKINAL_RUN_INTEGRATION','MYSQL_PWD')
 $taskOldEnvironment = @{}
+function Test-TaskMySqlReady {
+    # Windows PowerShell turns native stderr into terminating errors with Stop.
+    # A refused connection is expected while this private server is starting.
+    $ErrorActionPreference = 'SilentlyContinue'
+    & (Join-Path $MySqlBin 'mysqladmin.exe') --no-defaults '--host=127.0.0.1' "-P$Port" -uroot --connect-timeout=2 ping 2>$null | Out-Null
+    return $LASTEXITCODE -eq 0
+}
 foreach ($taskName in $taskVariables) { $taskOldEnvironment[$taskName] = [Environment]::GetEnvironmentVariable($taskName) }
 if ($Port -eq 3306) { throw 'Use un puerto diferente al servidor habitual.' }
 if (Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue) { throw 'El puerto ya está ocupado.' }
@@ -22,17 +29,20 @@ try {
     $env:MYSQL_PWD = ''
     $taskReady = $false
     for ($taskAttempt=0; $taskAttempt -lt 60; $taskAttempt++) {
-        & (Join-Path $MySqlBin 'mysqladmin.exe') --no-defaults '--host=127.0.0.1' "-P$Port" -uroot --connect-timeout=2 ping 2>$null | Out-Null
-        if ($LASTEXITCODE -eq 0) { $taskReady=$true; break }
+        if (Test-TaskMySqlReady) { $taskReady=$true; break }
         Start-Sleep -Milliseconds 500
     }
     if (-not $taskReady) { throw 'El servidor de prueba no arrancó.' }
     $taskSql = (Get-Content database/schema.sql -Raw).Replace('DBKinalExpress2020527','superkinal_audit_test')
     $taskSql | & (Join-Path $MySqlBin 'mysql.exe') --no-defaults '--host=127.0.0.1' "-P$Port" -uroot --default-character-set=utf8mb4
     if ($LASTEXITCODE -ne 0) { throw 'Falló la instalación del esquema.' }
+    & (Join-Path $MySqlBin 'mysql.exe') --no-defaults '--host=127.0.0.1' "-P$Port" -uroot --execute="ALTER USER 'root'@'localhost' IDENTIFIED BY 'test-only'"
+    if ($LASTEXITCODE -ne 0) { throw 'Falló la configuración del usuario del servidor aislado.' }
     $env:SUPERKINAL_DB_URL = "jdbc:mysql://127.0.0.1:$Port/superkinal_audit_test?sslMode=DISABLED&allowPublicKeyRetrieval=true&serverTimezone=America/Guatemala"
     $env:SUPERKINAL_DB_USER = 'root'
-    $env:SUPERKINAL_DB_PASSWORD = ''
+    # Windows PowerShell removes an env var when assigned ''; Java would see null.
+    $env:SUPERKINAL_DB_PASSWORD = 'test-only'
+    $env:MYSQL_PWD = 'test-only'
     $env:SUPERKINAL_RUN_INTEGRATION = '1'
     & $Maven -B clean verify
     if ($LASTEXITCODE -ne 0) { throw 'Fallaron las pruebas Java.' }
